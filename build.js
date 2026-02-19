@@ -41,7 +41,7 @@ function htmlTemplate(title, body, extra = '') {
 ${extra}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>${STYLE}</style>
 </head>
 <body>
@@ -115,8 +115,8 @@ const postListHtml = posts.length === 0
 const indexBody = `
 <nav><a class="nav-home" href="/">Jeremy Cowcher</a></nav>
 <section class="hero">
-  <h1>Jeremy Cowcher</h1>
   <p class="hero-subtitle">It is not the critic who counts; not the man who points out how the strong man stumbles. The credit belongs to the man who is actually in the arena.</p>
+  <p class="hero-attr">&mdash; Theodore Roosevelt</p>
   <a href="#posts" class="scroll-arrow">
     <span>Read</span>
     <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
