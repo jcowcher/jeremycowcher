@@ -26,6 +26,11 @@ function formatDate(dateStr) {
   return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 }
 
+function formatDateShort(dateStr) {
+  const d = new Date(dateStr + 'T00:00:00');
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+
 function htmlTemplate(title, body, extra = '') {
   return `<!DOCTYPE html>
 <html lang="en">
@@ -98,23 +103,34 @@ const postListHtml = posts.length === 0
   : posts.map(post => `
     <a href="/posts/${post.slug}" class="post-link">
       <article class="post-card">
-        <time>${formatDate(post.date)}</time>
-        <h2>${post.title}</h2>
-        ${post.description ? '<p>' + post.description + '</p>' : ''}
+        <span class="post-card-date">${formatDateShort(post.date)}</span>
+        <div class="post-card-content">
+          <h2>${post.title}</h2>
+          ${post.description ? '<p>' + post.description + '</p>' : ''}
+        </div>
+        <span class="post-card-arrow">&rsaquo;</span>
       </article>
     </a>`).join('\n');
 
 const indexBody = `
 <nav><a class="nav-home" href="/">Jeremy Cowcher</a></nav>
-<main class="index">
-  <header class="index-header">
-    <h1>Jeremy Cowcher</h1>
-    <p class="index-subtitle">Writing about things I find interesting.</p>
-  </header>
-  <section class="post-list">
+<section class="hero">
+  <h1>Jeremy Cowcher</h1>
+  <p class="hero-subtitle">It is not the critic who counts; not the man who points out how the strong man stumbles. The credit belongs to the man who is actually in the arena.</p>
+  <a href="#posts" class="scroll-arrow">
+    <span>Read</span>
+    <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+  </a>
+</section>
+<div class="posts-section" id="posts">
+  <div class="posts-section-header">
+    <span class="posts-section-title">Writing</span>
+    <span class="posts-section-count">${posts.length} post${posts.length !== 1 ? 's' : ''}</span>
+  </div>
+  <div class="post-list">
     ${postListHtml}
-  </section>
-</main>`;
+  </div>
+</div>`;
 
 const indexMeta = `
 <meta name="description" content="Jeremy Cowcher's personal blog.">
