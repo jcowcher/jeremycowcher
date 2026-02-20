@@ -46,6 +46,20 @@ ${extra}
 </head>
 <body>
 ${body}
+<footer class="site-disclaimer">The views expressed here are my own. This is not investment advice. I may hold positions in companies discussed. This content is for informational and entertainment purposes only.</footer>
+<script>
+(function(){
+  var el=document.getElementById('clock');
+  if(!el)return;
+  function tick(){
+    var d=new Date();
+    var date=d.toLocaleDateString('en-US',{month:'numeric',day:'numeric',year:'numeric'});
+    var time=d.toLocaleTimeString('en-US',{hour12:false,hour:'2-digit',minute:'2-digit',second:'2-digit'});
+    el.innerHTML=date+'&emsp;&emsp;'+time;
+  }
+  tick();setInterval(tick,1000);
+})();
+</script>
 </body>
 </html>`;
 }
@@ -76,7 +90,7 @@ const posts = fs.readdirSync(POSTS_DIR)
 // Generate individual post pages
 posts.forEach(post => {
   const body = `
-<nav><a class="nav-home" href="/">Jeremy Cowcher</a></nav>
+<div class="page-clock" id="clock"></div>
 <main class="post">
   <header class="post-header">
     <time>${formatDate(post.date)}</time>
@@ -113,11 +127,12 @@ const postListHtml = posts.length === 0
     </a>`).join('\n');
 
 const indexBody = `
-<nav><a class="nav-home" href="/">Jeremy Cowcher</a></nav>
 <section class="hero">
+  <div class="hero-clock" id="clock"></div>
   <p class="hero-subtitle">It is not the critic who counts; not the man who points out how the strong man stumbles. The credit belongs to the man who is actually in the arena.</p>
   <p class="hero-attr">&mdash; Theodore Roosevelt</p>
   <a href="#posts" class="scroll-arrow">
+    <span class="scroll-name">Jeremy Cowcher</span>
     <span>Read</span>
     <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
   </a>
