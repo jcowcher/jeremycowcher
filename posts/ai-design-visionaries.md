@@ -6,7 +6,7 @@ description: AI can solve the simultaneous equation facing non-technical founder
 
 > "To the curious incident of the dog in the night-time."
 > "The dog did nothing in the night-time."
-> "That was the curious incident."
+> "That was the curious incident"
 > — Exchange between Inspector Gregory and Sherlock Holmes
 
 Humans are not amazing at seeing what didn't happen, i.e., the dog that didn't bark. When people see something that works, it's natural to decide there's a pattern and run with that. Less time is spent thinking about the dog that didn't bark; in this case the brilliant non-technical founders that didn't create amazing companies.
@@ -19,7 +19,7 @@ Canva empowered everyone to design and ultimately has made Perkins and her co-fo
 
 In that post, the simultaneous equation issue is apparent in the early Canva story. It took over a year to find the technical team. Bill Tai, Canva's catalytic seed backer, would only provide funding if they could build the right technical team.
 
-While Perkins was resilient and determined (including learning to kitesurf to get investors), it seems likely that many other designer founders with wonderful ideas would have given up. The designer founders who don't exist couldn't overcome the friction of the simultaneous equation - these missing founders are the "dog that didn't bark" in the Sherlock Holmes stories.
+While Perkins was resilient and determined (including learning to kitesurf to get investors), it seems likely that many other designer founders with wonderful ideas would have given up. The designer founders who don't exist couldn't overcome the friction of the simultaneous equation - these missing founders are the "dog that didn't bark" from Sherlock Holmes.
 
 By enabling almost anyone to build MVPs with code, AI can help solve this simultaneous equation and unlock a new wave of "design visionaries" who don't fit the mould of most founders who have come before them.
 
