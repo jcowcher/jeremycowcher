@@ -85,7 +85,7 @@ const posts = fs.readdirSync(POSTS_DIR)
       html,
     };
   })
-  .sort((a, b) => new Date(b.date) - new Date(a.date));
+  .sort((a, b) => new Date(b.date) - new Date(a.date) || b.slug.localeCompare(a.slug));
 
 // Generate individual post pages
 posts.forEach(post => {
