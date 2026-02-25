@@ -5,8 +5,11 @@ description: AI can solve the simultaneous equation facing non-technical founder
 ---
 
 > "To the curious incident of the dog in the night-time."
+>
 > "The dog did nothing in the night-time."
+>
 > "That was the curious incident"
+>
 > — Exchange between Inspector Gregory and Sherlock Holmes
 
 Humans are not amazing at seeing what didn't happen, i.e., the dog that didn't bark. When people see something that works, it's natural to decide there's a pattern and run with that. Less time is spent thinking about the dog that didn't bark; in this case the brilliant non-technical founders that didn't create amazing companies.
