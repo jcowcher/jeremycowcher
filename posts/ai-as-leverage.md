@@ -5,7 +5,7 @@ description: The best founders, engineers and designers are going to create more
 ---
 
 > "In a lot of fields, the difference between, say, the worst taxicab driver and the best taxicab driver to get you across town in Manhattan might be 2-to-1. The best one will get you there in 15 minutes, the worst one will get you there in half an hour... Or the best cook and the worst cook, maybe it's 3-to-1... The difference between a good software person and a great software person is probably 50 to 1, 25 to 50 to 1. Huge, dynamic range"
-> — Steve Jobs ([source](https://www.youtube.com/watch?v=M6Oxl5dAnR0), ~27 minutes)
+> — Steve Jobs ([source](https://www.youtube.com/watch?v=M6Oxl5dAnR0&t=1620), ~27 minutes)
 
 Steve Jobs made those comments ~30 years ago. Since that time, many fortunes have been made with leverage through code. The advancement in AI means the leverage available to great software builders has undergone a step-change increase and so even greater value will be created through technology in the years to come.
 
