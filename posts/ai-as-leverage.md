@@ -1,5 +1,5 @@
 ---
-title: "The Promise of AI (Part I): Leverage"
+title: The Promise of AI (Part I) - Leverage
 date: 2026-02-25
 description: The best founders, engineers and designers are going to create more value than ever before
 ---
