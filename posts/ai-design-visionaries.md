@@ -26,7 +26,7 @@ While Perkins was resilient and determined (including learning to kitesurf to ge
 
 By enabling almost anyone to build MVPs with code, AI can help solve this simultaneous equation and unlock a new wave of "design visionaries," who don't fit the mould of most founders who have come before them.
 
-Instead of wireframes and at least 44 iterations on pitch decks, the 2026 version of Melanie Perkins could have used Claude Code to design a Canva MVP and taken that to potential investors. In fact, the limitations of wireframes and pitch decks can be seen in that same blog post from Perkins, which had a screenshot of one of Canva's earliest investors tweeting that he finally understood what they'd been talking about.
+Instead of wireframes and at least 44 iterations on pitch decks, the 2026 version of Melanie Perkins could have used Claude Code to design a Canva MVP and taken that to potential investors. In fact, the limitations of wireframes and pitch decks can be seen in that same blog post from Perkins, which had a screenshot of one of Canva's earliest investors tweeting that he finally understood what they'd been talking about once Canva launched.
 
 Scaling brilliant tech companies will surely continue to require extraordinary technical talents and the kind of guidance Lars Rasmussen (the Google Maps co-founder who became an early Canva mentor) gave to Perkins. Even with a technical team in place at Canva, it still took two years to do a front-end rewrite.
 
