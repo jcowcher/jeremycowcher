@@ -24,7 +24,7 @@ In that post, the simultaneous equation issue is apparent in the early Canva sto
 
 While Perkins was resilient and determined (including learning to kitesurf to get investors), it seems likely that many other designer founders with wonderful ideas would have given up. The designer founders who don't exist couldn't overcome the friction of the simultaneous equation - these missing founders are the "dog that didn't bark" from Sherlock Holmes.
 
-By enabling almost anyone to build MVPs with code, AI can help solve this simultaneous equation and unlock a new wave of "design visionaries" who don't fit the mould of most founders who have come before them.
+By enabling almost anyone to build MVPs with code, AI can help solve this simultaneous equation and unlock a new wave of "design visionaries," who don't fit the mould of most founders who have come before them.
 
 Instead of wireframes and at least 44 iterations on pitch decks, the 2026 version of Melanie Perkins could have used Claude Code to design a Canva MVP and taken that to potential investors. In fact, the limitations of wireframes and pitch decks can be seen in that same blog post from Perkins, which had a screenshot of one of Canva's earliest investors tweeting that he finally understood what they'd been talking about.
 
