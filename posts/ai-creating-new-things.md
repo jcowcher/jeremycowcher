@@ -9,7 +9,7 @@ description: AI will democratize the ability to build things by removing the fri
 
 There are many more great business ideas in the world than there are businesses that turn those ideas into tools and products. "That could have been me" is what you might hear some people say. That happens at least partly because it can be too overwhelming to get started. The friction of getting started is what stops many people in their tracks.
 
-I bought the domain jeremycowcher.com five years ago and had done nothing with it until a few weeks ago. I can give plenty of plausible reasons why I never acted and yet I suspect that I was actually overwhelmed and put it in the "too hard" basket. The friction was too great for me. Since you're reading this post on a website with that domain, you can see that five years of inaction was remedied. It was actually remedied by AI.
+I bought the domain jeremycowcher.com five years ago and had done nothing with it until a few weeks ago. I can give plenty of plausible reasons why I never acted and yet I suspect that I was actually overwhelmed and put it in the "too hard" basket. The friction was too great for me. Since you're reading this post on a website with that domain, you can see that five years of inaction was remedied. It was actually remedied by AI. I write these posts in a TextEdit file on my Mac and Claude Code does the rest.
 
 In Part I of this series, I wrote about how AI is giving the best founders, engineers and designers more leverage and ability to create greater value. In Part II, I outlined why I expect to see a wave of amazing companies led by designer founders, unlocked by AI.
 
