@@ -5,6 +5,7 @@ description: AI will democratize the ability to build things by curbing the fric
 ---
 
 > *Friction shapes the world a lot more than policy*
+>
 > — Tobi Lutke ([This Week in Startups podcast March 2021](https://thisweekinstartups.com/episodes/KTCYdaENNaN))
 
 There are many more great business ideas in the world than there are businesses that turn those ideas into tools and products. "That could have been me" is what you might hear some people say. That happens at least partly because it can be too overwhelming to get started. The friction of getting started is what stops many people in their tracks.
