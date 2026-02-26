@@ -22,7 +22,7 @@ Canva empowered everyone to design and ultimately has made Perkins and her co-fo
 
 In that post, the simultaneous equation issue is apparent in the early Canva story. It took over a year to find the technical team. Bill Tai, Canva's catalytic seed backer, would only provide funding if they could build the right technical team.
 
-While Perkins was resilient and determined (including learning to kitesurf to get investors), it seems likely that many other designer founders with wonderful ideas would have given up. The designer founders who don't exist couldn't overcome the friction of the simultaneous equation - these missing founders are the "dog that didn't bark" from Sherlock Holmes.
+While Perkins was resilient and determined (including learning to kitesurf to get investors and still being rejected by 100+ investors), it seems likely that many other designer founders with wonderful ideas would have given up. The designer founders who don't exist couldn't overcome the friction of the simultaneous equation - these missing founders are the "dog that didn't bark" from Sherlock Holmes.
 
 By enabling almost anyone to build MVPs with code, AI can help solve this simultaneous equation and unlock a new wave of "design visionaries," who don't fit the mould of most founders who have come before them.
 
