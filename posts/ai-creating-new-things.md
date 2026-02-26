@@ -1,7 +1,7 @@
 ---
 title: The Promise of AI (Part III) - Defanging friction and just doing things
 date: 2026-02-26
-description: AI will democratize the ability to build things by removing the friction of getting started
+description: AI will democratize the ability to build things by curbing the friction of getting started
 ---
 
 > *Friction shapes the world a lot more than policy*
