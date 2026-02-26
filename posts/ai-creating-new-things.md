@@ -22,7 +22,7 @@ Think of creators like Bill Simmons, who has achieved incredible success, and ge
 
 As one small example of how AI will reduce the friction of getting started, take the beginning of DoorDash. DoorDash has been in the news because of viral AI prediction articles, but it started with a simple landing page and personal phone number for restaurant delivery. While the DoorDash founding team had incredible technical talent, the landing page was simple. Before AI, if you didn't have any technical talent, the friction of building a simple landing page would stop many people. Thanks to AI, everyone can now build a simple landing page. As Ben Thompson noted, the hard part of building the three-sided market for DoorDash would remain. That first step, however, is available to everyone now.
 
-AI is not perfect. I worked with Claude to build a financial model last week for a public company and was underwhelmed. I was so underwhelmed I ultimately landed on not trusting it because of data issues. I suspect I'll feel differently in the near future. Right now, while AI is not perfect, it's definitely good enough to defang the friction of getting started.
+AI is not perfect. I worked with Claude to build a financial model last week for a public company and was underwhelmed. I was so underwhelmed I ultimately landed on not trusting it because of data issues. I suspect I'll feel differently in the near future. So while AI is not perfect, it's definitely good enough to defang the friction of getting started.
 
 > *And all the really successful people I know have a very strong action bias. They just do things. The easiest way to figure out if something is viable or not is by doing it. At least do the first step, and the second step, and the third, and then decide*
 >
