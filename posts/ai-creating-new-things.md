@@ -25,4 +25,5 @@ As one small example of how AI will reduce the friction of getting started, take
 I worked with Claude to build a financial model last week on a public company and was underwhelmed. I was so underwhelmed I ultimately landed on not trusting it because of data issues. I suspect I'll feel differently in the near future. Right now, while AI is not perfect, it's definitely good enough to take out the friction of getting started.
 
 > *And all the really successful people I know have a very strong action bias. They just do things. The easiest way to figure out if something is viable or not is by doing it. At least do the first step, and the second step, and the third, and then decide*
+>
 > — Naval Ravikant ([source](https://nav.al/rational-optimists))
