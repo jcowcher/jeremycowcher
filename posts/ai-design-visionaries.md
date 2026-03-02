@@ -1,6 +1,6 @@
 ---
 title: The Promise of AI (Part II) - Unlocking more design visionaries
-date: 2026-02-25
+date: 2026-02-26
 description: AI can help solve the simultaneous equation facing non-technical founders and unlock a new wave of design visionaries
 ---
 
