@@ -129,13 +129,15 @@ nav {
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--black);
+  color: var(--gray-700);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .scroll-arrow svg {
   width: 20px;
   height: 20px;
-  fill: currentColor;
+  fill: var(--gray-700);
   animation: bounce 2s ease-in-out infinite;
 }
 
