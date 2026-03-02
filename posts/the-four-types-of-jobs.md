@@ -1,5 +1,5 @@
 ---
-title: The Four Types of Jobs
+title: The four types of jobs in every company
 date: 2026-02-19
 description: Getting things done is hard and aiming people in the right direction matters a lot
 ---
