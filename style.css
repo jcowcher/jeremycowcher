@@ -116,7 +116,7 @@ nav {
 }
 
 .scroll-name {
-  font-size: 0.95rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: var(--black);
   letter-spacing: -0.02em;
@@ -125,10 +125,11 @@ nav {
 }
 
 .scroll-arrow span {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.12em;
+  color: var(--black);
 }
 
 .scroll-arrow svg {
