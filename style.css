@@ -121,6 +121,7 @@ nav {
   color: var(--black);
   letter-spacing: -0.02em;
   text-transform: none;
+  text-decoration: none;
   margin-bottom: 0.25rem;
 }
 
