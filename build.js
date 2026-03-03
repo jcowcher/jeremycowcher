@@ -138,7 +138,6 @@ const indexBody = `
   </a>
 </section>
 <div class="posts-section" id="posts">
-  <div class="posts-back"><a href="#">&larr; Jeremy Cowcher</a></div>
   <div class="posts-section-header">
     <span class="posts-section-title">Writing</span>
     <span class="posts-section-count">${posts.length} post${posts.length !== 1 ? 's' : ''}</span>
@@ -146,6 +145,7 @@ const indexBody = `
   <div class="post-list">
     ${postListHtml}
   </div>
+  <div class="posts-back"><a href="#">&larr; Jeremy Cowcher</a></div>
 </div>`;
 
 const indexMeta = `
