@@ -166,7 +166,7 @@ nav {
 .posts-section {
   max-width: 680px;
   margin: 0 auto;
-  padding: 3rem 1.5rem 6rem;
+  padding: 2rem 1.5rem 6rem;
 }
 
 .posts-section-header {
@@ -209,7 +209,7 @@ nav {
 }
 
 .post-card {
-  padding: 1.5rem 0;
+  padding: 1rem 0;
   display: flex;
   align-items: flex-start;
   gap: 1.5rem;
@@ -248,9 +248,9 @@ nav {
 }
 
 .post-card-content p {
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   color: var(--gray-700);
-  line-height: 1.55;
+  line-height: 1.45;
 }
 
 .post-card-arrow {
