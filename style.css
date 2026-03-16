@@ -56,7 +56,7 @@ nav {
 
 /* Hero section — full viewport */
 .hero {
-  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -424,7 +424,9 @@ main.post {
 /* Responsive */
 @media (max-width: 640px) {
   nav { padding: 1rem 1.25rem; }
+  .hero { min-height: 100svh; }
   .hero-subtitle { font-size: 1.3rem; }
+  .scroll-arrow { bottom: 1.5rem; }
   .posts-section { padding: 3rem 1.25rem 4rem; }
   .post-card { flex-direction: column; gap: 0.25rem; }
   .post-card-date { min-width: auto; }
