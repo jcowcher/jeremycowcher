@@ -96,6 +96,15 @@ nav {
   letter-spacing: 0.02em;
 }
 
+.hero-attr a {
+  color: var(--gray-400);
+  text-decoration: none;
+}
+
+.hero-attr a:hover {
+  text-decoration: underline;
+}
+
 /* Scroll arrow */
 .scroll-arrow {
   position: absolute;

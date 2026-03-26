@@ -130,8 +130,8 @@ const postListHtml = posts.length === 0
 const indexBody = `
 <section class="hero">
   <div class="hero-clock" id="clock"></div>
-  <p class="hero-subtitle">It is not the critic who counts; not the man who points out how the strong man stumbles. The credit belongs to the man who is actually in the arena.</p>
-  <p class="hero-attr">&mdash; Theodore Roosevelt</p>
+  <p class="hero-subtitle">It is not the critic who counts; not the man who points out how the strong man stumbles, or where the doer of deeds could have done them better. The credit belongs to the man who is actually in the arena.</p>
+  <p class="hero-attr">&mdash; <a href="https://www.presidency.ucsb.edu/documents/address-the-sorbonne-paris-france-citizenship-republic" target="_blank" rel="noopener">Theodore Roosevelt</a></p>
   <a href="#posts" class="scroll-arrow">
     <span class="scroll-name">Jeremy Cowcher</span>
     <span>Read</span>
