@@ -55,7 +55,7 @@ ${body}
     var d=new Date();
     var date=d.toLocaleDateString('en-US',{month:'numeric',day:'numeric',year:'numeric'});
     var time=d.toLocaleTimeString('en-US',{hour12:false,hour:'2-digit',minute:'2-digit',second:'2-digit'});
-    el.innerHTML=date+'&emsp;&emsp;'+time;
+    el.innerHTML='<span class="clock-half clock-date">'+date+'</span><span class="clock-half clock-time">'+time+'</span>';
   }
   tick();setInterval(tick,1000);
 })();
@@ -90,7 +90,10 @@ const posts = fs.readdirSync(POSTS_DIR)
 // Generate individual post pages
 posts.forEach(post => {
   const body = `
-<div class="page-clock" id="clock"></div>
+<nav>
+  <a href="/" class="nav-home">Jeremy Cowcher</a>
+  <div class="nav-clock" id="clock"></div>
+</nav>
 <main class="post">
   <header class="post-header">
     <time>${formatDate(post.date)}</time>

@@ -21,12 +21,21 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
 /* Nav */
 nav {
+  position: relative;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 1.25rem 2.5rem;
+  align-items: center;
+  padding: 16px 40px;
+  max-width: 1100px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
   border-bottom: 1px solid var(--gray-200);
 }
 
@@ -42,16 +51,30 @@ nav {
   color: var(--orange);
 }
 
-/* Page clock (post pages) */
-.page-clock {
-  text-align: center;
-  padding: 1.25rem 2.5rem;
+/* Nav clock (post pages) */
+.nav-clock {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.75rem;
+  font-variant-numeric: tabular-nums;
   font-size: 0.8rem;
   font-weight: 400;
   color: var(--gray-400);
   letter-spacing: 0.05em;
-  font-variant-numeric: tabular-nums;
-  border-bottom: 1px solid var(--gray-200);
+}
+
+.clock-half {
+  width: 5.5rem;
+}
+
+.clock-date {
+  text-align: right;
+}
+
+.clock-time {
+  text-align: left;
 }
 
 /* Hero section — full viewport */
@@ -71,6 +94,8 @@ nav {
   top: 1.5rem;
   left: 50%;
   transform: translateX(-50%);
+  display: flex;
+  gap: 0.75rem;
   font-size: 0.8rem;
   font-weight: 400;
   color: var(--gray-400);
