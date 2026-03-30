@@ -123,12 +123,12 @@ nav::after {
 /* Hero section — full viewport */
 .hero {
   height: 100svh;
-  display: grid;
-  grid-template-rows: 1fr auto;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-items: center;
+  justify-content: center;
   text-align: center;
-  padding: 2rem;
+  padding: 2rem 2rem 3rem;
   position: relative;
 }
 
@@ -182,10 +182,10 @@ nav::after {
 /* Scroll arrow */
 .scroll-arrow {
   display: flex;
-  padding-bottom: 2.5rem;
+  margin-top: 1.5rem;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
   text-decoration: none;
   color: var(--gray-400);
   transition: color 0.2s;
@@ -202,7 +202,21 @@ nav::after {
   letter-spacing: 0.02em;
   text-transform: none;
   text-decoration: none;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.15rem;
+}
+
+.scroll-arrow .scroll-cta {
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  color: var(--gray-700);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.scroll-arrow:hover .scroll-cta {
+  opacity: 0.6;
 }
 
 .scroll-arrow span {
@@ -540,7 +554,7 @@ main.post {
   nav::after { left: 1.25rem; right: 1.25rem; }
   .hero { min-height: 100svh; }
   .hero-subtitle { font-size: 1.3rem; }
-  .scroll-arrow { padding-bottom: 1.5rem; }
+  .scroll-arrow { margin-top: 1.25rem; }
   .posts-section { padding: 3rem 1.25rem 4rem; }
   .post-card { flex-direction: column; gap: 0.25rem; }
   .post-card-date { min-width: auto; }
