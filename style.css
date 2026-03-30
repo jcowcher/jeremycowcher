@@ -176,7 +176,7 @@ nav::after {
 /* Scroll arrow */
 .scroll-arrow {
   position: absolute;
-  bottom: 2.5rem;
+  bottom: 5rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -537,7 +537,7 @@ main.post {
   nav::after { left: 1.25rem; right: 1.25rem; }
   .hero { min-height: 100svh; }
   .hero-subtitle { font-size: 1.3rem; }
-  .scroll-arrow { bottom: 1.5rem; }
+  .scroll-arrow { bottom: 4rem; }
   .posts-section { padding: 3rem 1.25rem 4rem; }
   .post-card { flex-direction: column; gap: 0.25rem; }
   .post-card-date { min-width: auto; }

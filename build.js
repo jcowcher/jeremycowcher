@@ -92,7 +92,6 @@ posts.forEach(post => {
   const body = `
 <nav>
   <div class="nav-left">
-    <a href="/" class="nav-home">Jeremy Cowcher</a>
     <a href="/the-why" class="nav-link">The Why</a>
   </div>
   <div class="nav-clock" id="clock"></div>
@@ -127,7 +126,6 @@ posts.forEach(post => {
 const whyBody = `
 <nav>
   <div class="nav-left">
-    <a href="/" class="nav-home">Jeremy Cowcher</a>
     <a href="/the-why" class="nav-link">The Why</a>
   </div>
   <div class="nav-clock" id="clock"></div>
@@ -166,7 +164,6 @@ const postListHtml = posts.length === 0
 const indexBody = `
 <nav>
   <div class="nav-left">
-    <a href="/" class="nav-home">Jeremy Cowcher</a>
     <a href="/the-why" class="nav-link">The Why</a>
   </div>
   <div class="nav-clock" id="clock"></div>
@@ -181,6 +178,7 @@ const indexBody = `
   <p class="hero-subtitle">It is not the critic who counts; not the man who points out how the strong man stumbles, or where the doer of deeds could have done them better. The credit belongs to the man who is actually in the arena.</p>
   <p class="hero-attr">&mdash; <a href="https://www.presidency.ucsb.edu/documents/address-the-sorbonne-paris-france-citizenship-republic" target="_blank" rel="noopener">Theodore Roosevelt</a></p>
   <a href="#posts" class="scroll-arrow">
+    <span class="scroll-name">Jeremy Cowcher</span>
     <span>Read</span>
     <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
   </a>
