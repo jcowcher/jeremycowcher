@@ -1,0 +1,71 @@
+Article Suggestions
+===================
+
+The Promise of AI (Part 0) — Painting
+---------------------------------------
+Before AI, painting with a brush was code — it was the technology for turning
+what's in your head into something others could see. Code was the next version
+of that. Now AI is the next version of code. The throughline from brush to
+keyboard to prompt: each generation gets a more direct path from imagination
+to reality.
+
+The Promise of AI (Part VI) — Asking Good Questions
+-----------------------------------------------------
+Already drafted (see 20260306 RTF). Needs to be finished.
+
+Loneliness as a Part of Greatness
+----------------------------------
+The preface to Van Gogh's autobiography starts with "Vincent Van Gogh was one
+of the world's loneliest souls." Explore the relationship between isolation and
+extraordinary work — the cost of seeing things differently before anyone else
+does. Could tie into the builder/founder theme: building something new is
+inherently lonely because you're working on something no one else sees yet.
+
+Bill Simmons and Netflix
+-------------------------
+How Simmons built a media empire by being his own audience first, and what
+Netflix's evolution says about betting on taste vs. data.
+
+ESPN and the Need for Kayfabe
+------------------------------
+ESPN needs kayfabe — the professional wrestling tradition of maintaining the
+illusion that everything is real. Sports media thrives on narratives, rivalries,
+and storylines just like wrestling does. The difference is ESPN can't admit it.
+What happens when the audience starts seeing through the performance? The NBA
+is a case study — a league being dragged down by its media partner's need to
+manufacture drama instead of letting the game speak for itself.
+
+Elon Musk
+----------
+Love him or hate him — what his approach to building reveals about conviction,
+speed, and ignoring consensus.
+
+Deep Work
+----------
+Already drafted (see 20260303 Deep Work.rtf). Cal Newport's framework applied
+to the AI era — when tools do the shallow work, deep work becomes the only
+differentiator. Focus on the challenges: why deep work is so hard to actually
+do. The constant pull of notifications, the discomfort of sustained focus, the
+organizational pressure toward shallow busyness. Everyone agrees deep work
+matters — almost nobody structures their life to protect it.
+
+Zero to One vs. One to N
+--------------------------
+Thiel's distinction between creating something new (0 to 1) and copying what
+works (1 to n). Most people and companies live in the 1-to-n world — scaling,
+optimizing, iterating. The rare and valuable skill is 0 to 1: seeing something
+that doesn't exist yet and willing it into being. What separates the two
+mindsets, and why most advice is 1-to-n advice disguised as 0-to-1 thinking.
+
+Making Something Mean Something Because You Say So
+----------------------------------------------------
+The power of declaration — deciding that something matters and acting
+accordingly until the world agrees. Brands, movements, companies: they all
+start as someone insisting this thing is real before anyone else believes it.
+It's not delusion, it's the first act of creation. You define the meaning,
+then you build the evidence.
+
+The Great Men Theory
+---------------------
+Do individuals drive history, or do circumstances create the individual? What
+this means for founders who believe they can bend the arc of their industry.
