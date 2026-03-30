@@ -49,6 +49,15 @@ ${body}
 <footer class="site-disclaimer">The views expressed here are my own. This is not investment advice. I may hold positions in companies discussed. This content is for informational and entertainment purposes only.</footer>
 <script>
 (function(){
+  var q=document.getElementById('hero-quote');
+  if(q){
+    var quotes=[
+      {text:'It is not the critic who counts; not the man who points out how the strong man stumbles, or where the doer of deeds could have done them better. The credit belongs to the man who is actually in the arena.',attr:'Theodore Roosevelt',url:'https://www.presidency.ucsb.edu/documents/address-the-sorbonne-paris-france-citizenship-republic'},
+      {text:'The reasonable man adapts himself to the world: the unreasonable one persists in trying to adapt the world to himself. Therefore all progress depends on the unreasonable man.',attr:'George Bernard Shaw',url:'https://en.wikipedia.org/wiki/Man_and_Superman'}
+    ];
+    var pick=quotes[Math.floor(Math.random()*quotes.length)];
+    q.innerHTML='<p class="hero-subtitle">'+pick.text+'</p><p class="hero-attr">&mdash; <a href="'+pick.url+'" target="_blank" rel="noopener">'+pick.attr+'</a></p>';
+  }
   var el=document.getElementById('clock');
   if(!el)return;
   function tick(){
@@ -174,7 +183,7 @@ const indexBody = `
   </div>
 </nav>
 <section class="hero">
-  <div class="hero-content">
+  <div class="hero-content" id="hero-quote">
     <p class="hero-subtitle">It is not the critic who counts; not the man who points out how the strong man stumbles, or where the doer of deeds could have done them better. The credit belongs to the man who is actually in the arena.</p>
     <p class="hero-attr">&mdash; <a href="https://www.presidency.ucsb.edu/documents/address-the-sorbonne-paris-france-citizenship-republic" target="_blank" rel="noopener">Theodore Roosevelt</a></p>
   </div>
