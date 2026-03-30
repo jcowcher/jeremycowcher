@@ -122,14 +122,20 @@ nav::after {
 
 /* Hero section — full viewport */
 .hero {
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
+  height: 100svh;
+  display: grid;
+  grid-template-rows: 1fr auto;
   align-items: center;
-  justify-content: center;
+  justify-items: center;
   text-align: center;
   padding: 2rem;
   position: relative;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .hero-clock {
@@ -175,11 +181,8 @@ nav::after {
 
 /* Scroll arrow */
 .scroll-arrow {
-  position: absolute;
-  bottom: 5rem;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
+  padding-bottom: 2.5rem;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
@@ -537,7 +540,7 @@ main.post {
   nav::after { left: 1.25rem; right: 1.25rem; }
   .hero { min-height: 100svh; }
   .hero-subtitle { font-size: 1.3rem; }
-  .scroll-arrow { bottom: 4rem; }
+  .scroll-arrow { padding-bottom: 1.5rem; }
   .posts-section { padding: 3rem 1.25rem 4rem; }
   .post-card { flex-direction: column; gap: 0.25rem; }
   .post-card-date { min-width: auto; }
