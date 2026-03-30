@@ -51,6 +51,41 @@ nav {
   color: var(--orange);
 }
 
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: var(--gray-500);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.nav-link:hover {
+  color: var(--orange);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.nav-github {
+  color: var(--black);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  transition: color 0.15s;
+}
+
+.nav-github:hover {
+  color: var(--orange);
+}
+
 /* Nav clock (post pages) */
 .nav-clock {
   position: absolute;
@@ -464,6 +499,28 @@ main.post {
   line-height: 1.6;
   text-align: center;
   border-top: 1px solid var(--gray-200);
+}
+
+/* The Why page */
+.why-page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+}
+
+.why-page h1 {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 2.4rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.why-page p {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--gray-700);
 }
 
 /* Responsive */
