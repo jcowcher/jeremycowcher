@@ -36,6 +36,14 @@ nav {
   width: 100%;
   box-sizing: border-box;
   margin: 0 auto;
+}
+
+nav::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 40px;
+  right: 40px;
   border-bottom: 1px solid var(--gray-200);
 }
 
@@ -526,6 +534,7 @@ main.post {
 /* Responsive */
 @media (max-width: 640px) {
   nav { padding: 1rem 1.25rem; }
+  nav::after { left: 1.25rem; right: 1.25rem; }
   .hero { min-height: 100svh; }
   .hero-subtitle { font-size: 1.3rem; }
   .scroll-arrow { bottom: 1.5rem; }
