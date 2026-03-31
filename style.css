@@ -127,7 +127,7 @@ nav::after {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 2rem;
+  padding: 2rem 2rem calc(2rem + 53px);
   position: relative;
 }
 
@@ -181,9 +181,9 @@ nav::after {
 /* Scroll arrow */
 .scroll-arrow {
   position: absolute;
-  top: 75%;
+  bottom: 2.5rem;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -557,9 +557,9 @@ main.post {
 @media (max-width: 640px) {
   nav { padding: 1rem 1.25rem; }
   nav::after { left: 1.25rem; right: 1.25rem; }
-  .hero { height: calc(100svh - 45px); }
+  .hero { height: calc(100svh - 45px); padding-bottom: calc(2rem + 45px); }
   .hero-subtitle { font-size: 1.3rem; }
-  .scroll-arrow { top: 80%; }
+  .scroll-arrow { bottom: 1.5rem; }
   .posts-section { padding: 3rem 1.25rem 4rem; }
   .post-card { flex-direction: column; gap: 0.25rem; }
   .post-card-date { min-width: auto; }
