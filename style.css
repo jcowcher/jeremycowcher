@@ -235,8 +235,8 @@ nav::after {
 }
 
 .scroll-arrow svg {
-  width: 20px;
-  height: 20px;
+  width: 28px;
+  height: 28px;
   fill: var(--gray-700);
   animation: bounce 2s ease-in-out infinite;
 }
