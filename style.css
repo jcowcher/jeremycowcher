@@ -559,9 +559,13 @@ main.post {
 .why-page .post-footer {
   margin-top: 1rem;
   padding-top: 0.75rem;
-  border-bottom: none;
+  border-top: none;
   padding-bottom: 0;
   margin-bottom: 0;
+}
+
+.why-page ~ .site-disclaimer {
+  max-width: 860px;
 }
 
 .why-page p a,
