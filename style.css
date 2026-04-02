@@ -249,7 +249,7 @@ nav::after {
 }
 
 .posts-back {
-  margin-top: 1.5rem;
+  margin-top: 0.75rem;
 }
 
 .posts-back a {
@@ -267,15 +267,15 @@ nav::after {
 .posts-section {
   max-width: 680px;
   margin: 0 auto;
-  padding: 2rem 1.5rem 6rem;
+  padding: 1rem 1.5rem 1rem;
 }
 
 .posts-section-header {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  padding-bottom: 1rem;
-  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
   border-bottom: 2px solid var(--black);
 }
 
@@ -310,7 +310,7 @@ nav::after {
 }
 
 .post-card {
-  padding: 1rem 0;
+  padding: 0.6rem 0;
   display: flex;
   align-items: flex-start;
   gap: 1.5rem;
