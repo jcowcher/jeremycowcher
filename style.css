@@ -537,7 +537,7 @@ main.post {
 .why-page {
   max-width: 860px;
   margin: 0 auto;
-  padding: 1rem 1.5rem 1rem;
+  padding: 2rem 1.5rem 1rem;
 }
 
 .why-page h1 {
@@ -546,26 +546,26 @@ main.post {
   font-weight: 400;
   letter-spacing: -0.02em;
   line-height: 1.2;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .why-page p {
   font-size: 1.05rem;
-  line-height: 1.65;
+  line-height: 1.75;
   color: var(--gray-700);
-  margin-bottom: 0.85rem;
+  margin-bottom: 1.25rem;
 }
 
 .why-page .post-footer {
   margin-top: 1rem;
   padding-top: 0.75rem;
-  border-top: none;
   padding-bottom: 0;
   margin-bottom: 0;
 }
 
 .why-page ~ .site-disclaimer {
   max-width: 860px;
+  border-top: none;
 }
 
 .why-page p a,
