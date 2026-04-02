@@ -223,7 +223,7 @@ nav::after {
 .scroll-arrow:hover .scroll-cta {
   text-decoration: underline;
   text-underline-offset: 3px;
-  color: var(--gray-700);
+  color: var(--orange);
 }
 
 .scroll-arrow span {
@@ -237,9 +237,9 @@ nav::after {
 }
 
 .scroll-arrow svg {
-  width: 36px;
-  height: 28px;
-  fill: var(--gray-700);
+  width: 44px;
+  height: 36px;
+  fill: var(--black);
   animation: bounce 2s ease-in-out infinite;
 }
 
