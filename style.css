@@ -75,6 +75,8 @@ nav::after {
 
 .nav-link:hover {
   color: var(--orange);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .nav-right {
@@ -533,7 +535,7 @@ main.post {
 
 /* The Why page */
 .why-page {
-  max-width: 640px;
+  max-width: 860px;
   margin: 0 auto;
   padding: 3rem 1.5rem 5rem;
 }
@@ -551,6 +553,15 @@ main.post {
   font-size: 1.05rem;
   line-height: 1.75;
   color: var(--gray-700);
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.why-page p:last-of-type {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 /* Responsive */
