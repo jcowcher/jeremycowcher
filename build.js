@@ -148,7 +148,13 @@ const whyBody = `
 </nav>
 <main class="why-page">
   <h1>The Why</h1>
-  <p>The copy for this section is coming soon. This page will explain the philosophy behind this blog and the ideas explored here.</p>
+  <p>Writing helps me think. It helps me organize my thoughts. This website will be the vehicle for that - shorter takes on topics I'm interested in. Expect to see takes on AI, building products, general business and sports (particularly the NBA).</p>
+  <p>I enjoy great takesmen; it's the reason I've been reading and listening to Bill Simmons for 15 years. This website is my foray into the world of takes.</p>
+  <p>I'll have good and bad takes; no one bats a thousand. What I can guarantee is that these takes are authentic and what I believed when I wrote them.</p>
+  <p>There is no comment section and never will be. To paraphrase Colin Cowherd, I play offense. If you have constructive feedback, you'll be able to reach me online.</p>
+  <p>Thanks for visiting</p>
+  <p>Jeremy Cowcher</p>
+  <p>P.S. If you want to check out the products I've built with myself as the first customer, go to <a href="https://gemtimer.com" target="_blank" rel="noopener">gemtimer.com</a> to better manage your time and <a href="https://ideakache.com" target="_blank" rel="noopener">ideakache.com</a> to find the thoughts of remarkable thinkers and entrepreneurs.</p>
   <footer class="post-footer"><a href="/">&larr; All posts</a></footer>
 </main>`;
 
