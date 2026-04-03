@@ -140,8 +140,8 @@ const whyBody = `
   <p>Writing helps me think. This website is the vehicle for that: shorter takes on topics I'm interested in. Expect to see takes on AI, building products, business, and sports, particularly the NBA.</p>
   <p>I enjoy great takesmen; it's one reason I've been reading and listening to Bill Simmons for 15 years. I'll have good takes and bad takes. No one bats a thousand. What I can guarantee is that they'll be authentic and reflect what I believed when I wrote them.</p>
   <p>There is no comment section, and there never will be. To paraphrase Colin Cowherd, I play offense. If you have constructive feedback, you'll be able to reach me online.</p>
-  <p>Thanks for visiting.</p>
-  <p>Jeremy Cowcher</p>
+  <p>Thanks for visiting,</p>
+  <p>Jeremy</p>
   <p><em>P.S. If you want to check out the products I've built with myself as the first customer, visit <a href="https://gemtimer.com" target="_blank" rel="noopener">gemtimer.com</a> to better manage your time and <a href="https://ideakache.com" target="_blank" rel="noopener">ideakache.com</a> to find the thoughts of remarkable thinkers and entrepreneurs.</em></p>
   <footer class="post-footer"><a href="/#posts">&larr; All posts</a></footer>
 </main>`;
