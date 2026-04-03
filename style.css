@@ -586,10 +586,13 @@ main.post {
   .hero { height: calc(100svh - 45px); padding-bottom: calc(2rem + 45px); }
   .hero-subtitle { font-size: 1.3rem; }
   .scroll-arrow { bottom: 1.5rem; }
-  .posts-section { padding: 3rem 1.25rem 4rem; }
-  .post-card { flex-direction: column; gap: 0.25rem; }
-  .post-card-date { min-width: auto; }
+  .posts-section { padding: 1.5rem 1.25rem 1.5rem; }
+  .post-card { flex-direction: row; gap: 0.75rem; }
+  .post-card { padding: 0.35rem 0; }
+  .post-card-date { min-width: 60px; font-size: 0.7rem; }
   .post-card-arrow { display: none; }
+  .post-card-content h2 { font-size: 1rem; margin-bottom: 0.15rem; }
+  .post-card-content p { font-size: 0.72rem; line-height: 1.35; }
   main.post { padding: 2rem 1.25rem 3rem; }
   .post-header h1 { font-size: 1.7rem; }
   .post-body { font-size: 1rem; }
