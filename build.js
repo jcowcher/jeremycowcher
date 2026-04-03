@@ -119,7 +119,7 @@ posts.forEach(post => {
   </header>
   <article class="post-body">${post.html}</article>
   <div class="post-disclaimer">This post is provided for general information, commentary and discussion purposes only. It is not legal, investing or other professional advice, and it should not be relied upon as such. Any errors or omissions are unintentional. The views expressed are those of the author in a personal capacity and do not represent the views of any employer, client, partner or affiliated organization. Generative AI tools were used to assist with research and editing.</div>
-  <footer class="post-footer"><a href="/">&larr; All posts</a></footer>
+  <footer class="post-footer"><a href="/#posts">&larr; All posts</a></footer>
 </main>`;
 
   const meta = `
