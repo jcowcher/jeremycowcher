@@ -18,18 +18,18 @@ I keep three reference files in each project. CLAUDE.md is the technical spec �
 
 When I start a session, I open VS Code and point it at the project folder (e.g. File → Open Folder → Desktop → ideakache). Claude Code runs inside VS Code — that's where I make changes.
 
-Separately, I open Mac Terminal, /exit out of Claude Code if it's started automatically, navigate to the project folder using cd (e.g. cd ~/Desktop/ideakache), and run npm run dev.
-
-This launches a local version of my site that only runs on my laptop. I can see it in my browser at localhost:3000, and it updates in real time as I work.
+Separately, I open Mac Terminal, /exit out of Claude Code if it's started automatically, navigate to the project folder using cd (e.g. cd ~/Desktop/ideakache), and run npm run dev. This launches a local version of my site that only runs on my laptop. I can see it in my browser at localhost:3000, and it updates in real time as I work.
 
 Claude Code saves my conversation history within each project, so keeping my VS Code window open means Claude remembers what we've been working on. If I close and reopen it, though, it starts fresh — it only knows what's in the code files and CLAUDE.md.
 
-When I tell Claude Code to make changes, it writes the new code. I check how things look at localhost:3000, and when I'm happy I tell it to commit and push. Commit records a snapshot of my changes on my laptop. Push sends it to GitHub. I always do both together.
+When I tell Claude Code to make changes, it writes the new code. I check how things look at localhost:3000, and when I'm happy I tell it to commit and push. I ask Claude Code to write a descriptive commit message — not just 'update styles' but something like 'add custom sign-in form for 1Password compatibility.' This makes my git history actually useful if I ever need to look back. Commit records a snapshot of my changes on my laptop. Push sends it to GitHub. I always do both together.
 
 GitHub keeps everything — a full history of every change. Those pushes are what show up as green squares on my profile. Because I'm on dev, though, my live website doesn't change. If something goes wrong, I can always roll it back.
 
 The key difference: pushing to dev is free — it just stores my code on GitHub. Pushing to main triggers a Vercel rebuild, and that's what costs money.
 
+Before going live, I do a final check at localhost:3000 to make sure everything works together — individual changes can look fine on their own but sometimes interact in unexpected ways.
+
 When it's time to go live, I tell Claude Code merge dev to main and push. That moves my draft into the final version.
 
-Vercel is watching main. As soon as it sees an update, it rebuilds my site and the changes go live.
+Vercel is watching main. As soon as it sees an update, it rebuilds my site and the changes go live. I've set up Vercel to notify me if a build fails, so I'm not deploying and hoping.
