@@ -18,7 +18,7 @@
 \f0\b\fs28 My current workflow:\
 
 \f1\b0\fs24 \
-1. My code has two branches: dev is my working draft and main is the final, live version.\
+1. My code has two branches: dev is my working draft and main is the final, live version. Separate dev branches are a function of how many people are working on something together. Since it\'92s just me, one dev branch is all I need \'97 I merge to main when I\'92m ready to go live.\
 2. I used Claude Code to set this up so all my day-to-day work happens on dev by default. I write and edit code in VS Code, which is my IDE (basically a text editor built for coding).\
 3. I keep three reference files in each project. CLAUDE.md is the technical spec \'97 Claude Code reads it automatically every time it starts so it knows how the project is built. CONTEXT.md is the product brief \'97 what the project is, who it\'92s for, how it works. NOTES.md is my troubleshooting journal \'97 non-obvious decisions, workarounds, things that bit me. Claude Code created all three and updates them when I ask.\
 4. When I start a session, I open VS Code and point it at the project folder (e.g. File \'8e Open Folder \'8e Desktop \'8e ideakache). Claude Code runs inside VS Code \'97 that\'92s where I make changes.\
@@ -28,6 +28,6 @@
 8. GitHub keeps everything \'97 a full history of every change. Those pushes are what show up as green squares on my profile. Because I\'92m on dev, though, my live website doesn\'92t change. If something goes wrong, I can always roll it back.\
 9. The key difference: pushing to dev is free \'97 it just stores my code on GitHub. Pushing to main triggers a Vercel rebuild, and that\'92s what costs money.\
 10. Before going live, I do a final check at localhost:3000 to make sure everything works together \'97 individual changes can look fine on their own but sometimes interact in unexpected ways.\
-11. When it\'92s time to go live, I tell Claude Code merge dev to main and push. That moves my draft into the final version.\
+11. When it\'92s time to go live, I tell Claude Code merge dev to main and push, and write a commit message summarising what changed since the last deploy. That way my git history on main reads like a changelog \'97 each merge tells me what that deploy included.\
 12. Vercel is watching main. As soon as it sees an update, it rebuilds my site and the changes go live. I\'92ve set up Vercel to notify me if a build fails, so I\'92m not deploying and hoping.\
 }

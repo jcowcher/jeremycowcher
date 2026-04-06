@@ -64,6 +64,12 @@ Open `dist/index.html` locally or push to deploy on Vercel.
 - **Post list was carefully compacted** to fit all 6 posts on one screen. If adding a 7th post, the layout may need revisiting.
 - **The Why page has no nav bar** — the `whyBody` in `build.js` omits the `<nav>` element entirely. Don't add it back.
 
+## Deploy workflow
+
+- **Default branch:** `dev` (GitHub default). All work happens here.
+- **Production branch:** `main`. Only `main` triggers Vercel builds — all other branches are skipped (configured in `vercel.json` under `git.deploymentEnabled`).
+- **Merging dev → main:** Always write a descriptive merge commit message summarising what changed since the last deploy. Don't use the default merge message.
+
 ## Current state (April 2026)
 
 - **Shipped:** 6 posts (5-part "Promise of AI" series + 1 standalone). Fully deployed and live.
