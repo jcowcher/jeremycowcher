@@ -583,7 +583,7 @@ main.post {
 @media (max-width: 640px) {
   nav { padding: 1rem 1.25rem; }
   nav::after { left: 1.25rem; right: 1.25rem; }
-  .hero { height: calc(100svh - 45px); padding-bottom: calc(2rem + 45px); }
+  .hero { height: calc(100svh - 45px); padding-top: 1.5rem; padding-bottom: calc(2rem + 45px); }
   .hero-subtitle { font-size: 1.3rem; }
   .scroll-arrow { bottom: 1.5rem; }
   .posts-section { padding: 1.5rem 1.25rem 1.5rem; }
