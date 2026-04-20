@@ -24,11 +24,11 @@ If you ever wonder why governments struggle to build anything on time or on budg
 
 When hiring, many leaders misidentify that they've hired someone in category 1 or 2. Instead, they have hired someone in category 3, with the result that the output of the team doesn't increase as it should, given the additional resources.
 
-Essential regulator roles are in Legal, Finance, and HR — be mindful of how many people your organization has in each. I can speak from personal experience that giving someone a "Privacy" role seems to create privacy issues when people in an organization want to get something done.
+Essential regulator roles are in Legal, Finance, and HR; be mindful of how many people your organization has in each. I can speak from personal experience that giving someone a "Privacy" role seems to create privacy issues when people in an organization want to get something done.
 
 **High-IQ, great logo.** The fourth category is one where I've seen many ex-colleagues end up, some falling for a "prestige trap." They take one of these roles at a great logo, not realizing they've capped their earning power and influence. The roles with upside at those great logos are in category 1 or category 2. Roles in this fourth category include "Chief of Staff," "Strategy and Operations," and, more recently, "GTM." People who take one of these roles and want upside, need to ensure there's alignment that their next role will be in category 1 or 2.
 
-When you see a company hiring for lots of roles in this fourth category, one of two things is true: they're a monopoly in disguise — including one tech company that has had the greatest business model ever — or the company is due for a regression to the mean, like Peloton pre-2022. Companies that hire lots of consultants sometimes get a bad rap and see their performance decline. Actually, in the non-monopoly case, that's a symptom, not a cause.
+When you see a company hiring for lots of roles in this fourth category, one of two things is true: they're a monopoly in disguise (including one tech company that has had the greatest business model ever) or the company is due for a regression to the mean, like Peloton pre-2022. Companies that hire lots of consultants sometimes get a bad rap and see their performance decline. Actually, in the non-monopoly case, that's a symptom, not a cause.
 
 Finally, if you have people in your organization who can do 1 and 2, they are priceless. They may have started at your company in a junior role and grown over time. Use this framework to find them and give them opportunities to succeed.
 
