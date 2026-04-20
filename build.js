@@ -201,10 +201,10 @@ const indexBody = `
 </div>`;
 
 const indexMeta = `
-<meta name="description" content="Jeremy Cowcher's personal blog.">
+<meta name="description" content="Shorter takes on AI, building products, business, and sports (particularly the NBA).">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Jeremy Cowcher">
-<meta property="og:description" content="Jeremy Cowcher's personal blog.">
+<meta property="og:description" content="Shorter takes on AI, building products, business, and sports (particularly the NBA).">
 <meta property="og:url" content="https://jeremycowcher.com/">
 <link rel="canonical" href="https://jeremycowcher.com/">`;
 
