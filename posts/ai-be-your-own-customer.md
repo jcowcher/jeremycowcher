@@ -1,7 +1,7 @@
 ---
 title: The Promise of AI (Part V) - Be your own customer
 date: 2026-03-06
-description: Build things you want to use yourself — be your first customer
+description: Build things you want to use yourself; be your first customer
 ---
 
 > *If you wait for the customer to tell you what to do, you're too late, so we were our own customer*

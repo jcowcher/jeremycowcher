@@ -1,7 +1,7 @@
 ---
 title: The Promise of AI (Part IV) - Borrow from giants and ask no one
 date: 2026-03-05
-description: You don't need permission to start building — borrow from what you like and stand on the shoulders of giants
+description: You don't need permission to start building; borrow from what you like and stand on the shoulders of giants
 ---
 
 > *If I have seen further it is by standing on [the] sho[u]lders of Giants.*
