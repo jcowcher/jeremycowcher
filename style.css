@@ -596,4 +596,6 @@ main.post {
   main.post { padding: 2rem 1.25rem 3rem; }
   .post-header h1 { font-size: 1.7rem; }
   .post-body { font-size: 1rem; }
+  .why-page { padding: 0.25rem 1.25rem 0.25rem; }
+  .why-page h1 { font-size: 2rem; margin-bottom: 0.75rem; }
 }
