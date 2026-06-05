@@ -47,3 +47,6 @@ Unlike all other pages, the Why page has no `<nav>` element — no clock, no Git
 
 **Post list and Why page spacing were tightened across multiple passes.**
 Both pages needed to fit all content (including footer disclaimer) in a single desktop viewport. Required iterative reduction of section padding, card padding, line-height, and margins. `dd9487d`, `206db24`
+
+**June 4, 2026 — added site favicon (charcoal disc, white serif J); repo previously had none.**
+`build.js` now copies `favicon.ico` + `icon.png` from the repo root into `dist/` on every build (since `dist/` is wiped), and `htmlTemplate` emits `<link rel="icon">` + `<link rel="apple-touch-icon">` in the head of every page.
