@@ -38,6 +38,8 @@ function htmlTemplate(title, body, extra = '') {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${title}</title>
+<link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/icon.png">
 ${extra}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -79,6 +81,11 @@ ${body}
 fs.rmSync(DIST_DIR, { recursive: true, force: true });
 fs.mkdirSync(DIST_DIR, { recursive: true });
 fs.mkdirSync(path.join(DIST_DIR, 'posts'), { recursive: true });
+
+// Copy favicon assets from repo root into dist (dist/ is wiped on every build)
+['favicon.ico', 'icon.png'].forEach(file => {
+  fs.copyFileSync(path.join(__dirname, file), path.join(DIST_DIR, file));
+});
 
 // Read and parse all posts
 const posts = fs.readdirSync(POSTS_DIR)
