@@ -167,7 +167,9 @@ const whyBody = `
   <p>There is no comment section. To paraphrase Colin Cowherd, I play offense (on this website). If you have constructive feedback, you'll be able to reach me online.</p>
   <p>Thanks for visiting,</p>
   <p>Jeremy</p>
+  <!-- P.S. hidden for now: names/links the products before they're public. Restore when ready.
   <p><em>P.S. If you want to check out the products I've built with myself as the first customer, visit <a href="https://gemtimer.com" target="_blank" rel="noopener">gemtimer.com</a> to better manage your time and <a href="https://ideakache.com" target="_blank" rel="noopener">ideakache.com</a> to find the thoughts of remarkable thinkers and entrepreneurs.</em></p>
+  -->
   <footer class="post-footer"><a href="/#posts">&larr; All posts</a></footer>
 </main>`;
 
