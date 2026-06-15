@@ -51,7 +51,7 @@ Open `dist/index.html` locally or push to deploy on Vercel.
 - **The Why page:** Standalone page at `/the-why` explaining the blog's purpose. No nav bar (no clock, no GitHub icon) — just the title and body. All other pages keep the full nav. Links to gemtimer.com and ideakache.com open in new tabs. P.S. paragraph is italicized.
 - **The Why page width:** `max-width: 860px` (wider than post pages at 640px). The footer disclaimer matches this width via `.why-page ~ .site-disclaimer`.
 - **Accent color:** `#FF6600` (orange) for links, hovers, and interactive elements.
-- **Instrument Serif at weight 400** — 700 looks too heavy for serif; this was an intentional design choice.
+- **Fraunces (serif) at weight 500** — the GemKa system's heading weight, shared across the other GemKa sites. Body stays Inter. (Was Instrument Serif at 400 before the GemKa font swap.)
 
 ## No em dashes
 
