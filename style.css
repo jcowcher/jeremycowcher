@@ -528,8 +528,8 @@ main.post {
    meta row (copyright left, tagline right). The outer .footer-links mirrors the
    nav container (max-width 1100px, 40px insets) and draws its top divider via a
    pseudo-element, so the footer line matches the header line (nav::after)
-   exactly. Content stays centered at 640px in .footer-inner. Disclaimer text
-   now lives on /disclosures. */
+   exactly. The two rows stay centered at 640px; a faint .footer-divider
+   between them spans the same width. Disclaimer text now lives on /disclosures. */
 .footer-links {
   position: relative;
   max-width: 1100px;
@@ -537,6 +537,8 @@ main.post {
   box-sizing: border-box;
   margin: 0 auto;
   padding: 0.85rem 40px;
+  font-size: 0.78rem;
+  line-height: 1.8;
 }
 
 .footer-links::before {
@@ -548,23 +550,23 @@ main.post {
   border-top: 1px solid var(--gk-border);
 }
 
-.footer-inner {
-  max-width: 640px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  font-size: 0.78rem;
-  line-height: 1.8;
-}
-
 .footer-row,
 .footer-meta {
+  max-width: 640px;
+  margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   gap: 0.4rem 1rem;
+}
+
+/* Faint hairline between the links row and the meta row. As a normal-flow
+   child of .footer-links it fills the container's content box (inset 40px by
+   the padding), so it spans the same width as the top divider (::before). */
+.footer-divider {
+  border-top: 0.5px solid var(--gk-border);
+  margin: 0.55rem 0;
 }
 
 .footer-group {
@@ -631,7 +633,8 @@ main.post {
   margin-bottom: 0;
 }
 
-.why-page ~ .footer-links .footer-inner {
+.why-page ~ .footer-links .footer-row,
+.why-page ~ .footer-links .footer-meta {
   max-width: 860px;
 }
 
@@ -665,9 +668,9 @@ main.post {
   .post-body { font-size: 1rem; }
   .why-page { padding: 0.25rem 1.25rem 0.25rem; }
   .why-page h1 { font-size: 2rem; margin-bottom: 0.75rem; }
-  .footer-links { padding: 0.75rem 1.25rem; }
+  .footer-links { padding: 0.75rem 1.25rem; text-align: center; }
   .footer-links::before { left: 1.25rem; right: 1.25rem; }
-  .footer-inner { gap: 0.5rem; text-align: center; }
   .footer-row, .footer-meta { flex-direction: column; gap: 0.3rem; }
+  .footer-divider { margin: 0.45rem 0; }
   .footer-sep { margin: 0 0.4rem; }
 }

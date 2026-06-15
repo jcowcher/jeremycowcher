@@ -14,31 +14,30 @@ const STYLE = fs.readFileSync(path.join(__dirname, 'style.css'), 'utf8');
 // on the right. External links open in a new tab; order and styling mirror the
 // other GemKa sites.
 const FOOTER_LINKS = `<footer class="footer-links">
-  <div class="footer-inner">
-    <div class="footer-row">
-      <div class="footer-group footer-left">
-        <a href="https://x.com/GemTimer_GemKa" target="_blank" rel="noopener noreferrer">X.com</a>
-        <span class="footer-sep" aria-hidden="true">·</span>
-        <a href="https://www.linkedin.com/company/gemka" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <span class="footer-sep" aria-hidden="true">·</span>
-        <a href="https://gemtimer.com" target="_blank" rel="noopener noreferrer">GemTimer</a>
-        <span class="footer-sep" aria-hidden="true">·</span>
-        <a href="https://gemtodo.com" target="_blank" rel="noopener noreferrer">GemTodo</a>
-        <span class="footer-sep" aria-hidden="true">·</span>
-        <a href="https://gemka.co" target="_blank" rel="noopener noreferrer">GemKa</a>
-        <span class="footer-sep" aria-hidden="true">·</span>
-        <a href="https://ideakache.com" target="_blank" rel="noopener noreferrer">IdeaKache</a>
-      </div>
-      <div class="footer-group footer-right">
-        <a href="/disclosures">Disclosures</a>
-        <span class="footer-sep" aria-hidden="true">·</span>
-        <a href="mailto:jeremy@gemka.co">Contact</a>
-      </div>
+  <div class="footer-row">
+    <div class="footer-group footer-left">
+      <a href="https://x.com/GemTimer_GemKa" target="_blank" rel="noopener noreferrer">X.com</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <a href="https://www.linkedin.com/company/gemka" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <a href="https://gemtimer.com" target="_blank" rel="noopener noreferrer">GemTimer</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <a href="https://gemtodo.com" target="_blank" rel="noopener noreferrer">GemTodo</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <a href="https://gemka.co" target="_blank" rel="noopener noreferrer">GemKa</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <a href="https://ideakache.com" target="_blank" rel="noopener noreferrer">IdeaKache</a>
     </div>
-    <div class="footer-meta">
-      <span class="footer-copy">&copy; 2026 GemKa</span>
-      <span class="footer-tagline">Writing to think</span>
+    <div class="footer-group footer-right">
+      <a href="/disclosures">Disclosures</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <a href="mailto:jeremy@gemka.co">Contact</a>
     </div>
+  </div>
+  <div class="footer-divider" aria-hidden="true"></div>
+  <div class="footer-meta">
+    <span class="footer-copy">&copy; 2026 GemKa</span>
+    <span class="footer-tagline">Writing to think</span>
   </div>
 </footer>`;
 
