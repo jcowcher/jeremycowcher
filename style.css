@@ -537,7 +537,7 @@ main.post {
   width: 100%;
   box-sizing: border-box;
   margin: 0 auto;
-  padding: 0.85rem 40px;
+  padding: 0.45rem 40px;
   font-size: 0.78rem;
   line-height: 1.8;
 }
@@ -565,7 +565,7 @@ main.post {
    the padding), so it spans the same width as the top divider (::before). */
 .footer-divider {
   border-top: 1px solid color-mix(in srgb, var(--gk-border) 45%, transparent);
-  margin: 0.55rem 0;
+  margin: 0.35rem 0;
 }
 
 .footer-group {
@@ -662,9 +662,9 @@ main.post {
   .post-body { font-size: 1rem; }
   .why-page { padding: 0.25rem 1.25rem 0.25rem; }
   .why-page h1 { font-size: 2rem; margin-bottom: 0.75rem; }
-  .footer-links { padding: 0.75rem 1.25rem; text-align: center; }
+  .footer-links { padding: 0.45rem 1.25rem; text-align: center; }
   .footer-links::before { left: 1.25rem; right: 1.25rem; }
   .footer-row, .footer-meta { flex-direction: column; gap: 0.3rem; }
-  .footer-divider { margin: 0.45rem 0; }
+  .footer-divider { margin: 0.3rem 0; }
   .footer-sep { margin: 0 0.4rem; }
 }
