@@ -4,8 +4,8 @@ Personal blog at **jeremycowcher.com** — minimal static site for shorter takes
 
 ## Tech stack
 
-- **Build:** `node build.js` (custom script) using `marked` for markdown→HTML. Only dependency.
-- **Styling:** Single `style.css`, plain CSS with CSS variables. Inter + Instrument Serif from Google Fonts.
+- **Build:** `node build.js` (custom script) using `marked` for markdown→HTML. Dependencies: `marked` and `gemka-tokens` (canonical GemKa design tokens).
+- **Styling:** Single `style.css`, plain CSS with CSS variables, repointed onto the GemKa design system. The palette comes from the `gemka-tokens` npm package (`--gk-*` tokens): warm cream paper/bg, warm ink, oxblood accent. Fonts: Inter (body) + Fraunces (serif), both from Google Fonts.
 - **Hosting:** Vercel. Config in `vercel.json` (clean URLs, no trailing slashes).
 - **Output:** Static HTML to `dist/` (gitignored, rebuilt on every deploy).
 - **No framework.** No React, no bundler, no TypeScript. Just Node, HTML, CSS, and one inline `<script>` for the clock.
@@ -26,7 +26,7 @@ NOTES.md          — Non-obvious bugs and fixes with commit refs
 ## How to run
 
 ```
-npm install        # just `marked`
+npm install        # `marked` + `gemka-tokens`
 npm run build      # generates dist/
 ```
 
@@ -39,7 +39,7 @@ Open `dist/index.html` locally or push to deploy on Vercel.
 3. Generates individual post pages with OG metadata + disclaimers
 4. Generates "The Why" page (no nav bar, standalone layout)
 5. Generates index page with hero section + post list
-6. CSS is inlined into every page via `<style>` tag (read from `style.css` at build time)
+6. CSS is inlined into every page via `<style>` tags at build time: first `node_modules/gemka-tokens/tokens.css` (the `--gk-*` token `:root`), then `style.css`. Order matters — the tokens must be defined before `style.css` references them.
 
 ## Key patterns and conventions
 
@@ -48,10 +48,11 @@ Open `dist/index.html` locally or push to deploy on Vercel.
 - **Two disclaimers:** Site-wide footer (every page, modeled after Acquired podcast format) + post-specific disclaimer (individual post pages)
 - **Clock widget:** Inline JS on every page, updates every second. Uses `tabular-nums` to prevent layout shift.
 - **Hero:** Full-viewport (`100svh`, not `100vh` — see below). Rotating quotes (Roosevelt, Shaw, Collison) + "My takes" CTA scroll button.
-- **The Why page:** Standalone page at `/the-why` explaining the blog's purpose. No nav bar (no clock, no GitHub icon) — just the title and body. All other pages keep the full nav. Links to gemtimer.com and ideakache.com open in new tabs. P.S. paragraph is italicized.
+- **The Why page:** Standalone page at `/the-why` explaining the blog's purpose. No nav bar (no clock, no GitHub icon) — just the title and body. All other pages keep the full nav. The italicized P.S. paragraph (links to gemtimer.com and ideakache.com, opening in new tabs) is **currently hidden**: it's wrapped in an HTML comment in `whyBody` so it doesn't render, since the products aren't public yet. Unwrap it to restore.
 - **The Why page width:** `max-width: 860px` (wider than post pages at 640px). The footer disclaimer matches this width via `.why-page ~ .site-disclaimer`.
-- **Accent color:** `#FF6600` (orange) for links, hovers, and interactive elements.
-- **Instrument Serif at weight 400** — 700 looks too heavy for serif; this was an intentional design choice.
+- **Accent color:** oxblood `var(--gk-accent)` (`#c8102e`) for links, hovers, and interactive elements. (Was `#FF6600` orange before the GemKa adoption.)
+- **Palette via GemKa tokens:** `style.css`'s legacy color vars (`--black`, `--white`, `--orange`, `--gray-*`) are now thin aliases onto `--gk-*` tokens rather than literal hex — e.g. `--black: var(--gk-ink)`, `--white: var(--gk-paper)`, `--orange: var(--gk-accent)`, page background uses `--gk-bg`. No pure white/black/orange anywhere. `--gray-100` maps to `--gk-surface-2` (it's a fill, not a border); `--gray-300`/`--gray-400` both collapse to `--gk-faint`.
+- **Fraunces (serif) at weight 500** — the GemKa system's heading weight, shared across the other GemKa sites, for post titles, section and "The Why" headings. **Exception:** the large italic hero rotating quotes (`.hero-subtitle`) are weight **360** — 500 reads too heavy at display size. Body stays Inter. (Was Instrument Serif at 400 before the GemKa font swap.)
 
 ## No em dashes
 
@@ -74,9 +75,9 @@ Don't use em dashes in prose you write: UI text, taglines, commit messages, desc
 - **Production branch:** `main`. Pushes to `main` trigger production Vercel builds; pushes to `dev` trigger preview builds. Other branches are skipped (configured in `vercel.json` under `git.deploymentEnabled`).
 - **Merging dev → main:** Always write a descriptive merge commit message summarising what changed since the last deploy. Don't use the default merge message.
 
-## Current state (April 2026)
+## Current state (June 2026)
 
-- **Shipped:** 6 posts (5-part "Promise of AI" series + 1 standalone). Fully deployed and live.
-- **Shipped:** "The Why" page with full copy — blog philosophy, Bill Simmons inspiration, no comment section by design, P.S. linking to gemtimer.com and ideakache.com.
-- **In progress:** Drafting Part VI ("Asking good questions") and other essays (RTF files in repo root).
-- **Recent work:** The Why page content and styling, nav removal on Why page, "My takes" CTA rename, scroll arrow enlargement, post list compacting, site-wide spacing tightening.
+- **Design:** Adopted the GemKa design system — `gemka-tokens` cream/oxblood palette and Inter + Fraunces type. Replaced the old white/black/#FF6600 look. Hero quotes lightened to Fraunces 360.
+- **Posts offline:** All blog posts were moved to `posts/_archive/` ahead of the GemKa relaunch, so the live writing list is currently empty (the build skips `_`-prefixed folders). The "Learning with AI (Part IV) — Skills and CLAUDE.md" draft also lives in `_archive` as a work in progress.
+- **The Why page:** Full copy live, but the P.S. (gemtimer.com / ideakache.com links) is hidden for now (see Key patterns).
+- **In progress:** Drafting further essays (RTF files in repo root) and the "Learning with AI" series.
