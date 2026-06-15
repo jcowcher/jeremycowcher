@@ -16,7 +16,7 @@ Personal blog at **jeremycowcher.com** — minimal static site for shorter takes
 build.js          — Entire build pipeline (frontmatter parse → markdown → HTML)
 style.css         — All styles (~600 lines), responsive breakpoint at 640px
 posts/*.md        — Source content. YAML frontmatter (title, date, description) + markdown body
-dist/             — Generated output (gitignored). index.html + posts/*.html
+dist/             — Generated output (gitignored). index.html + posts/*.html + the-why.html + disclosures.html
 vercel.json       — Vercel config
 CONTEXT.md        — Project brief (what/who/why)
 NOTES.md          — Non-obvious bugs and fixes with commit refs
@@ -38,18 +38,21 @@ Open `dist/index.html` locally or push to deploy on Vercel.
 2. Sorts posts by date descending, then by slug descending (for deterministic same-date ordering)
 3. Generates individual post pages with OG metadata + disclaimers
 4. Generates "The Why" page (no nav bar, standalone layout)
-5. Generates index page with hero section + post list
-6. CSS is inlined into every page via `<style>` tags at build time: first `node_modules/gemka-tokens/tokens.css` (the `--gk-*` token `:root`), then `style.css`. Order matters — the tokens must be defined before `style.css` references them.
+5. Generates the "Disclosures" page at `/disclosures` (full nav, post-page layout) holding the site-wide disclaimer copy
+6. Generates index page with hero section + post list
+7. CSS is inlined into every page via `<style>` tags at build time: first `node_modules/gemka-tokens/tokens.css` (the `--gk-*` token `:root`), then `style.css`. Order matters — the tokens must be defined before `style.css` references them.
 
 ## Key patterns and conventions
 
 - **Frontmatter format:** `title`, `date` (YYYY-MM-DD), `description` — all required for proper rendering
 - **URLs:** `/posts/{slug}` (slug = markdown filename without `.md`). Clean URLs via Vercel.
-- **Two disclaimers:** Site-wide footer (every page, modeled after Acquired podcast format) + post-specific disclaimer (individual post pages)
+- **Disclosures page:** `/disclosures` (full nav, post-page layout) holds the Acquired-style site-wide disclaimer copy. It used to be an inline `.site-disclaimer` paragraph in the footer; it now lives on its own page, linked from the footer's utility group.
+- **Footer (matches the GemKa product sites, e.g. gemtimer.com):** rendered on every page from the `FOOTER_LINKS` constant in `build.js`. Row 1 is two middot-separated groups, `space-between`: family + social on the left (X.com, LinkedIn, GemTimer, GemTodo, GemKa, IdeaKache — all external, new tab) and utility on the right (Disclosures → `/disclosures`, Contact → `mailto:`). Row 2 is `© 2026 GemKa` (left) and the tagline `Writing to think` (right, Fraunces italic). The outer `.footer-links` mirrors the nav container (max-width 1100px, 40px insets) so its **2px oxblood (`var(--gk-accent)`) top divider** lines up exactly with the header divider (`nav::after`, also 2px oxblood). Between the two rows is a faint `rgba(0,0,0,0.06)` inter-row whisper. Spacing/height matched to gemtimer (font-size 0.72rem, padding 0.75rem, row-gap 0.25rem, `line-height: normal`).
+- **Post-specific disclaimer:** still inline on individual post pages.
 - **Clock widget:** Inline JS on every page, updates every second. Uses `tabular-nums` to prevent layout shift.
 - **Hero:** Full-viewport (`100svh`, not `100vh` — see below). Rotating quotes (Roosevelt, Shaw, Collison) + "My takes" CTA scroll button.
 - **The Why page:** Standalone page at `/the-why` explaining the blog's purpose. No nav bar (no clock, no GitHub icon) — just the title and body. All other pages keep the full nav. The italicized P.S. paragraph (links to gemtimer.com and ideakache.com, opening in new tabs) is **currently hidden**: it's wrapped in an HTML comment in `whyBody` so it doesn't render, since the products aren't public yet. Unwrap it to restore.
-- **The Why page width:** `max-width: 860px` (wider than post pages at 640px). The footer disclaimer matches this width via `.why-page ~ .site-disclaimer`.
+- **The Why page width:** `max-width: 860px` (wider than post pages at 640px).
 - **Accent color:** oxblood `var(--gk-accent)` (`#c8102e`) for links, hovers, and interactive elements. (Was `#FF6600` orange before the GemKa adoption.)
 - **Palette via GemKa tokens:** `style.css`'s legacy color vars (`--black`, `--white`, `--orange`, `--gray-*`) are now thin aliases onto `--gk-*` tokens rather than literal hex — e.g. `--black: var(--gk-ink)`, `--white: var(--gk-paper)`, `--orange: var(--gk-accent)`, page background uses `--gk-bg`. No pure white/black/orange anywhere. `--gray-100` maps to `--gk-surface-2` (it's a fill, not a border); `--gray-300`/`--gray-400` both collapse to `--gk-faint`.
 - **Fraunces (serif) at weight 500** — the GemKa system's heading weight, shared across the other GemKa sites, for post titles, section and "The Why" headings. **Exception:** the large italic hero rotating quotes (`.hero-subtitle`) are weight **360** — 500 reads too heavy at display size. Body stays Inter. (Was Instrument Serif at 400 before the GemKa font swap.)
