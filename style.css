@@ -542,7 +542,7 @@ main.post {
   flex-direction: column;
   gap: 0.25rem;
   font-size: 0.72rem;
-  line-height: 1.8;
+  line-height: normal;
 }
 
 .footer-links::before {
