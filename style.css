@@ -524,15 +524,28 @@ main.post {
   color: var(--orange);
 }
 
-/* Footer (GemKa family): links row + disclaimer */
+/* Footer (GemKa family): two middot-separated groups — social/family left,
+   utility right — like the product sites. Disclaimer text now lives on
+   /disclosures. */
 .footer-links {
   max-width: 640px;
   margin: 0 auto;
-  padding: 1.5rem 1.5rem 0.75rem;
-  text-align: center;
-  line-height: 1.9;
+  padding: 0.85rem 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.4rem 1rem;
   font-size: 0.78rem;
+  line-height: 1.8;
   border-top: 1px solid var(--gk-border);
+}
+
+.footer-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 
 .footer-links a {
@@ -549,17 +562,6 @@ main.post {
 .footer-sep {
   color: var(--gk-faint);
   margin: 0 0.55rem;
-}
-
-/* Disclaimer — sits below the links row, which now carries the top border line */
-.site-disclaimer {
-  max-width: 640px;
-  margin: 0 auto;
-  padding: 0 1.5rem 1.5rem;
-  font-size: 0.72rem;
-  color: var(--gray-400);
-  line-height: 1.6;
-  text-align: center;
 }
 
 /* The Why page */
@@ -592,8 +594,7 @@ main.post {
   margin-bottom: 0;
 }
 
-.why-page ~ .footer-links,
-.why-page ~ .site-disclaimer {
+.why-page ~ .footer-links {
   max-width: 860px;
 }
 
@@ -627,6 +628,6 @@ main.post {
   .post-body { font-size: 1rem; }
   .why-page { padding: 0.25rem 1.25rem 0.25rem; }
   .why-page h1 { font-size: 2rem; margin-bottom: 0.75rem; }
-  .footer-links { padding: 1.25rem 1.25rem 0.6rem; }
+  .footer-links { flex-direction: column; gap: 0.3rem; padding: 0.75rem 1.25rem; text-align: center; }
   .footer-sep { margin: 0 0.4rem; }
 }

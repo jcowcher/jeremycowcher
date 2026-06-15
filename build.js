@@ -9,22 +9,30 @@ const DIST_DIR = path.join(__dirname, 'dist');
 const TOKENS = fs.readFileSync(path.join(__dirname, 'node_modules', 'gemka-tokens', 'tokens.css'), 'utf8');
 const STYLE = fs.readFileSync(path.join(__dirname, 'style.css'), 'utf8');
 
-// GemKa-family footer links row (rendered above the site-wide disclaimer on
-// every page). All targets are external, so each opens in a new tab. Order and
-// styling mirror the other GemKa sites (gemtimer.com, gemka.co).
-const FOOTER_LINKS = `<nav class="footer-links" aria-label="GemKa family links">
-  <a href="https://x.com/GemTimer_GemKa" target="_blank" rel="noopener noreferrer">X.com</a>
-  <span class="footer-sep" aria-hidden="true">·</span>
-  <a href="https://www.linkedin.com/company/gemka" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-  <span class="footer-sep" aria-hidden="true">·</span>
-  <a href="https://gemtimer.com" target="_blank" rel="noopener noreferrer">GemTimer</a>
-  <span class="footer-sep" aria-hidden="true">·</span>
-  <a href="https://gemtodo.com" target="_blank" rel="noopener noreferrer">GemTodo</a>
-  <span class="footer-sep" aria-hidden="true">·</span>
-  <a href="https://gemka.co" target="_blank" rel="noopener noreferrer">GemKa</a>
-  <span class="footer-sep" aria-hidden="true">·</span>
-  <a href="https://ideakache.com" target="_blank" rel="noopener noreferrer">IdeaKache</a>
-</nav>`;
+// GemKa-family footer (rendered on every page). Two middot-separated groups
+// like the product sites (gemtimer.com): social + family on the left, utility
+// on the right. External links open in a new tab; order and styling mirror the
+// other GemKa sites.
+const FOOTER_LINKS = `<footer class="footer-links">
+  <div class="footer-group footer-left">
+    <a href="https://x.com/GemTimer_GemKa" target="_blank" rel="noopener noreferrer">X.com</a>
+    <span class="footer-sep" aria-hidden="true">·</span>
+    <a href="https://www.linkedin.com/company/gemka" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <span class="footer-sep" aria-hidden="true">·</span>
+    <a href="https://gemtimer.com" target="_blank" rel="noopener noreferrer">GemTimer</a>
+    <span class="footer-sep" aria-hidden="true">·</span>
+    <a href="https://gemtodo.com" target="_blank" rel="noopener noreferrer">GemTodo</a>
+    <span class="footer-sep" aria-hidden="true">·</span>
+    <a href="https://gemka.co" target="_blank" rel="noopener noreferrer">GemKa</a>
+    <span class="footer-sep" aria-hidden="true">·</span>
+    <a href="https://ideakache.com" target="_blank" rel="noopener noreferrer">IdeaKache</a>
+  </div>
+  <div class="footer-group footer-right">
+    <a href="/disclosures">Disclosures</a>
+    <span class="footer-sep" aria-hidden="true">·</span>
+    <a href="mailto:jeremy@gemka.co">Contact</a>
+  </div>
+</footer>`;
 
 // Parse frontmatter from markdown files
 function parseFrontmatter(content) {
@@ -70,7 +78,6 @@ ${extra}
 <body>
 ${body}
 ${FOOTER_LINKS}
-<footer class="site-disclaimer">The views expressed here are my own. This is not investment advice. I may hold positions in companies discussed. This content is for informational and entertainment purposes only.</footer>
 <script>
 (function(){
   var q=document.getElementById('hero-quote');
