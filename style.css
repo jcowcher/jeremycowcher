@@ -47,7 +47,7 @@ nav::after {
   bottom: 0;
   left: 40px;
   right: 40px;
-  border-bottom: 1px solid var(--gray-200);
+  border-bottom: 2px solid var(--gk-accent);
 }
 
 .nav-home {
@@ -524,16 +524,86 @@ main.post {
   color: var(--orange);
 }
 
-/* Disclaimer */
-.site-disclaimer {
-  max-width: 640px;
-  margin: 0 auto;
-  padding: 1rem 1.5rem 1.5rem;
+/* Footer (GemKa family): a links row (social/family left, utility right) and a
+   meta row (copyright left, tagline right). The outer .footer-links mirrors the
+   nav container (max-width 1100px, 40px insets) and draws its top divider via a
+   pseudo-element, so the footer line matches the header line (nav::after)
+   exactly. Both rows span the full content box (space-between, edges aligned
+   with the divider lines); a faint .footer-divider sits between them.
+   Disclaimer text now lives on /disclosures. */
+.footer-links {
+  position: relative;
+  max-width: 1100px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0.5rem auto 0;
+  padding: 0.75rem 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
   font-size: 0.72rem;
-  color: var(--gray-400);
-  line-height: 1.6;
-  text-align: center;
-  border-top: 1px solid var(--gray-200);
+  line-height: normal;
+}
+
+.footer-links::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 40px;
+  right: 40px;
+  border-top: 2px solid var(--gk-accent);
+}
+
+.footer-row,
+.footer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.4rem 1rem;
+}
+
+/* Faint hairline between the links row and the meta row. As a flex item it
+   stretches to fill the container's content box (inset 40px by the padding),
+   so it spans the same width as the top divider (::before). A true whisper —
+   rgba(0,0,0,0.06), matching gemtimer.com; the row gap comes from the parent. */
+.footer-divider {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.footer-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-copy {
+  color: var(--gk-muted);
+}
+
+.footer-tagline {
+  font-family: 'Fraunces', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--gk-muted);
+}
+
+.footer-links a {
+  color: var(--gk-muted);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+
+.footer-links a:hover {
+  color: var(--gk-accent);
+}
+
+.footer-sep {
+  color: var(--gk-faint);
+  margin: 0 0.55rem;
 }
 
 /* The Why page */
@@ -566,11 +636,6 @@ main.post {
   margin-bottom: 0;
 }
 
-.why-page ~ .site-disclaimer {
-  max-width: 860px;
-  border-top: none;
-}
-
 .why-page p a,
 .why-page p a:visited {
   color: var(--orange);
@@ -601,4 +666,8 @@ main.post {
   .post-body { font-size: 1rem; }
   .why-page { padding: 0.25rem 1.25rem 0.25rem; }
   .why-page h1 { font-size: 2rem; margin-bottom: 0.75rem; }
+  .footer-links { padding: 0.75rem 1.25rem; text-align: center; }
+  .footer-links::before { left: 1.25rem; right: 1.25rem; }
+  .footer-row, .footer-meta { flex-direction: column; gap: 0.3rem; }
+  .footer-sep { margin: 0 0.4rem; }
 }
