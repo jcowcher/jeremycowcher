@@ -47,7 +47,7 @@ nav::after {
   bottom: 0;
   left: 40px;
   right: 40px;
-  border-bottom: 1px solid var(--gray-200);
+  border-bottom: 2px solid var(--gk-accent);
 }
 
 .nav-home {
@@ -551,7 +551,7 @@ main.post {
   top: 0;
   left: 40px;
   right: 40px;
-  border-top: 1px solid var(--gk-border);
+  border-top: 2px solid var(--gk-accent);
 }
 
 .footer-row,
