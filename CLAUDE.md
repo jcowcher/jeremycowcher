@@ -53,6 +53,10 @@ Open `dist/index.html` locally or push to deploy on Vercel.
 - **Accent color:** `#FF6600` (orange) for links, hovers, and interactive elements.
 - **Instrument Serif at weight 400** — 700 looks too heavy for serif; this was an intentional design choice.
 
+## No em dashes
+
+Don't use em dashes in prose you write: UI text, taglines, commit messages, descriptions, or anything user-facing written as sentences. Em dashes in prose read as a tell for AI-generated text, so they're off the table by default; use commas, periods, parentheses, or a colon instead. The ban is about prose, not structured formatting: em dashes in established naming patterns (such as the "Title — Author" carve-out names) are a legitimate, intentional use and should stay. If a prose case seems genuinely better served by an em dash, flag it and let Jeremy decide rather than reaching for one unprompted.
+
 ## Non-obvious things that will bite you
 
 - **`100svh` not `100vh`** for the hero. `100vh` on mobile doesn't account for browser chrome, hiding the Read button. Commit `68dd49e`.
