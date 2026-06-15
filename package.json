@@ -5,6 +5,7 @@
     "build": "node build.js"
   },
   "dependencies": {
+    "gemka-tokens": "^0.2.0",
     "marked": "^15.0.0"
   }
 }

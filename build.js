@@ -4,6 +4,9 @@ const { marked } = require('marked');
 
 const POSTS_DIR = path.join(__dirname, 'posts');
 const DIST_DIR = path.join(__dirname, 'dist');
+// Canonical GemKa design tokens (:root with --gk-* vars). Inlined first, before
+// style.css, so style.css can reference the vars when repointing its palette.
+const TOKENS = fs.readFileSync(path.join(__dirname, 'node_modules', 'gemka-tokens', 'tokens.css'), 'utf8');
 const STYLE = fs.readFileSync(path.join(__dirname, 'style.css'), 'utf8');
 
 // Parse frontmatter from markdown files
@@ -44,6 +47,7 @@ ${extra}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>${TOKENS}</style>
 <style>${STYLE}</style>
 </head>
 <body>
@@ -87,13 +91,27 @@ fs.mkdirSync(path.join(DIST_DIR, 'posts'), { recursive: true });
   fs.copyFileSync(path.join(__dirname, file), path.join(DIST_DIR, file));
 });
 
+// Recursively collect .md files under posts/, skipping any folder whose name
+// starts with "_" (e.g. _archive stays unpublished). Subfolders are purely for
+// organizing source — the slug is derived from the filename only, so a post's
+// URL is independent of which folder it lives in (posts/learning-with-ai/part-2.md
+// still publishes to /posts/learning-with-ai-part-2). Filenames must stay unique
+// across folders, since the path is dropped from the slug.
+function collectPostFiles(dir) {
+  return fs.readdirSync(dir, { withFileTypes: true }).flatMap(entry => {
+    if (entry.isDirectory()) {
+      return entry.name.startsWith('_') ? [] : collectPostFiles(path.join(dir, entry.name));
+    }
+    return entry.name.endsWith('.md') ? [path.join(dir, entry.name)] : [];
+  });
+}
+
 // Read and parse all posts
-const posts = fs.readdirSync(POSTS_DIR)
-  .filter(f => f.endsWith('.md'))
-  .map(filename => {
-    const raw = fs.readFileSync(path.join(POSTS_DIR, filename), 'utf8');
+const posts = collectPostFiles(POSTS_DIR)
+  .map(filepath => {
+    const raw = fs.readFileSync(filepath, 'utf8');
     const { meta, body } = parseFrontmatter(raw);
-    const slug = filename.replace(/\.md$/, '');
+    const slug = path.basename(filepath).replace(/\.md$/, '');
     const html = marked(body);
     return {
       slug,
