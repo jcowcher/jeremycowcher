@@ -136,6 +136,21 @@ nav::after {
   position: relative;
 }
 
+/* Landing (index only): stack nav + hero + footer to fill one screen with the
+   footer at the bottom of the viewport. The hero grows to fill the space
+   between nav and footer instead of using its own fixed height. Scoped to
+   body.landing so all other pages keep the default layout. */
+body.landing {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+body.landing .hero {
+  flex: 1 1 auto;
+  height: auto;
+}
+
 .hero-content {
   display: flex;
   flex-direction: column;
