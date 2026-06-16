@@ -66,7 +66,7 @@ function formatDateShort(dateStr) {
   return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 }
 
-function htmlTemplate(title, body, extra = '') {
+function htmlTemplate(title, body, extra = '', bodyClass = '') {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,7 +82,7 @@ ${extra}
 <style>${TOKENS}</style>
 <style>${STYLE}</style>
 </head>
-<body>
+<body class="${bodyClass}">
 ${body}
 ${FOOTER_LINKS}
 <script>
@@ -176,7 +176,7 @@ posts.forEach(post => {
   </header>
   <article class="post-body">${post.html}</article>
   <div class="post-disclaimer">This post is provided for general information, commentary and discussion purposes only. It is not legal, investing or other professional advice, and it should not be relied upon as such. Any errors or omissions are unintentional. The views expressed are those of the author in a personal capacity and do not represent the views of any employer, client, partner or affiliated organization. Generative AI tools were used to assist with research and editing.</div>
-  <footer class="post-footer"><a href="/#posts">&larr; All posts</a></footer>
+  <footer class="post-footer"><a href="/writing">&larr; All posts</a></footer>
 </main>`;
 
   const meta = `
@@ -202,7 +202,7 @@ const whyBody = `
   <!-- P.S. hidden for now: names/links the products before they're public. Restore when ready.
   <p><em>P.S. If you want to check out the products I've built with myself as the first customer, visit <a href="https://gemtimer.com" target="_blank" rel="noopener">gemtimer.com</a> to better manage your time and <a href="https://ideakache.com" target="_blank" rel="noopener">ideakache.com</a> to find the thoughts of remarkable thinkers and entrepreneurs.</em></p>
   -->
-  <footer class="post-footer"><a href="/#posts">&larr; All posts</a></footer>
+  <footer class="post-footer"><a href="/writing">&larr; All posts</a></footer>
 </main>`;
 
 fs.writeFileSync(
@@ -231,7 +231,7 @@ const disclosuresBody = `
   <article class="post-body">
     <p>The views expressed here are my own. This is not investment advice. I may hold positions in companies discussed. This content is for informational and entertainment purposes only.</p>
   </article>
-  <footer class="post-footer"><a href="/#posts">&larr; All posts</a></footer>
+  <footer class="post-footer"><a href="/writing">&larr; All posts</a></footer>
 </main>`;
 
 fs.writeFileSync(
@@ -239,7 +239,8 @@ fs.writeFileSync(
   htmlTemplate('Disclosures — Jeremy Cowcher', disclosuresBody)
 );
 
-// Generate index page
+// Generate the "Writing" index page. The article list lives here, split out of
+// the landing so the landing stays a single hero screen.
 const postListHtml = posts.length === 0
   ? '<p class="empty">No posts yet.</p>'
   : posts.map(post => `
@@ -254,6 +255,43 @@ const postListHtml = posts.length === 0
       </article>
     </a>`).join('\n');
 
+const writingBody = `
+<nav>
+  <div class="nav-left">
+    <a href="/the-why" class="nav-link">The Why</a>
+  </div>
+  <div class="nav-clock" id="clock"></div>
+  <div class="nav-right">
+    <a href="https://github.com/jcowcher" target="_blank" rel="noopener" class="nav-github" aria-label="GitHub">
+      <svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+    </a>
+  </div>
+</nav>
+<div class="posts-section">
+  <div class="posts-section-header">
+    <span class="posts-section-title">Writing</span>
+    <span class="posts-section-count">${posts.length} post${posts.length !== 1 ? 's' : ''}</span>
+  </div>
+  <div class="post-list">
+    ${postListHtml}
+  </div>
+  <div class="posts-back"><a href="/">&larr; Home</a></div>
+</div>`;
+
+const writingMeta = `
+<meta name="description" content="Writing by Jeremy Cowcher: shorter takes on AI, building products, business, and sports, particularly the NBA.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Writing">
+<meta property="og:description" content="Writing by Jeremy Cowcher: shorter takes on AI, building products, business, and sports, particularly the NBA.">
+<meta property="og:url" content="https://jeremycowcher.com/writing">`;
+
+fs.writeFileSync(
+  path.join(DIST_DIR, 'writing.html'),
+  htmlTemplate('Writing — Jeremy Cowcher', writingBody, writingMeta)
+);
+
+// Generate the landing (index) page: nav + hero + footer only, sized to one
+// screen via the "landing" body class. The article list lives on /writing.
 const indexBody = `
 <nav>
   <div class="nav-left">
@@ -271,22 +309,12 @@ const indexBody = `
     <p class="hero-subtitle">It is not the critic who counts; not the man who points out how the strong man stumbles, or where the doer of deeds could have done them better. The credit belongs to the man who is actually in the arena.</p>
     <p class="hero-attr">&mdash; <a href="https://www.presidency.ucsb.edu/documents/address-the-sorbonne-paris-france-citizenship-republic" target="_blank" rel="noopener">Theodore Roosevelt</a></p>
   </div>
-  <a href="#posts" class="scroll-arrow">
+  <a href="/writing" class="scroll-arrow">
     <span class="scroll-name">Jeremy Cowcher</span>
     <span class="scroll-cta">My writing</span>
     <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
   </a>
-</section>
-<div class="posts-section" id="posts">
-  <div class="posts-section-header">
-    <span class="posts-section-title">Writing</span>
-    <span class="posts-section-count">${posts.length} post${posts.length !== 1 ? 's' : ''}</span>
-  </div>
-  <div class="post-list">
-    ${postListHtml}
-  </div>
-  <div class="posts-back"><a href="#">&larr; Jeremy Cowcher</a></div>
-</div>`;
+</section>`;
 
 const indexMeta = `
 <meta name="description" content="Shorter takes on AI, building products, business, and sports (particularly the NBA).">
@@ -298,7 +326,7 @@ const indexMeta = `
 
 fs.writeFileSync(
   path.join(DIST_DIR, 'index.html'),
-  htmlTemplate('Jeremy Cowcher', indexBody, indexMeta)
+  htmlTemplate('Jeremy Cowcher', indexBody, indexMeta, 'landing')
 );
 
 console.log(`Built ${posts.length} post(s) → dist/`);
