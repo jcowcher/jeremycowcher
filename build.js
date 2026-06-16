@@ -24,9 +24,9 @@ const FOOTER_LINKS = `<footer class="footer-links">
       <span class="footer-sep" aria-hidden="true">·</span>
       <a href="https://gemtodo.com" target="_blank" rel="noopener noreferrer">GemTodo</a>
       <span class="footer-sep" aria-hidden="true">·</span>
-      <a href="https://gemka.co" target="_blank" rel="noopener noreferrer">GemKa</a>
-      <span class="footer-sep" aria-hidden="true">·</span>
       <a href="https://ideakache.com" target="_blank" rel="noopener noreferrer">IdeaKache</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <a href="https://gemka.co" target="_blank" rel="noopener noreferrer">GemKa</a>
     </div>
     <div class="footer-group footer-right">
       <a href="/disclosures">Disclosures</a>
@@ -37,7 +37,7 @@ const FOOTER_LINKS = `<footer class="footer-links">
   <div class="footer-divider" aria-hidden="true"></div>
   <div class="footer-meta">
     <span class="footer-copy">&copy; 2026 GemKa</span>
-    <span class="footer-tagline">Writing to think</span>
+    <span class="footer-tagline">Writing to think.</span>
   </div>
 </footer>`;
 
