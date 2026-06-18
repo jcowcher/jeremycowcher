@@ -2,6 +2,14 @@
 
 Personal blog at **jeremycowcher.com** — minimal static site for shorter takes on AI, building products, general business, and sports (particularly the NBA).
 
+## Where to do this work
+
+Anything that touches this repo belongs in **Claude Code**, not Cowork — that means code edits (`build.js`, `style.css`, `posts/*.md`, `vercel.json`), git operations (commit / branch / merge / push), and deploys (merging `dev` to `main`). If Jeremy opens Cowork and asks for repo changes or a deploy, the right move is to point him to Claude Code rather than doing it in Cowork. A skill or tool being available inside Cowork is not permission to run it here.
+
+That said, Cowork is still useful for the thinking *around* the edit:
+- **Trade-off discussions happen in Cowork.** Jeremy often wants to talk through approach, scope, risk, or alternatives before touching code. Engage fully with those in Cowork; don't punt him to Claude Code just to discuss.
+- **Give him a ready-to-paste prompt for Claude Code.** Once the approach is settled, write out the exact prompt he should paste into Claude Code to make the change. Include the file(s), the specific behavior to change, any constraints from this CLAUDE.md, and the acceptance check. The handoff is: discuss here, paste there. **Format the prompt for copy-paste:** put it in a fenced code block (not a blockquote or inline prose), so Jeremy can copy it in one click without picking around formatting or stray characters.
+
 ## Tech stack
 
 - **Build:** `node build.js` (custom script) using `marked` for markdown→HTML. Dependencies: `marked` and `gemka-tokens` (canonical GemKa design tokens).
