@@ -69,6 +69,12 @@ Open `dist/index.html` locally or push to deploy on Vercel.
 
 Don't use em dashes in prose you write: UI text, taglines, commit messages, descriptions, or anything user-facing written as sentences. Em dashes in prose read as a tell for AI-generated text, so they're off the table by default; use commas, periods, parentheses, or a colon instead. The ban is about prose, not structured formatting: em dashes in established naming patterns (such as the "Title — Author" carve-out names) are a legitimate, intentional use and should stay. If a prose case seems genuinely better served by an em dash, flag it and let Jeremy decide rather than reaching for one unprompted.
 
+## Quotes and sourced content come from IdeaKache only
+
+Any quote, attribution, or sourced excerpt that goes on this site must come from **IdeaKache**, never from the open web and never generated or paraphrased from memory. Web quote sites and model recall routinely surface fabricated or misattributed lines (the "If you hear a voice within you say you cannot paint..." line widely credited to van Gogh is one example: it's not in IdeaKache and its sourcing doesn't hold up). Shipping one of those is the kind of error that quietly undermines the whole site.
+
+The source of truth is the IdeaKache Supabase project (`content` table, filter `verified = 'true'`; attributions come from the `authors` table via `content_authors`). Search it for the quote you want and use its stored text and author. If a quote you want isn't in IdeaKache, stop and tell Jeremy. Do not substitute a web version, do not invent one, and do not "fix" attribution from memory. He decides whether to add it to IdeaKache first or drop it.
+
 ## Non-obvious things that will bite you
 
 - **`100svh` not `100vh`** for the hero. `100vh` on mobile doesn't account for browser chrome, hiding the Read button. Commit `68dd49e`.
