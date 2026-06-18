@@ -681,10 +681,23 @@ main.post {
   .post-body { font-size: 1rem; }
   .why-page { padding: 0.25rem 1.25rem 0.25rem; }
   .why-page h1 { font-size: 2rem; margin-bottom: 0.75rem; }
-  .footer-links { padding: 0.75rem 1.25rem; text-align: center; }
+  .footer-links { padding: 0.75rem 1.25rem; }
   .footer-links::before { left: 1.25rem; right: 1.25rem; }
-  .footer-row, .footer-meta { flex-direction: column; gap: 0.3rem; }
-  .footer-sep { margin: 0 0.4rem; }
+  /* Mobile: two stacked link columns (family/social left, utility right),
+     mirroring gemtimer.com. The inline middot separators hide; the hairline
+     divider and the copyright/tagline row stay, with copyright left and tagline
+     right like gemtimer's bottom row. */
+  .footer-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 24px;
+    align-items: start;
+  }
+  .footer-group { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
+  .footer-right { align-items: flex-end; text-align: right; }
+  .footer-sep { display: none; }
+  .footer-links a { font-size: 0.82rem; }
+  .footer-meta { flex-direction: row; justify-content: space-between; align-items: center; gap: 0.3rem; }
 }
 
 /* Large-screen scaling (mirrors gemtimer.com / gemtodo.com). On wide monitors

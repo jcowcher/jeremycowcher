@@ -2,6 +2,14 @@
 
 Personal blog at **jeremycowcher.com** — minimal static site for shorter takes on AI, building products, general business, and sports (particularly the NBA).
 
+## Where to do this work
+
+Anything that touches this repo belongs in **Claude Code**, not Cowork — that means code edits (`build.js`, `style.css`, `posts/*.md`, `vercel.json`), git operations (commit / branch / merge / push), and deploys (merging `dev` to `main`). If Jeremy opens Cowork and asks for repo changes or a deploy, the right move is to point him to Claude Code rather than doing it in Cowork. A skill or tool being available inside Cowork is not permission to run it here.
+
+That said, Cowork is still useful for the thinking *around* the edit:
+- **Trade-off discussions happen in Cowork.** Jeremy often wants to talk through approach, scope, risk, or alternatives before touching code. Engage fully with those in Cowork; don't punt him to Claude Code just to discuss.
+- **Give him a ready-to-paste prompt for Claude Code.** Once the approach is settled, write out the exact prompt he should paste into Claude Code to make the change. Include the file(s), the specific behavior to change, any constraints from this CLAUDE.md, and the acceptance check. The handoff is: discuss here, paste there. **Format the prompt for copy-paste:** put it in a fenced code block (not a blockquote or inline prose), so Jeremy can copy it in one click without picking around formatting or stray characters.
+
 ## Tech stack
 
 - **Build:** `node build.js` (custom script) using `marked` for markdown→HTML. Dependencies: `marked` and `gemka-tokens` (canonical GemKa design tokens).
@@ -60,6 +68,12 @@ Open `dist/index.html` locally or push to deploy on Vercel.
 ## No em dashes
 
 Don't use em dashes in prose you write: UI text, taglines, commit messages, descriptions, or anything user-facing written as sentences. Em dashes in prose read as a tell for AI-generated text, so they're off the table by default; use commas, periods, parentheses, or a colon instead. The ban is about prose, not structured formatting: em dashes in established naming patterns (such as the "Title — Author" carve-out names) are a legitimate, intentional use and should stay. If a prose case seems genuinely better served by an em dash, flag it and let Jeremy decide rather than reaching for one unprompted.
+
+## Quotes and sourced content come from IdeaKache only
+
+Any quote, attribution, or sourced excerpt that goes on this site must come from **IdeaKache**, never from the open web and never generated or paraphrased from memory. Web quote sites and model recall routinely surface fabricated or misattributed lines (the "If you hear a voice within you say you cannot paint..." line widely credited to van Gogh is one example: it's not in IdeaKache and its sourcing doesn't hold up). Shipping one of those is the kind of error that quietly undermines the whole site.
+
+The source of truth is the IdeaKache Supabase project (`content` table, filter `verified = 'true'`; attributions come from the `authors` table via `content_authors`). Search it for the quote you want and use its stored text and author. If a quote you want isn't in IdeaKache, stop and tell Jeremy. Do not substitute a web version, do not invent one, and do not "fix" attribution from memory. He decides whether to add it to IdeaKache first or drop it.
 
 ## Non-obvious things that will bite you
 
