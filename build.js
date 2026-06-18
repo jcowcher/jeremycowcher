@@ -239,6 +239,72 @@ fs.writeFileSync(
   htmlTemplate('Disclosures — Jeremy Cowcher', disclosuresBody)
 );
 
+// Generate the "Nobody knows anything" quotes page at /part-0-quotes — same
+// full-nav, post-page layout as the disclosures page. Each quote is a
+// blockquote whose last line is the attribution (matching the site's markdown
+// quote convention), with the source text linking out in a new tab. Quote text
+// is verbatim from IdeaKache; do not alter wording, casing, or punctuation.
+const partZeroQuotes = [
+  {
+    text: `"NOBODY KNOWS ANYTHING.  Not one person in the entire motion picture field knows for a certainty what's going to work. Every time out it's a guess - and, if you're lucky, an educated one"`,
+    attr: `&mdash; William Goldman, <a href="https://www.amazon.com/Adventures-Screen-Trade-Hollywood-Screenwriting/dp/0446391174?tag=gemka0e-20" target="_blank" rel="noopener noreferrer">Adventures in the Screen Trade</a>`,
+  },
+  {
+    text: `"Five dimensional chess doesn't exist. Everyone is furiously improvising all the time. The future is utterly uncertain."`,
+    attr: `&mdash; Marc Andreessen, <a href="https://x.com/pmarca/status/2065868849271156971" target="_blank" rel="noopener noreferrer">X</a>`,
+  },
+  {
+    text: `"Nvidia doesn't have a long-term strategy, We have no long-term plan. Our definition of a long-term plan is what are we doing today"`,
+    attr: `&mdash; Jensen Huang, <a href="https://www.youtube.com/watch?v=F2eis4isQiA" target="_blank" rel="noopener noreferrer">CASPA 2023 Dinner Banquet</a>`,
+  },
+  {
+    text: `"Everything around you that you call life was made up by people that were no smarter than you. And you can change it. You can influence it. You can build your own things that other people can use."`,
+    attr: `&mdash; <a href="https://www.youtube.com/watch?v=kYfNvmF0Bqw" target="_blank" rel="noopener noreferrer">Steve Jobs</a>`,
+  },
+  {
+    text: `"There is not one path to greatness, there's many"`,
+    attr: `&mdash; Daniel Ek, <a href="https://www.davidsenra.com/episode/daniel-ek-spotify" target="_blank" rel="noopener noreferrer">David Senra</a>`,
+  },
+  {
+    text: `"You have to start your own engine every day"`,
+    attr: `&mdash; Pat Summitt, <a href="https://www.amazon.com/Sum-Ninety-Eight-Victories-Irrelevant-Perspective/dp/0385347057?tag=gemka0e-20" target="_blank" rel="noopener noreferrer">Sum It Up</a>`,
+  },
+];
+
+const partZeroQuotesHtml = partZeroQuotes.map(q => `
+    <blockquote>
+      <p>${q.text}</p>
+      <p>${q.attr}</p>
+    </blockquote>`).join('\n');
+
+const partZeroBody = `
+<nav>
+  <div class="nav-left">
+    <a href="/the-why" class="nav-link">The Why</a>
+  </div>
+  <div class="nav-clock" id="clock"></div>
+  <div class="nav-right">
+    <a href="https://github.com/jcowcher" target="_blank" rel="noopener" class="nav-github" aria-label="GitHub">
+      <svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+    </a>
+  </div>
+</nav>
+<main class="post">
+  <header class="post-header">
+    <h1>Nobody knows anything</h1>
+  </header>
+  <article class="post-body">
+    <p>A few reminders that the people you admire are improvising too. So you might as well start.</p>
+    ${partZeroQuotesHtml}
+  </article>
+  <footer class="post-footer"><a href="/writing">&larr; All posts</a></footer>
+</main>`;
+
+fs.writeFileSync(
+  path.join(DIST_DIR, 'part-0-quotes.html'),
+  htmlTemplate('Nobody knows anything — Jeremy Cowcher', partZeroBody)
+);
+
 // Generate the "Writing" index page. The article list lives here, split out of
 // the landing so the landing stays a single hero screen.
 const postListHtml = posts.length === 0
