@@ -8,9 +8,9 @@ description: Dyson said anyone can become an expert in six months; AI shortens t
 >
 > — Jeff Bezos ([Squawk Pod](https://www.youtube.com/watch?v=NSVpd46EfLo))
 
-> "Anyone can become an expert at anything in six months, whether it is hydrodynamics for boats or cyclonic systems for vacuum cleaners."
+> "Anyone can become an expert in anything in six months, whether it is hydrodynamics for boats or cyclonic systems for vacuum cleaners."
 >
-> — James Dyson ([Against the Odds: An Autobiography](https://www.goodreads.com/en/book/show/955045.Against_the_Odds))
+> — James Dyson ([Against the Odds: An Autobiography](https://www.amazon.com/dp/1587991705?tag=gemka0e-20))
 
 James Dyson didn't train as an engineer. He went to art school. He taught himself the hydrodynamics and the cyclonic physics he needed by reading, asking, and building, because the thing he wanted to make required it. His claim that anyone can become an expert in six months isn't motivational fluff; it's a description of how he actually worked. The barrier to entry in most fields is lower than the insiders want you to believe, and focused effort beats credentials more often than not.
 
