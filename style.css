@@ -666,7 +666,7 @@ main.post {
 @media (max-width: 640px) {
   nav { padding: 1rem 1.25rem; }
   nav::after { left: 1.25rem; right: 1.25rem; }
-  .hero { height: auto; padding: 1.5rem 1.25rem 2rem; flex-direction: column; justify-content: center; gap: 1.75rem; }
+  .hero { height: auto; padding: 1.5rem 1.25rem 2rem; flex-direction: column; justify-content: space-evenly; gap: 1.75rem; }
   .hero-content { flex: 0 0 auto; }
   .hero-subtitle { font-size: 1.3rem; }
   /* Return the scroll arrow to normal flow on mobile so a long rotating quote
