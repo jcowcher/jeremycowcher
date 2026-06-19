@@ -16,10 +16,6 @@ const STYLE = fs.readFileSync(path.join(__dirname, 'style.css'), 'utf8');
 const FOOTER_LINKS = `<footer class="footer-links">
   <div class="footer-row">
     <div class="footer-group footer-left">
-      <a href="https://x.com/GemTimer_GemKa" target="_blank" rel="noopener noreferrer">X.com</a>
-      <span class="footer-sep" aria-hidden="true">·</span>
-      <a href="https://www.linkedin.com/company/gemkaventures" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <span class="footer-sep" aria-hidden="true">·</span>
       <a href="https://gemtimer.com" target="_blank" rel="noopener noreferrer">GemTimer</a>
       <span class="footer-sep" aria-hidden="true">·</span>
       <a href="https://gemtodo.com" target="_blank" rel="noopener noreferrer">GemTodo</a>
