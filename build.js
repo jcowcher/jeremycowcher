@@ -295,7 +295,7 @@ const partZeroBody = `
     <h1>Nobody knows anything</h1>
   </header>
   <article class="post-body">
-    <p>A few reminders that the people you admire are improvising too. So you might as well start.</p>
+    <p>There's no grand plan you've missed.</p>
     ${partZeroQuotesHtml}
   </article>
   <footer class="post-footer"><a href="/writing">&larr; All posts</a></footer>
