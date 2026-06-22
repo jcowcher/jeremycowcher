@@ -10,10 +10,6 @@ part: 0
 >
 > — James Dyson ([Against the Odds: An Autobiography](https://www.amazon.com/dp/1587991705?tag=gemka0e-20))
 
-> "There is something very powerful about zero ... Zero is a good number."
->
-> — Jeff Bezos ([Squawk Pod](https://www.youtube.com/watch?v=NSVpd46EfLo))
-
 Before SpaceX, Elon Musk's companies hadn't built physical products. James Dyson didn't train as an engineer; he went to art school and graduated with a degree in industrial design. Boris Cherny (creator of Claude Code) doesn't have a Computer Science degree. Estée Lauder got her start selling homemade skincare creams in New York beauty salons.
 
 Everyone starts somewhere and that somewhere is often not as far along as you think it is, especially if you focus on where they ended up. Household names like Musk, Bezos, Dyson and Lauder all started at zero. People start at zero again and again and still succeed.
