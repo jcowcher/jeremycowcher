@@ -292,10 +292,9 @@ const partZeroBody = `
 </nav>
 <main class="post part-0-quotes">
   <header class="post-header">
-    <h1>Nobody knows anything</h1>
+    <h1>There's no grand plan you've missed</h1>
   </header>
   <article class="post-body">
-    <p>There's no grand plan you've missed.</p>
     ${partZeroQuotesHtml}
   </article>
   <footer class="post-footer"><a href="/writing">&larr; All posts</a></footer>
@@ -303,7 +302,7 @@ const partZeroBody = `
 
 fs.writeFileSync(
   path.join(DIST_DIR, 'part-0-quotes.html'),
-  htmlTemplate('Nobody knows anything — Jeremy Cowcher', partZeroBody)
+  htmlTemplate('There\'s no grand plan you\'ve missed — Jeremy Cowcher', partZeroBody)
 );
 
 // Generate the "Writing" index page. The article list lives here, split out of
