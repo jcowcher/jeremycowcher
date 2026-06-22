@@ -461,7 +461,7 @@ main.post {
 }
 
 .post-header {
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .post-header time {
@@ -527,7 +527,7 @@ main.post {
   border-left: 3px solid var(--gray-300);
   background: var(--gray-100);
   padding: 0.5rem 1.25rem;
-  margin: 1.5rem 0;
+  margin: 1rem 0;
   color: var(--gray-700);
   font-style: normal;
   border-radius: 0 4px 4px 0;
