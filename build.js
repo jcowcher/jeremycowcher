@@ -146,6 +146,8 @@ const posts = collectPostFiles(POSTS_DIR)
       title: meta.title || slug,
       date: meta.date || '2026-01-01',
       description: meta.description || '',
+      series: meta.series || null,
+      part: meta.part !== undefined ? Number(meta.part) : null,
       html,
     };
   })
@@ -303,19 +305,74 @@ fs.writeFileSync(
 
 // Generate the "Writing" index page. The article list lives here, split out of
 // the landing so the landing stays a single hero screen.
-const postListHtml = posts.length === 0
-  ? '<p class="empty">No posts yet.</p>'
-  : posts.map(post => `
+// Build index entries: standalone posts stay flat rows; posts sharing a
+// `series` collapse into one <details> group. Each entry carries the sort key
+// of its newest member so groups and standalone posts interleave by recency
+// (date DESC then slug DESC). `posts` is already sorted that way, so the first
+// post seen for a series is its newest, and it sets the group's sort key.
+const indexEntries = [];
+const seriesPos = {};
+posts.forEach(post => {
+  if (post.series) {
+    if (seriesPos[post.series] === undefined) {
+      seriesPos[post.series] = indexEntries.length;
+      indexEntries.push({ type: 'series', name: post.series, date: post.date, slug: post.slug, parts: [] });
+    }
+    indexEntries[seriesPos[post.series]].parts.push(post);
+  } else {
+    indexEntries.push({ type: 'post', date: post.date, slug: post.slug, post });
+  }
+});
+indexEntries.sort((a, b) => new Date(b.date) - new Date(a.date) || b.slug.localeCompare(a.slug));
+
+// Strip the "{series} (Part {part}) - " prefix to get the per-part headline.
+function partHeadline(post) {
+  const prefix = `${post.series} (Part ${post.part}) - `;
+  return post.title.startsWith(prefix) ? post.title.slice(prefix.length) : post.title;
+}
+
+function renderStandaloneRow(post) {
+  return `
     <a href="/posts/${post.slug}" class="post-link">
       <article class="post-card">
         <span class="post-card-date">${formatDateShort(post.date)}</span>
         <div class="post-card-content">
           <h2>${post.title}</h2>
-          ${post.description ? '<p>' + post.description + '</p>' : ''}
         </div>
         <span class="post-card-arrow">&rsaquo;</span>
       </article>
-    </a>`).join('\n');
+    </a>`;
+}
+
+function renderSeriesGroup(entry) {
+  const parts = entry.parts.slice().sort((a, b) => a.part - b.part);
+  const partsHtml = parts.map(post => `
+        <a href="/posts/${post.slug}" class="post-link series-part">
+          <article class="post-card">
+            <span class="post-card-date">${formatDateShort(post.date)}</span>
+            <div class="post-card-content">
+              <span class="series-part-label">Part ${post.part}</span>
+              <h2>${partHeadline(post)}</h2>
+            </div>
+            <span class="post-card-arrow">&rsaquo;</span>
+          </article>
+        </a>`).join('\n');
+  return `
+    <details class="series-group" open>
+      <summary class="series-summary">
+        <svg class="series-chevron" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+        <span class="series-name">${entry.name}</span>
+        <span class="series-count">${parts.length} part${parts.length !== 1 ? 's' : ''}</span>
+      </summary>
+      <div class="series-parts">
+        ${partsHtml}
+      </div>
+    </details>`;
+}
+
+const postListHtml = posts.length === 0
+  ? '<p class="empty">No posts yet.</p>'
+  : indexEntries.map(e => e.type === 'series' ? renderSeriesGroup(e) : renderStandaloneRow(e.post)).join('\n');
 
 const writingBody = `
 <nav>

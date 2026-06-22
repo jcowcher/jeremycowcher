@@ -2,6 +2,8 @@
 title: Learning with AI (Part 0) - Anyone can get started
 date: 2026-06-23
 description: Dyson said anyone can become an expert in six months; AI shortens the clock and removes the excuse
+series: Learning with AI
+part: 0
 ---
 
 > "There is something very powerful about zero ... Zero is a good number."
