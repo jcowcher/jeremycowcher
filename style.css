@@ -526,7 +526,7 @@ main.post {
 .post-body blockquote {
   border-left: 3px solid var(--gray-300);
   background: var(--gray-100);
-  padding: 0.75rem 1.25rem;
+  padding: 0.5rem 1.25rem;
   margin: 1.5rem 0;
   color: var(--gray-700);
   font-style: normal;
@@ -534,7 +534,7 @@ main.post {
 }
 
 .post-body blockquote p {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.35rem;
 }
 
 .post-body blockquote p:last-child {
