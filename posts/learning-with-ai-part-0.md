@@ -1,5 +1,5 @@
 ---
-title: Learning with AI (Part 0) - Anyone can learn anything
+title: Learning with AI (Part 0) - Anyone can get started
 date: 2026-06-23
 description: Dyson said anyone can become an expert in six months; AI shortens the clock and removes the excuse
 ---
