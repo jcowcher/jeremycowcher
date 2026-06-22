@@ -1,5 +1,5 @@
 ---
-title: Learning with AI (Part 0) - Anyone can get started
+title: Learning with AI (Part 0) - Getting past the cold start problem
 date: 2026-06-23
 description: Dyson said anyone can become an expert in six months; AI shortens the clock and removes the excuse
 series: Learning with AI
@@ -14,7 +14,7 @@ Before SpaceX, Elon Musk's companies hadn't built physical products. James Dyson
 
 Everyone starts somewhere and that somewhere is often not as far along as you think it is, especially if you focus on where they ended up. Household names like Musk, Dyson and Lauder all started at zero. People start at zero again and again and still succeed.
 
-I started at zero with Claude, rather than Cursor or other great options, because a few people in my life, and a couple of writers I follow, said they were starting projects with Claude that sounded cool. Realizing that you don't need to be a developer to make things with Claude was enough for me to try it too.
+I started at zero with Claude, rather than Cursor or other great options, because a few people in my life, and a couple of writers I follow, said they were starting projects with Claude that sounded cool. Realizing that you don't need to be a developer to make things with Claude was enough to get me past my own cold start.
 
 The more I built, the more I noticed a gap between high-level pronouncements of a company being "AI-first" and Anthropic technical staff running loops from their phone while they sleep. I'm writing this series to sit somewhere between those extremes; it's the thing that would have helped the version of me starting out. Writing also sharpens my thinking, so I expect it to make my products better too.
 
