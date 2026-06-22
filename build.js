@@ -9,6 +9,10 @@ const DIST_DIR = path.join(__dirname, 'dist');
 const TOKENS = fs.readFileSync(path.join(__dirname, 'node_modules', 'gemka-tokens', 'tokens.css'), 'utf8');
 const STYLE = fs.readFileSync(path.join(__dirname, 'style.css'), 'utf8');
 
+// Footer kill switch. Temporarily hidden until launch; flip to true to restore
+// the footer on every page exactly as before (FOOTER_LINKS markup is unchanged).
+const SHOW_FOOTER = false;
+
 // GemKa-family footer (rendered on every page). Two middot-separated groups
 // like the product sites (gemtimer.com): social + family on the left, utility
 // on the right. External links open in a new tab; order and styling mirror the
@@ -80,8 +84,7 @@ ${extra}
 </head>
 <body class="${bodyClass}">
 ${body}
-${FOOTER_LINKS}
-<script>
+${SHOW_FOOTER ? FOOTER_LINKS + '\n' : ''}<script>
 (function(){
   var q=document.getElementById('hero-quote');
   if(q){
