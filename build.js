@@ -290,7 +290,7 @@ const partZeroBody = `
     </a>
   </div>
 </nav>
-<main class="post">
+<main class="post part-0-quotes">
   <header class="post-header">
     <h1>Nobody knows anything</h1>
   </header>

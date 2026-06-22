@@ -541,6 +541,11 @@ main.post {
   margin-bottom: 0;
 }
 
+/* Tighter quote spacing on the /part-0-quotes page only */
+.part-0-quotes .post-body blockquote {
+  margin: 0.6rem 0;
+}
+
 .post-body code {
   font-family: 'SF Mono', 'Fira Code', monospace;
   font-size: 0.9em;
