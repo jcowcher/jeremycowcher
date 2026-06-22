@@ -260,7 +260,7 @@ const partZeroQuotes = [
   },
   {
     text: `"Everything around you that you call life was made up by people that were no smarter than you. And you can change it. You can influence it. You can build your own things that other people can use."`,
-    attr: `&mdash; <a href="https://www.youtube.com/watch?v=kYfNvmF0Bqw" target="_blank" rel="noopener noreferrer">Steve Jobs</a>`,
+    attr: `&mdash; Steve Jobs, <a href="https://www.youtube.com/watch?v=kYfNvmF0Bqw" target="_blank" rel="noopener noreferrer">Silicon Valley Historical Association</a>`,
   },
   {
     text: `"There is not one path to greatness, there's many"`,
