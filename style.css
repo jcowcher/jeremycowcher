@@ -455,9 +455,9 @@ body.landing .hero {
 
 /* Post page */
 main.post {
-  max-width: 640px;
+  max-width: 720px;
   margin: 0 auto;
-  padding: 3rem 1.5rem 5rem;
+  padding: 1.5rem 1.5rem 5rem;
 }
 
 .post-header {
