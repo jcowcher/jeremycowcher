@@ -20,7 +20,7 @@ Everyone starts somewhere and that somewhere is often not as far along as you th
 
 I started with Claude, rather than Cursor or other great options, because a few people in my life, and a couple of writers I follow, said they were starting projects with Claude that sounded cool. Realizing that you don't need to be a developer to make things with Claude was enough for me to try it too.
 
-I've found there is a gap between high-level pronouncements of a company being "AI-first" and Anthropic technical staff running loops from their phone while they sleep. I'm writing this series to sit somewhere between those extremes, the thing that would have helped the version of me starting out. Writing also sharpens my thinking, so I expect it to make my products better too.
+I've found there is a gap between high-level pronouncements of a company being "AI-first" and Anthropic technical staff running loops from their phone while they sleep. I'm writing this series to sit somewhere between those extremes; it's the thing that would have helped the version of me starting out. Writing also sharpens my thinking, so I expect it to make my products better too.
 
 I've made plenty of painful mistakes, like crashing my first website while trying to sync data across devices. Those lessons will shape what I write here, but there is no grand plan. It will be the topics that inspired me enough to write about them.
 
