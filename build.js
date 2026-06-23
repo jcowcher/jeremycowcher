@@ -9,6 +9,10 @@ const DIST_DIR = path.join(__dirname, 'dist');
 const TOKENS = fs.readFileSync(path.join(__dirname, 'node_modules', 'gemka-tokens', 'tokens.css'), 'utf8');
 const STYLE = fs.readFileSync(path.join(__dirname, 'style.css'), 'utf8');
 
+// Footer kill switch. Temporarily hidden until launch; flip to true to restore
+// the footer on every page exactly as before (FOOTER_LINKS markup is unchanged).
+const SHOW_FOOTER = false;
+
 // GemKa-family footer (rendered on every page). Two middot-separated groups
 // like the product sites (gemtimer.com): social + family on the left, utility
 // on the right. External links open in a new tab; order and styling mirror the
@@ -80,8 +84,7 @@ ${extra}
 </head>
 <body class="${bodyClass}">
 ${body}
-${FOOTER_LINKS}
-<script>
+${SHOW_FOOTER ? FOOTER_LINKS + '\n' : ''}<script>
 (function(){
   var q=document.getElementById('hero-quote');
   if(q){
@@ -146,6 +149,8 @@ const posts = collectPostFiles(POSTS_DIR)
       title: meta.title || slug,
       date: meta.date || '2026-01-01',
       description: meta.description || '',
+      series: meta.series || null,
+      part: meta.part !== undefined ? Number(meta.part) : null,
       html,
     };
   })
@@ -255,7 +260,7 @@ const partZeroQuotes = [
   },
   {
     text: `"Everything around you that you call life was made up by people that were no smarter than you. And you can change it. You can influence it. You can build your own things that other people can use."`,
-    attr: `&mdash; <a href="https://www.youtube.com/watch?v=kYfNvmF0Bqw" target="_blank" rel="noopener noreferrer">Steve Jobs</a>`,
+    attr: `&mdash; Steve Jobs, <a href="https://www.youtube.com/watch?v=kYfNvmF0Bqw" target="_blank" rel="noopener noreferrer">Silicon Valley Historical Association</a>`,
   },
   {
     text: `"There is not one path to greatness, there's many"`,
@@ -285,12 +290,11 @@ const partZeroBody = `
     </a>
   </div>
 </nav>
-<main class="post">
+<main class="post part-0-quotes">
   <header class="post-header">
-    <h1>Nobody knows anything</h1>
+    <h1>There's no grand plan you've missed</h1>
   </header>
   <article class="post-body">
-    <p>A few reminders that the people you admire are improvising too. So you might as well start.</p>
     ${partZeroQuotesHtml}
   </article>
   <footer class="post-footer"><a href="/writing">&larr; All posts</a></footer>
@@ -298,24 +302,79 @@ const partZeroBody = `
 
 fs.writeFileSync(
   path.join(DIST_DIR, 'part-0-quotes.html'),
-  htmlTemplate('Nobody knows anything — Jeremy Cowcher', partZeroBody)
+  htmlTemplate('There\'s no grand plan you\'ve missed — Jeremy Cowcher', partZeroBody)
 );
 
 // Generate the "Writing" index page. The article list lives here, split out of
 // the landing so the landing stays a single hero screen.
-const postListHtml = posts.length === 0
-  ? '<p class="empty">No posts yet.</p>'
-  : posts.map(post => `
+// Build index entries: standalone posts stay flat rows; posts sharing a
+// `series` collapse into one <details> group. Each entry carries the sort key
+// of its newest member so groups and standalone posts interleave by recency
+// (date DESC then slug DESC). `posts` is already sorted that way, so the first
+// post seen for a series is its newest, and it sets the group's sort key.
+const indexEntries = [];
+const seriesPos = {};
+posts.forEach(post => {
+  if (post.series) {
+    if (seriesPos[post.series] === undefined) {
+      seriesPos[post.series] = indexEntries.length;
+      indexEntries.push({ type: 'series', name: post.series, date: post.date, slug: post.slug, parts: [] });
+    }
+    indexEntries[seriesPos[post.series]].parts.push(post);
+  } else {
+    indexEntries.push({ type: 'post', date: post.date, slug: post.slug, post });
+  }
+});
+indexEntries.sort((a, b) => new Date(b.date) - new Date(a.date) || b.slug.localeCompare(a.slug));
+
+// Strip the "{series} (Part {part}) - " prefix to get the per-part headline.
+function partHeadline(post) {
+  const prefix = `${post.series} (Part ${post.part}) - `;
+  return post.title.startsWith(prefix) ? post.title.slice(prefix.length) : post.title;
+}
+
+function renderStandaloneRow(post) {
+  return `
     <a href="/posts/${post.slug}" class="post-link">
       <article class="post-card">
         <span class="post-card-date">${formatDateShort(post.date)}</span>
         <div class="post-card-content">
           <h2>${post.title}</h2>
-          ${post.description ? '<p>' + post.description + '</p>' : ''}
         </div>
         <span class="post-card-arrow">&rsaquo;</span>
       </article>
-    </a>`).join('\n');
+    </a>`;
+}
+
+function renderSeriesGroup(entry) {
+  const parts = entry.parts.slice().sort((a, b) => a.part - b.part);
+  const partsHtml = parts.map(post => `
+        <a href="/posts/${post.slug}" class="post-link series-part">
+          <article class="post-card">
+            <span class="post-card-date">${formatDateShort(post.date)}</span>
+            <div class="post-card-content">
+              <span class="series-part-label">Part ${post.part}</span>
+              <h2>${partHeadline(post)}</h2>
+            </div>
+            <span class="post-card-arrow">&rsaquo;</span>
+          </article>
+        </a>`).join('\n');
+  return `
+    <details class="series-group" open>
+      <summary class="series-summary">
+        <svg class="series-chevron" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+        <span class="series-name">${entry.name}</span>
+        <span class="series-count">${parts.length} part${parts.length !== 1 ? 's' : ''}</span>
+      </summary>
+      <div class="series-parts">
+        ${partsHtml}
+      </div>
+    </details>`;
+}
+
+const postListHtml = posts.length === 0
+  ? '<p class="empty">No posts yet.</p>'
+  : indexEntries.map(e => e.type === 'series' ? renderSeriesGroup(e) : renderStandaloneRow(e.post)).join('\n');
 
 const writingBody = `
 <nav>

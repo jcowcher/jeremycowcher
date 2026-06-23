@@ -385,6 +385,68 @@ body.landing .hero {
   transform: translateX(3px);
 }
 
+/* Collapsible series groups (native <details>, no JS) */
+.post-list > .series-group {
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.post-list > .series-group:last-child {
+  border-bottom: none;
+}
+
+.series-summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0;
+}
+
+.series-summary::-webkit-details-marker {
+  display: none;
+}
+
+.series-chevron {
+  width: 1rem;
+  height: 1rem;
+  fill: var(--gk-accent);
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
+}
+
+.series-group[open] .series-chevron {
+  transform: rotate(90deg);
+}
+
+.series-name {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 500;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.series-count {
+  font-size: 0.75rem;
+  color: var(--gray-400);
+  font-weight: 400;
+}
+
+.series-parts {
+  padding-left: 1.5rem;
+}
+
+.series-part-label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gk-accent);
+  margin-bottom: 0.15rem;
+}
+
 .empty {
   color: var(--gray-400);
   font-style: italic;
@@ -393,13 +455,13 @@ body.landing .hero {
 
 /* Post page */
 main.post {
-  max-width: 640px;
+  max-width: 720px;
   margin: 0 auto;
-  padding: 3rem 1.5rem 5rem;
+  padding: 1.5rem 1.5rem 5rem;
 }
 
 .post-header {
-  margin-bottom: 2.5rem;
+  margin-bottom: 1rem;
 }
 
 .post-header time {
@@ -411,7 +473,7 @@ main.post {
 
 .post-header h1 {
   font-family: 'Fraunces', Georgia, serif;
-  font-size: 2.4rem;
+  font-size: 2rem;
   font-weight: 500;
   letter-spacing: -0.02em;
   line-height: 1.2;
@@ -464,15 +526,24 @@ main.post {
 .post-body blockquote {
   border-left: 3px solid var(--gray-300);
   background: var(--gray-100);
-  padding: 1rem 1.25rem;
-  margin: 1.5rem 0;
+  padding: 0.5rem 1.25rem;
+  margin: 1rem 0;
   color: var(--gray-700);
   font-style: normal;
   border-radius: 0 4px 4px 0;
 }
 
+.post-body blockquote p {
+  margin-bottom: 0.35rem;
+}
+
 .post-body blockquote p:last-child {
   margin-bottom: 0;
+}
+
+/* Tighter quote spacing on the /part-0-quotes page only */
+.part-0-quotes .post-body blockquote {
+  margin: 0.6rem 0;
 }
 
 .post-body code {

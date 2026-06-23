@@ -10,6 +10,14 @@ That said, Cowork is still useful for the thinking *around* the edit:
 - **Trade-off discussions happen in Cowork.** Jeremy often wants to talk through approach, scope, risk, or alternatives before touching code. Engage fully with those in Cowork; don't punt him to Claude Code just to discuss.
 - **Give him a ready-to-paste prompt for Claude Code.** Once the approach is settled, write out the exact prompt he should paste into Claude Code to make the change. Include the file(s), the specific behavior to change, any constraints from this CLAUDE.md, and the acceptance check. The handoff is: discuss here, paste there. **Format the prompt for copy-paste:** put it in a fenced code block (not a blockquote or inline prose), so Jeremy can copy it in one click without picking around formatting or stray characters.
 
+### Opening a repo file in TextEdit (computer use)
+
+When Jeremy asks to open a post in TextEdit, paste an absolute path; do not type a tilde path into the Go to Folder field. The reliable sequence: (1) request TextEdit access with `clipboardWrite: true` up front; (2) write the absolute path to the clipboard (e.g. `/Users/Jeremy/code/jeremycowcher/posts/_archive`, never `~/...`); (3) bring TextEdit forward, then Cmd+O, Cmd+Shift+G, Cmd+V to paste, Return, then double-click the file in the list.
+
+Why paste: the "Go to Folder" field has live autocomplete. A typed path gets mangled (the slash after `~` often drops), and pressing Return while a suggestion is highlighted selects that suggestion instead of navigating, which leaves the sheet stuck. Pasting an absolute path sidesteps all of it.
+
+Traps that remain: the sheet only resolves folders, so a file path fails silently. If the sheet gets stuck, Escape will not dismiss it; use Cmd+. to cancel, and make sure TextEdit is frontmost first. Watch for other apps stealing focus mid-sequence; if a click errors with "not in allowed applications," re-front TextEdit and retry.
+
 ## Tech stack
 
 - **Build:** `node build.js` (custom script) using `marked` for markdown→HTML. Dependencies: `marked` and `gemka-tokens` (canonical GemKa design tokens).
