@@ -1,6 +1,6 @@
 ---
 title: Learning with AI (Part 1) - Redundancy equals insurance
-date: 2026-06-25
+date: 2026-06-24
 description: A tool that can create anything can break it just as fast, so building with AI means building in redundancy: backups, copies, and staging before anything reaches a real user
 series: Learning with AI
 part: 1
