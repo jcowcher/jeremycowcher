@@ -13,14 +13,14 @@ Split the work by what it touches, not by which repo it is:
 
 When a task is a code change, scope or discuss it in Cowork if that helps, then hand Claude Code a ready-to-paste prompt. A skill being available in Cowork's skill list is not permission to run a code or deploy skill there.
 
-## One change at a time (Dyson 5,127 rule)
+## One change at a time (the Dyson rule)
 
-Jeremy works the way James Dyson prototyped: change one variable at a time, verify it, then move to the next. Slower, but every change's effect stays attributable.
+James Dyson built and tested 5,127 handmade prototypes of his cyclonic vacuum. It took four years. Dyson followed the Edisonian principle that you only ever make one change at a time. This is so you can know which changes improved your product and which did not.
 
-- One logical change per commit. Verify it works (on staging, where the repo has one) before starting the next.
-- A "logical change" is scoped by the issue it solves, not by edit count: several coordinated edits fixing the same issue ship as one commit.
-- Don't batch independent fixes into one commit or one Claude Code prompt, even when batching looks faster.
-- When Jeremy asks for several changes at once, sequence them: agree an order, deliver the first, confirm it works, then move to the next.
+- Make one logical change, verify it works, then start the next. Never the reverse order.
+- One change is one problem solved, not one file touched: several edits fixing the same issue still count as one change.
+- Don't batch independent changes into one commit or request, even when it looks faster. When something improves or breaks, you want one cause, not five.
+- When handed several things at once, sequence them: agree an order, finish the first, confirm it, then move on.
 
 (Each repo's own "classify the change" / staging / scrimmage steps live in that repo's CLAUDE.md, not here.)
 
