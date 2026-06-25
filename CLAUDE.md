@@ -13,7 +13,7 @@ Split the work by what it touches, not by which repo it is:
 
 When a task is a code change, scope or discuss it in Cowork if that helps, then hand Claude Code a ready-to-paste prompt. A skill being available in Cowork's skill list is not permission to run a code or deploy skill there.
 
-## One change at a time (the Dyson rule)
+## The Dyson 5,127 Rule
 
 James Dyson built and tested 5,127 handmade prototypes of his cyclonic vacuum. It took four years. Dyson followed the Edisonian principle that you only ever make one change at a time. This is so you can know which changes improved your product and which did not.
 
