@@ -33,6 +33,7 @@ Don't use em dashes in prose you write: UI text, taglines, commit messages, desc
 - Ask clarifying questions as plain inline chat text, never the multiple-choice pop-up chooser. Jeremy finds the pop-up high-friction. This is about format, not whether to ask: he wants to be asked when a question genuinely helps. Keep it conversational, in the chat.
 - Give commands, terminal instructions, and any message to relay as copy-paste code blocks, not inline prose.
 - For handoffs to Claude Code: put the entire handoff inside a single fenced code block Jeremy can copy in one action, with no prose left outside it. If the handoff itself contains a fenced code block, use a four-backtick outer fence so the inner triple-backtick fences don't break the copy.
+- Every Claude Code handoff states its change count on the first line (e.g. "One logical change: de-fork the overlay account menu"). More than one, split or flag before handing over. This is where the Dyson 5,127 Rule is enforced: the count forces the one-change check at the moment work crosses from Cowork to Claude Code.
 
 ## Jeremy makes the calls
 
