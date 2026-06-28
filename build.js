@@ -6,7 +6,7 @@ const POSTS_DIR = path.join(__dirname, 'posts');
 const DIST_DIR = path.join(__dirname, 'dist');
 // Canonical GemKa design tokens (:root with --gk-* vars). Inlined first, before
 // style.css, so style.css can reference the vars when repointing its palette.
-const TOKENS = fs.readFileSync(path.join(__dirname, 'node_modules', 'gemka-tokens', 'tokens.css'), 'utf8');
+const TOKENS = fs.readFileSync(path.join(__dirname, 'node_modules', '@gemka', 'core', 'tokens.css'), 'utf8');
 const STYLE = fs.readFileSync(path.join(__dirname, 'style.css'), 'utf8');
 
 // Footer kill switch. Temporarily hidden until launch; flip to true to restore
