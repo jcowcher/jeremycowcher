@@ -1,7 +1,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 /* Palette repointed onto the canonical GemKa tokens (defined in node_modules/
-   gemka-tokens/tokens.css, inlined before this file at build time). Warm cream
+   @gemka/core/tokens.css, inlined before this file at build time). Warm cream
    surfaces, soft warm ink, oxblood accent — no pure white/black/orange. */
 :root {
   --black: var(--gk-ink);
