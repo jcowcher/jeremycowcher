@@ -191,6 +191,20 @@ posts.forEach(post => {
   fs.writeFileSync(path.join(DIST_DIR, 'posts', post.slug + '.html'), html);
 });
 
+// Copy standalone HTML pages from AI Essentials/ into dist/ at their own
+// filename (e.g. dist/ai-essentials-3-skills.html → served at the clean URL
+// /ai-essentials-3-skills). These are already complete, self-styled pages with
+// inlined CSS — copy them verbatim, don't wrap or re-inline anything.
+const STANDALONE_DIR = path.join(__dirname, 'AI Essentials');
+if (fs.existsSync(STANDALONE_DIR)) {
+  fs.readdirSync(STANDALONE_DIR)
+    .filter(name => name.endsWith('.html'))
+    .forEach(name => {
+      const src = fs.readFileSync(path.join(STANDALONE_DIR, name), 'utf8');
+      fs.writeFileSync(path.join(DIST_DIR, name), src);
+    });
+}
+
 // Generate "The Why" page
 const whyBody = `
 <main class="why-page">
