@@ -1,9 +1,9 @@
 <!--post
-title: AI Essentials #3 - Skills
+title: AI Essentials #3 - A home for Skills
 date: 2026-06-29
 series: AI Essentials
 part: 3
-headline: Skills
+headline: A home for Skills
 description: How I landed on a workable setup for Claude skills across Cowork and Claude Code.
 -->
 <!DOCTYPE html>
@@ -11,7 +11,7 @@ description: How I landed on a workable setup for Claude skills across Cowork an
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Essentials #3 - Skills — Jeremy Cowcher</title>
+<title>AI Essentials #3 - A home for Skills — Jeremy Cowcher</title>
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/icon.png">
 <meta name="description" content="How I landed on a workable setup for Claude skills across Cowork and Claude Code.">
@@ -889,7 +889,7 @@ main.post {
 <main class="post">
   <header class="post-header">
     <time>June 29, 2026</time>
-    <h1>AI Essentials #3 - Skills</h1>
+    <h1>AI Essentials #3 - A home for Skills</h1>
   </header>
   <article class="post-body"><p>Skills in Claude are one of those things that sound great and yet have vexed me until very recently. I couldn't get the workflow right even though when they worked, they were amazing.</p>
 
@@ -897,7 +897,7 @@ main.post {
 <p>I started out by creating Skills in Cowork itself. That worked well for a while until I realized that Claude Code, which is where I do the coding in an IDE called VS Code, couldn't edit those Skills.</p>
 
 <h2>The second approach</h2>
-<p>Wanting Claude Code to be able to edit the Skills, I pivoted 180 degrees and put the Skills in <code>~/.claude/skills</code>, where Claude Code could reach them. Pretty quickly I realized I'd made a mistake because now Cowork couldn't find the Skills and definitely couldn't edit them. That's because I wasn't able to mount <code>~/.claude/skills</code> to a Cowork task. It was a protected folder, according to Claude.</p>
+<p>Wanting Claude Code to be able to edit the Skills, I pivoted 180 degrees and put the Skills in <code>~/.claude/skills</code>, where Claude Code could reach them. Pretty quickly I realized I'd made a mistake because now Cowork couldn't find the Skills and definitely couldn't edit them. That's because <code>.claude</code> folders are generally protected by Claude and so I wasn't able to mount <code>~/.claude/skills</code> to a Cowork task.</p>
 
 <h2>The third approach</h2>
 <p>I created a new folder called claude-kit on my laptop at <code>~/code/claude-kit</code>. This new folder has Skills, along with other notes and explainers that are helpful to me as I build my products. Since claude-kit is a folder, it can be mounted to a Cowork session and so Cowork can edit it. It's not a perfect setup because Claude Code can't read directly from claude-kit; it reads from <code>~/.claude/skills</code>.</p>
