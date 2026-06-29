@@ -9,6 +9,11 @@ const DIST_DIR = path.join(__dirname, 'dist');
 const TOKENS = fs.readFileSync(path.join(__dirname, 'node_modules', '@gemka', 'core', 'tokens.css'), 'utf8');
 const STYLE = fs.readFileSync(path.join(__dirname, 'style.css'), 'utf8');
 
+// Pinned order for series groups on the /writing index. Series listed here
+// render first, in this order, regardless of date. Any series not listed, and
+// any standalone posts, fall below these and sort by date desc. Reorder freely.
+const SERIES_ORDER = ['Learning with AI', 'AI Essentials'];
+
 // Footer kill switch. Temporarily hidden until launch; flip to true to restore
 // the footer on every page exactly as before (FOOTER_LINKS markup is unchanged).
 const SHOW_FOOTER = false;
@@ -54,6 +59,24 @@ function parseFrontmatter(content) {
     meta[key] = val;
   });
   return { meta, body: match[2] };
+}
+
+// Parse the leading <!--post ... --> metadata comment from an HTML post. Same
+// key: value format as markdown frontmatter. Returns the metadata plus the body
+// with the comment (and any blank lines after it) stripped, so the remaining
+// file is the complete self-styled page starting at <!DOCTYPE html>.
+function parsePostComment(content) {
+  const match = content.match(/^<!--post\n([\s\S]*?)\n-->\n?/);
+  if (!match) return { meta: {}, body: content };
+  const meta = {};
+  match[1].split('\n').forEach(line => {
+    const idx = line.indexOf(':');
+    if (idx === -1) return;
+    const key = line.slice(0, idx).trim();
+    const val = line.slice(idx + 1).trim();
+    meta[key] = val;
+  });
+  return { meta, body: content.slice(match[0].length).replace(/^\n+/, '') };
 }
 
 function formatDate(dateStr) {
@@ -122,8 +145,9 @@ fs.mkdirSync(path.join(DIST_DIR, 'posts'), { recursive: true });
   fs.copyFileSync(path.join(__dirname, file), path.join(DIST_DIR, file));
 });
 
-// Recursively collect .md files under posts/, skipping any folder whose name
-// starts with "_" (e.g. _archive stays unpublished). Subfolders are purely for
+// Recursively collect post source files under posts/ — both .md (markdown) and
+// .html (complete self-styled pages) — skipping any folder whose name starts
+// with "_" (e.g. _archive stays unpublished). Subfolders are purely for
 // organizing source — the slug is derived from the filename only, so a post's
 // URL is independent of which folder it lives in (posts/learning-with-ai/part-2.md
 // still publishes to /posts/learning-with-ai-part-2). Filenames must stay unique
@@ -133,24 +157,47 @@ function collectPostFiles(dir) {
     if (entry.isDirectory()) {
       return entry.name.startsWith('_') ? [] : collectPostFiles(path.join(dir, entry.name));
     }
-    return entry.name.endsWith('.md') ? [path.join(dir, entry.name)] : [];
+    return (entry.name.endsWith('.md') || entry.name.endsWith('.html')) ? [path.join(dir, entry.name)] : [];
   });
 }
 
-// Read and parse all posts
+// Read and parse all posts. Two kinds, both producing the same index entry
+// shape so they share the series/index pipeline below:
+//  - kind 'md':   markdown frontmatter + body → marked() → wrapped in htmlTemplate.
+//  - kind 'html': a complete self-styled page with a leading <!--post--> metadata
+//                 comment. Emitted verbatim (comment stripped), never re-wrapped.
+//                 Carries a `headline` for the per-part index label, since its
+//                 title doesn't follow the markdown "(Part N) -" naming.
 const posts = collectPostFiles(POSTS_DIR)
   .map(filepath => {
     const raw = fs.readFileSync(filepath, 'utf8');
+    if (filepath.endsWith('.html')) {
+      const { meta, body } = parsePostComment(raw);
+      const slug = path.basename(filepath).replace(/\.html$/, '');
+      return {
+        kind: 'html',
+        slug,
+        title: meta.title || slug,
+        date: meta.date || '2026-01-01',
+        description: meta.description || '',
+        series: meta.series || null,
+        part: meta.part !== undefined ? Number(meta.part) : null,
+        headline: meta.headline || null,
+        page: body,
+      };
+    }
     const { meta, body } = parseFrontmatter(raw);
     const slug = path.basename(filepath).replace(/\.md$/, '');
     const html = marked(body);
     return {
+      kind: 'md',
       slug,
       title: meta.title || slug,
       date: meta.date || '2026-01-01',
       description: meta.description || '',
       series: meta.series || null,
       part: meta.part !== undefined ? Number(meta.part) : null,
+      headline: null,
       html,
     };
   })
@@ -158,6 +205,13 @@ const posts = collectPostFiles(POSTS_DIR)
 
 // Generate individual post pages
 posts.forEach(post => {
+  // HTML posts are already complete pages — write them verbatim (the <!--post-->
+  // comment was already stripped during parsing), never re-wrapped in htmlTemplate.
+  if (post.kind === 'html') {
+    fs.writeFileSync(path.join(DIST_DIR, 'posts', post.slug + '.html'), post.page);
+    return;
+  }
+
   const body = `
 <nav>
   <div class="nav-left">
@@ -190,20 +244,6 @@ posts.forEach(post => {
   const html = htmlTemplate(post.title + ' — Jeremy Cowcher', body, meta);
   fs.writeFileSync(path.join(DIST_DIR, 'posts', post.slug + '.html'), html);
 });
-
-// Copy standalone HTML pages from AI Essentials/ into dist/ at their own
-// filename (e.g. dist/ai-essentials-3-skills.html → served at the clean URL
-// /ai-essentials-3-skills). These are already complete, self-styled pages with
-// inlined CSS — copy them verbatim, don't wrap or re-inline anything.
-const STANDALONE_DIR = path.join(__dirname, 'AI Essentials');
-if (fs.existsSync(STANDALONE_DIR)) {
-  fs.readdirSync(STANDALONE_DIR)
-    .filter(name => name.endsWith('.html'))
-    .forEach(name => {
-      const src = fs.readFileSync(path.join(STANDALONE_DIR, name), 'utf8');
-      fs.writeFileSync(path.join(DIST_DIR, name), src);
-    });
-}
 
 // Generate "The Why" page
 const whyBody = `
@@ -339,10 +379,24 @@ posts.forEach(post => {
     indexEntries.push({ type: 'post', date: post.date, slug: post.slug, post });
   }
 });
-indexEntries.sort((a, b) => new Date(b.date) - new Date(a.date) || b.slug.localeCompare(a.slug));
+// Order: series pinned in SERIES_ORDER render first, in that order; everything
+// else (unlisted series + standalone posts) falls below, sorted date desc then
+// slug desc. A finite rank sorts above the Infinity bucket, which keeps its
+// date order.
+function entryRank(e) {
+  const i = e.type === 'series' ? SERIES_ORDER.indexOf(e.name) : -1;
+  return i === -1 ? Infinity : i;
+}
+indexEntries.sort((a, b) => {
+  const ra = entryRank(a), rb = entryRank(b);
+  if (ra !== rb) return ra - rb;
+  return new Date(b.date) - new Date(a.date) || b.slug.localeCompare(a.slug);
+});
 
-// Strip the "{series} (Part {part}) - " prefix to get the per-part headline.
+// Per-part headline for the index. HTML posts carry an explicit `headline`;
+// markdown posts derive it by stripping the "{series} (Part {part}) - " prefix.
 function partHeadline(post) {
+  if (post.headline) return post.headline;
   const prefix = `${post.series} (Part ${post.part}) - `;
   return post.title.startsWith(prefix) ? post.title.slice(prefix.length) : post.title;
 }

@@ -35,6 +35,10 @@ Don't use em dashes in prose you write: UI text, taglines, commit messages, desc
 - For handoffs to Claude Code: put the entire handoff inside a single fenced code block Jeremy can copy in one action, with no prose left outside it. If the handoff itself contains a fenced code block, use a four-backtick outer fence so the inner triple-backtick fences don't break the copy.
 - Every Claude Code handoff states its change count on the first line (e.g. "One logical change: de-fork the overlay account menu"). More than one, split or flag before handing over. This is where the Dyson 5,127 Rule is enforced: the count forces the one-change check at the moment work crosses from Cowork to Claude Code.
 
+## CLAUDE.md points at claude-kit
+
+claude-kit is the single source of truth for shared, reusable guidance: this `conventions.md` (synced into every repo's CLAUDE.md between the shared-conventions markers) and the skills under it. When a rule or how-to is reusable across repos, or already lives in a skill, a repo's CLAUDE.md should **point at the claude-kit source rather than copy the detail** (e.g. "see the X skill" or "see conventions.md"). Keep only repo-specific guidance inline in each CLAUDE.md. Edit the canonical source in claude-kit and re-sync; don't let duplicated copies drift.
+
 ## Jeremy makes the calls
 
 Don't decide things on Jeremy's behalf. When a judgment call comes up (a default, a tradeoff, an edge case, anything genuinely open), surface it and let him choose. Offer a recommendation if you have one, but never pre-resolve an open question just to save a round-trip. The decision is his.
@@ -73,6 +77,7 @@ Traps that remain: the sheet only resolves folders, so a file path fails silentl
 build.js          — Entire build pipeline (frontmatter parse → markdown → HTML)
 style.css         — All styles (~600 lines), responsive breakpoint at 640px
 posts/*.md        — Source content. YAML frontmatter (title, date, description) + markdown body
+posts/*.html      — Source content. Complete self-styled page + leading <!--post--> metadata comment (emitted verbatim, not re-wrapped)
 dist/             — Generated output (gitignored). index.html + posts/*.html + the-why.html + disclosures.html
 vercel.json       — Vercel config
 CONTEXT.md        — Project brief (what/who/why)
@@ -91,8 +96,8 @@ Open `dist/index.html` locally or push to deploy on Vercel.
 
 ## Build pipeline (build.js)
 
-1. Reads all `posts/*.md`, parses YAML frontmatter + markdown body
-2. Sorts posts by date descending, then by slug descending (for deterministic same-date ordering)
+1. Reads all `posts/*.md` (YAML frontmatter + markdown body → `marked` → wrapped in the page template) **and** all `posts/*.html` (a complete self-styled page with a leading `<!--post-->` metadata comment, emitted verbatim with the comment stripped — never re-wrapped). Both produce the same index-entry shape, so they share the sort/series/index pipeline.
+2. Sorts posts by date descending, then by slug descending (for deterministic same-date ordering); series groups are then pinned to the top in `SERIES_ORDER` (see Key patterns)
 3. Generates individual post pages with OG metadata + disclaimers
 4. Generates "The Why" page (no nav bar, standalone layout)
 5. Generates the "Disclosures" page at `/disclosures` (full nav, post-page layout) holding the site-wide disclaimer copy
@@ -102,7 +107,9 @@ Open `dist/index.html` locally or push to deploy on Vercel.
 ## Key patterns and conventions
 
 - **Frontmatter format:** `title`, `date` (YYYY-MM-DD), `description` — all required for proper rendering
-- **URLs:** `/posts/{slug}` (slug = markdown filename without `.md`). Clean URLs via Vercel.
+- **HTML posts (first-class, same as markdown):** A post can be authored as a complete self-styled `.html` page in `posts/` (full inlined CSS/nav/footer, like a real post page) instead of markdown. It must carry a leading `<!--post-->` metadata comment **before** `<!DOCTYPE html>` with `title`, `date`, `series`, `part`, `headline`, `description` (same `key: value` format as frontmatter). The build emits it verbatim to `dist/posts/<slug>.html` (comment stripped) without re-wrapping it in the page template, and feeds it into the **same** `/posts/<slug>` URL and series-grouping pipeline as markdown. Use `headline` for the per-part index label (markdown derives that label by stripping its `"(Part N) -"` title prefix; HTML titles don't follow that pattern, so `headline` supplies it). Example: `posts/ai-essentials-3-skills.html` is Part 3 of the "AI Essentials" series.
+- **Series order (`SERIES_ORDER`):** A single explicit list near the top of `build.js` pins which series groups render first on `/writing`, and in what order (currently `['Learning with AI', 'AI Essentials']`). Any series not in the list, and any standalone posts, fall below the listed groups sorted by date desc. Reorder the list to reorder the groups.
+- **URLs:** `/posts/{slug}` (slug = source filename without `.md` or `.html`). Clean URLs via Vercel.
 - **Disclosures page:** `/disclosures` (full nav, post-page layout) holds the Acquired-style site-wide disclaimer copy. It used to be an inline `.site-disclaimer` paragraph in the footer; it now lives on its own page, linked from the footer's utility group.
 - **Footer (matches the GemKa product sites, e.g. gemtimer.com):** rendered on every page from the `FOOTER_LINKS` constant in `build.js`. Row 1 is two middot-separated groups, `space-between`: family + social on the left (X.com, LinkedIn, GemTimer, GemTodo, GemKa, IdeaKache — all external, new tab) and utility on the right (Disclosures → `/disclosures`, Contact → `mailto:`). Row 2 is `© 2026 GemKa` (left) and the tagline `Writing to think` (right, Fraunces italic). The outer `.footer-links` mirrors the nav container (max-width 1100px, 40px insets) so its **2px oxblood (`var(--gk-accent)`) top divider** lines up exactly with the header divider (`nav::after`, also 2px oxblood). Between the two rows is a faint `rgba(0,0,0,0.06)` inter-row whisper. Spacing/height matched to gemtimer (font-size 0.72rem, padding 0.75rem, row-gap 0.25rem, `line-height: normal`).
 - **Post-specific disclaimer:** still inline on individual post pages.
