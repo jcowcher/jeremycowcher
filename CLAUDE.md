@@ -47,7 +47,7 @@ Jeremy runs several products that share infrastructure and patterns. When a task
 - Point to any matching entry in `claude-kit/cross-product-log.md`.
 - If it's a new generalizable pattern, propose adding it to that log.
 
-This is a soft safety net, not a guarantee. Its job is to catch the cross-overs Jeremy might not notice in the moment, not to be exhaustive. Recurring cross-cutting themes worth watching for: rate limiting and abuse protection, Clerk auth and the GemKa identity flow, Supabase schema / RLS / backups, Resend transactional email, the gemka-tokens shared design system, the cross-sell flow, and webhook / idempotency patterns.
+This is a soft safety net, not a guarantee. Its job is to catch the cross-overs Jeremy might not notice in the moment, not to be exhaustive. Recurring cross-cutting themes worth watching for: rate limiting and abuse protection, Clerk auth and the GemKa identity flow, Supabase schema / RLS / backups, Resend transactional email, the @gemka/core shared design system, the cross-sell flow, and webhook / idempotency patterns.
 
 <!-- shared-conventions:end -->
 
@@ -61,8 +61,8 @@ Traps that remain: the sheet only resolves folders, so a file path fails silentl
 
 ## Tech stack
 
-- **Build:** `node build.js` (custom script) using `marked` for markdown→HTML. Dependencies: `marked` and `gemka-tokens` (canonical GemKa design tokens).
-- **Styling:** Single `style.css`, plain CSS with CSS variables, repointed onto the GemKa design system. The palette comes from the `gemka-tokens` npm package (`--gk-*` tokens): warm cream paper/bg, warm ink, oxblood accent. Fonts: Inter (body) + Fraunces (serif), both from Google Fonts.
+- **Build:** `node build.js` (custom script) using `marked` for markdown→HTML. Dependencies: `marked` and `@gemka/core` (canonical GemKa design tokens).
+- **Styling:** Single `style.css`, plain CSS with CSS variables, repointed onto the GemKa design system. The palette comes from the `@gemka/core` npm package (`--gk-*` tokens): warm cream paper/bg, warm ink, oxblood accent. Fonts: Inter (body) + Fraunces (serif), both from Google Fonts.
 - **Hosting:** Vercel. Config in `vercel.json` (clean URLs, no trailing slashes).
 - **Output:** Static HTML to `dist/` (gitignored, rebuilt on every deploy).
 - **No framework.** No React, no bundler, no TypeScript. Just Node, HTML, CSS, and one inline `<script>` for the clock.
@@ -83,7 +83,7 @@ NOTES.md          — Non-obvious bugs and fixes with commit refs
 ## How to run
 
 ```
-npm install        # `marked` + `gemka-tokens`
+npm install        # `marked` + `@gemka/core`
 npm run build      # generates dist/
 ```
 
@@ -97,7 +97,7 @@ Open `dist/index.html` locally or push to deploy on Vercel.
 4. Generates "The Why" page (no nav bar, standalone layout)
 5. Generates the "Disclosures" page at `/disclosures` (full nav, post-page layout) holding the site-wide disclaimer copy
 6. Generates index page with hero section + post list
-7. CSS is inlined into every page via `<style>` tags at build time: first `node_modules/gemka-tokens/tokens.css` (the `--gk-*` token `:root`), then `style.css`. Order matters — the tokens must be defined before `style.css` references them.
+7. CSS is inlined into every page via `<style>` tags at build time: first `node_modules/@gemka/core/tokens.css` (the `--gk-*` token `:root`), then `style.css`. Order matters — the tokens must be defined before `style.css` references them.
 
 ## Key patterns and conventions
 
@@ -139,7 +139,7 @@ The source of truth is the IdeaKache Supabase project (`content` table, filter `
 
 ## Current state (June 2026)
 
-- **Design:** Adopted the GemKa design system — `gemka-tokens` cream/oxblood palette and Inter + Fraunces type. Replaced the old white/black/#FF6600 look. Hero quotes lightened to Fraunces 360.
+- **Design:** Adopted the GemKa design system — `@gemka/core` cream/oxblood palette and Inter + Fraunces type. Replaced the old white/black/#FF6600 look. Hero quotes lightened to Fraunces 360.
 - **Posts offline:** All blog posts were moved to `posts/_archive/` ahead of the GemKa relaunch, so the live writing list is currently empty (the build skips `_`-prefixed folders). The "Learning with AI (Part IV) — Skills and CLAUDE.md" draft also lives in `_archive` as a work in progress.
 - **The Why page:** Full copy live, but the P.S. (gemtimer.com / ideakache.com links) is hidden for now (see Key patterns).
 - **In progress:** Drafting further essays (RTF files in repo root) and the "Learning with AI" series.
