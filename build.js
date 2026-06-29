@@ -14,6 +14,11 @@ const STYLE = fs.readFileSync(path.join(__dirname, 'style.css'), 'utf8');
 // any standalone posts, fall below these and sort by date desc. Reorder freely.
 const SERIES_ORDER = ['Learning with AI', 'AI Essentials'];
 
+// Per-series prefix for the part label on the /writing index. Series not listed
+// here fall back to 'Part ' (e.g. "Part 0"); a listed series uses its own prefix
+// (e.g. AI Essentials renders "#3" instead of "Part 3").
+const SERIES_PART_PREFIX = { 'AI Essentials': '#' };
+
 // Footer kill switch. Temporarily hidden until launch; flip to true to restore
 // the footer on every page exactly as before (FOOTER_LINKS markup is unchanged).
 const SHOW_FOOTER = false;
@@ -416,12 +421,13 @@ function renderStandaloneRow(post) {
 
 function renderSeriesGroup(entry) {
   const parts = entry.parts.slice().sort((a, b) => a.part - b.part);
+  const partPrefix = SERIES_PART_PREFIX[entry.name] || 'Part ';
   const partsHtml = parts.map(post => `
         <a href="/posts/${post.slug}" class="post-link series-part">
           <article class="post-card">
             <span class="post-card-date">${formatDateShort(post.date)}</span>
             <div class="post-card-content">
-              <span class="series-part-label">Part ${post.part}</span>
+              <span class="series-part-label">${partPrefix}${post.part}</span>
               <h2>${partHeadline(post)}</h2>
             </div>
             <span class="post-card-arrow">&rsaquo;</span>
