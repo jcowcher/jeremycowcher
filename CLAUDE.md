@@ -31,11 +31,14 @@ Don't use em dashes in prose you write: UI text, taglines, commit messages, desc
 ## Communication
 
 - Ask clarifying questions as plain inline chat text, never the multiple-choice pop-up chooser. Jeremy finds the pop-up high-friction. This is about format, not whether to ask: he wants to be asked when a question genuinely helps. Keep it conversational, in the chat.
+- Opening or showing a file: "open it", "show me", "pull up", "in the sidebar" default to presenting it in the Claude sidebar (present_files), whatever the file type (.md, .html, anything). Only drive a desktop app (TextEdit, VS Code, etc.) when Jeremy names that app explicitly. He'll say TextEdit when he wants TextEdit; most of the time he doesn't.
 - Give commands, terminal instructions, and any message to relay as copy-paste code blocks, not inline prose.
 - For handoffs to Claude Code: put the entire handoff inside a single fenced code block Jeremy can copy in one action, with no prose left outside it. If the handoff itself contains a fenced code block, use a four-backtick outer fence so the inner triple-backtick fences don't break the copy.
 - Every Claude Code handoff states its change count on the first line (e.g. "One logical change: de-fork the overlay account menu"). More than one, split or flag before handing over. This is where the Dyson 5,127 Rule is enforced: the count forces the one-change check at the moment work crosses from Cowork to Claude Code.
 
 ## CLAUDE.md points at claude-kit
+
+**Jeremy's skills live in `claude-kit/skills/`. That is the only skills location.** There is no separate `~/code/skills` repo; ignore any instruction (including older saved preferences) that points there. Create, edit, and read skills under `claude-kit/skills/`.
 
 claude-kit is the single source of truth for shared, reusable guidance: this `conventions.md` (synced into every repo's CLAUDE.md between the shared-conventions markers) and the skills under it. When a rule or how-to is reusable across repos, or already lives in a skill, a repo's CLAUDE.md should **point at the claude-kit source rather than copy the detail** (e.g. "see the X skill" or "see conventions.md"). Keep only repo-specific guidance inline in each CLAUDE.md. Edit the canonical source in claude-kit and re-sync; don't let duplicated copies drift.
 
@@ -57,7 +60,7 @@ This is a soft safety net, not a guarantee. Its job is to catch the cross-overs 
 
 ## Opening a repo file in TextEdit (computer use)
 
-When Jeremy asks to open a post in TextEdit, paste an absolute path; do not type a tilde path into the Go to Folder field. The reliable sequence: (1) request TextEdit access with `clipboardWrite: true` up front; (2) write the absolute path to the clipboard (e.g. `/Users/Jeremy/code/jeremycowcher/posts/_archive`, never `~/...`); (3) bring TextEdit forward, then Cmd+O, Cmd+Shift+G, Cmd+V to paste, Return, then double-click the file in the list.
+This applies ONLY when Jeremy explicitly says "TextEdit". The default opener for "open it" / "show me" / "in the sidebar" is the Claude sidebar (present_files) regardless of file type, see conventions.md. When Jeremy explicitly asks to open a post in TextEdit, paste an absolute path; do not type a tilde path into the Go to Folder field. The reliable sequence: (1) request TextEdit access with `clipboardWrite: true` up front; (2) write the absolute path to the clipboard (e.g. `/Users/Jeremy/code/jeremycowcher/posts/_archive`, never `~/...`); (3) bring TextEdit forward, then Cmd+O, Cmd+Shift+G, Cmd+V to paste, Return, then double-click the file in the list.
 
 Why paste: the "Go to Folder" field has live autocomplete. A typed path gets mangled (the slash after `~` often drops), and pressing Return while a suggestion is highlighted selects that suggestion instead of navigating, which leaves the sheet stuck. Pasting an absolute path sidesteps all of it.
 
