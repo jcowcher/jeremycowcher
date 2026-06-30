@@ -867,14 +867,18 @@ main.post {
   color: var(--gk-accent);
   margin-bottom: 0.35rem;
 }
-@media (min-width: 1320px) {
+@media (min-width: 1440px) {
   .post-body .aside {
     float: right;
     clear: right;
-    width: 270px;
-    /* negative top pulls the box up level with its section heading; negative
-       right pushes it fully into the empty right margin */
-    margin: -2.5rem -294px 1.25rem 1.5rem;
+    width: 330px;
+    /* positive top so each box clears below the previous one with a visible
+       gap (no overlap); negative right pushes it fully into the right margin */
+    margin: 1rem -354px 1.25rem 1.5rem;
+  }
+  /* only the first box pulls up level with the "How websites get built" heading */
+  .post-body .aside:first-of-type {
+    margin-top: -2.5rem;
   }
 }
 
