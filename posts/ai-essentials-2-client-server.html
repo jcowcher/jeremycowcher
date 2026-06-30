@@ -872,13 +872,13 @@ main.post {
     float: right;
     clear: right;
     width: 330px;
-    /* positive top so each box clears below the previous one with a visible
-       gap (no overlap); negative right pushes it fully into the right margin */
-    margin: 1rem -354px 1.25rem 1.5rem;
+    /* tight top + bottom so a cleared box sits just below the previous one with
+       a small clean gap; negative right pushes it fully into the right margin */
+    margin: 0.3rem -354px 0.4rem 1.5rem;
   }
   /* only the first box pulls up level with the "How websites get built" heading */
   .post-body .aside:first-of-type {
-    margin-top: -2.5rem;
+    margin-top: -3.1rem;
   }
 }
 
