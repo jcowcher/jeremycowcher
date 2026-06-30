@@ -846,29 +846,40 @@ main.post {
 }
 </style>
 <style>
-/* Right-margin aside (segue/sidenote). On wide screens it floats into the
-   empty right margin beside the 720px column; below the threshold it collapses
-   inline as a marked-off aside with an oxblood left rule. */
-.post-body .sidenote {
+/* Right-margin side-note callout, matching the .aside boxes on AI Essentials
+   #2: GemKa surface fill, faint full border, rounded corners, oxblood Fraunces
+   title. Below the wide breakpoint it sits inline as a bordered box; at >=1440px
+   it floats out into the empty right margin beside the post column, pulled up to
+   sit centred against its paragraph. */
+.post-body .aside {
+  background: var(--gk-surface-2);
+  border: 1px solid var(--gk-border);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
   font-size: 0.85rem;
   line-height: 1.6;
-  color: var(--gray-500);
-  border-left: 3px solid var(--gk-accent);
-  padding-left: 1rem;
+  color: var(--gk-ink);
   margin: 1.75rem 0;
 }
-.post-body .sidenote p { font-size: inherit; line-height: inherit; margin: 0; }
-.post-body .sidenote p + p { margin-top: 0.7rem; }
-.post-body .sidenote code { font-size: 0.78rem; }
-.post-body .aside-anchor { position: relative; }
-@media (min-width: 1280px) {
-  .post-body .sidenote {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 100%;
-    margin-left: 2rem;
-    width: 230px;
+.post-body .aside .at {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 500;
+  color: var(--gk-accent);
+  margin-bottom: 0.35rem;
+}
+/* The body here is real <p> elements, so hold them at the box's small font size
+   rather than letting them inherit the large post-body font. */
+.post-body .aside p { font-size: inherit; line-height: inherit; margin: 0; }
+.post-body .aside p + p { margin-top: 0.7rem; }
+.post-body .aside code { font-size: 0.78rem; }
+@media (min-width: 1440px) {
+  .post-body .aside {
+    float: right;
+    clear: right;
+    width: 330px;
+    /* negative top pulls the box up centred against its paragraph; negative
+       right pushes it fully into the empty right margin */
+    margin: -17rem -354px 1.25rem 1.5rem;
   }
 }
 </style>
@@ -902,10 +913,8 @@ main.post {
 <h2>The third approach</h2>
 <p>I created a new folder called claude-kit on my laptop at <code>~/code/claude-kit</code>. This new folder has Skills, along with other notes and explainers that are helpful to me as I build my products. Since claude-kit is a folder, it can be mounted to a Cowork session and so Cowork can edit it. It's not a perfect setup because Claude Code can't read directly from claude-kit; it reads from <code>~/.claude/skills</code>.</p>
 <p>To match <code>~/code/claude-kit</code> and <code>~/.claude/skills</code>, I created symlinks for each individual Skill. Since <code>~/code/claude-kit</code> is my "single source of truth", the file that's in <code>~/.claude/skills</code> is kind of like a shortcut or hyperlink that directly links to the respective Skill in <code>~/code/claude-kit</code> and displays that information. Therefore, on my Mac it looks like I have the same Skill in two places, but it's really just one. Edits made in Cowork automatically hit <code>~/.claude/skills</code>, and edits made in Claude Code pass through the shortcut and hit <code>~/code/claude-kit</code> too.</p>
-<div class="aside-anchor">
 <p>I also needed to back up these Skills somewhere safe so they can't get wiped on my Mac and lost forever. To do that, I first commit to <code>.git</code>; my Mac looks at what changed since the last snapshot and records just that difference into <code>.git</code>. Then I push that difference up to GitHub's servers, and because GitHub already had the prior version, it now has the full project again. If anything happens to my Mac, I can recreate my work from GitHub.</p>
-<aside class="sidenote"><p>A way I think of it is that there are already 50 building blocks for my project, and I now add a 51st. My Mac commits that 51st block to <code>.git</code>, I push the 51st block to GitHub, and GitHub adds it to the 50 it already had.</p><p>If something happened to my Mac and I lost my files, GitHub could rebuild my project by adding block 1 to block 2 to block 3, all the way up to block 51, with each block being a change that was pushed to GitHub's servers.</p></aside>
-</div>
+<aside class="aside"><div class="at">GitHub and building blocks</div><p>A way I think of it is that there are already 50 building blocks for my project, and I now add a 51st. My Mac commits that 51st block to <code>.git</code>, I push the 51st block to GitHub, and GitHub adds it to the 50 it already had.</p><p>If something happened to my Mac and I lost my files, GitHub could rebuild my project by adding block 1 to block 2 to block 3, all the way up to block 51, with each block being a change that was pushed to GitHub's servers.</p></aside>
 
 <h2>The fourth approach</h2>
 <p>The third approach worked well except that if I created any new Skills, I was going to get drift between <code>~/code/claude-kit</code> and <code>~/.claude/skills</code>. That's because the symlink was at the individual Skill level and I would have to remember to set the symlink up at the same time I created the new Skill. That was a 50/50 bet at best.</p>
