@@ -876,9 +876,11 @@ main.post {
        a small clean gap; negative right pushes it fully into the right margin */
     margin: 0.3rem -354px 0.4rem 1.5rem;
   }
-  /* only the first box pulls up level with the "How websites get built" heading */
+  /* pull the first box up so it sits vertically centered against the "How
+     websites get built" section (heading + paragraph), rather than top-aligned.
+     The headless box clears below it (best-effort centred on its own section). */
   .post-body .aside:first-of-type {
-    margin-top: -3.1rem;
+    margin-top: -8.1rem;
   }
 }
 
