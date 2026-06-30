@@ -867,12 +867,14 @@ main.post {
   color: var(--gk-accent);
   margin-bottom: 0.35rem;
 }
-@media (min-width: 1280px) {
+@media (min-width: 1320px) {
   .post-body .aside {
     float: right;
     clear: right;
-    width: 230px;
-    margin: 0.3rem -262px 1.25rem 1.5rem; /* push the box fully into the right margin */
+    width: 270px;
+    /* negative top pulls the box up level with its section heading; negative
+       right pushes it fully into the empty right margin */
+    margin: -2.5rem -294px 1.25rem 1.5rem;
   }
 }
 
@@ -882,7 +884,9 @@ main.post {
 .post-body .exhibit {
   margin: 2rem 0 0;
   border-top: 2px solid var(--gk-ink);
+  border-bottom: 2px solid var(--gk-ink);
   padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
 }
 .post-body .ex-num {
   font-size: 0.72rem;
@@ -929,6 +933,9 @@ main.post {
 .post-body .ex-tbl td.sv {
   border-right: 1px solid var(--gk-border);
 }
+.post-body .ex-tbl tr:last-child td {
+  border-bottom: none;
+}
 </style>
 </head>
 <body>
@@ -949,7 +956,7 @@ main.post {
     <time>June 30, 2026</time>
     <h1>AI Essentials #2 - Server side and client side</h1>
   </header>
-  <article class="post-body"><p>Server side and client side are terms you will increasingly hear with the rise of agents on the internet. The choice matters more now because what an agent sees when it hits a website can be different than what a person with a browser sees, depending on whether the website is built client side or server side.</p>
+  <article class="post-body"><p>Server side and client side are terms you will increasingly hear with the rise of agents on the internet. The choice matters more now because what an agent sees when it hits a website can be different than what a person with a browser sees, depending on whether the website is built server side or client side.</p>
 
 <p>At its simplest, client side means the user's own computer, which they can control. Server side means a computer they don't control and can't touch.</p>
 
@@ -990,7 +997,7 @@ main.post {
 <h2>An analogy that might help</h2>
 <p>Finally, an analogy that helped me as I was thinking through this short article was playing golf.</p>
 
-<p>For building the page, think of client side as the golfer filling in their own scorecard as they go, and server side as the golfer being handed their completed scorecard as they go.</p>
+<p>For building a website, think of client side as the golfer filling in their own scorecard as they go, and server side as the golfer being handed their completed scorecard as they go.</p>
 
 <p>Taking a data perspective, and sticking with the golf analogy, client side is where you're playing on your own or casually with some friends and so your score only matters to you. The golfer keeps their own scorecard.</p>
 
