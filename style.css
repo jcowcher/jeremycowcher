@@ -447,6 +447,13 @@ body.landing .hero {
   margin-bottom: 0.15rem;
 }
 
+/* Loose standalone post rows sit directly under .post-list, unlike series
+   parts which get 1.5rem from .series-parts. Match that indent so a standalone
+   row's date and title line up with the series rows above it. */
+.post-list > .post-link {
+  padding-left: 1.5rem;
+}
+
 .empty {
   color: var(--gray-400);
   font-style: italic;
