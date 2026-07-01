@@ -831,6 +831,14 @@ main.post {
   .footer-sep { display: none; }
   .footer-links a { font-size: 0.82rem; }
   .footer-meta { flex-direction: row; justify-content: space-between; align-items: center; gap: 0.3rem; }
+
+  /* Exhibit table: on phones, drop the fixed layout so the description column
+     gets room instead of being crushed by the fixed Product/Category widths. */
+  .post-body .ex-tbl { table-layout: auto; }
+  .post-body .ex-tbl th { width: auto !important; }   /* overrides the inline width:170px / 130px */
+  .post-body .ex-tbl th,
+  .post-body .ex-tbl td { padding: 0.5rem 0.5rem; font-size: 0.75rem; }
+  .post-body .ex-tbl td.rk .lg { height: 16px; }
 }
 
 /* Large-screen scaling (mirrors gemtimer.com / gemtodo.com). On wide monitors
