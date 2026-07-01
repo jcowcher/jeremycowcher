@@ -19,6 +19,12 @@ const SERIES_ORDER = ['Learning with AI', 'AI Essentials'];
 // (e.g. AI Essentials renders "#3" instead of "Part 3").
 const SERIES_PART_PREFIX = { 'AI Essentials': '#' };
 
+// Placeholder series that have no posts yet: rendered at the bottom of /writing
+// as a section header with a "Coming soon" line beneath. Add a name here to show
+// a teaser section; remove it once the series has real posts (which then render
+// via SERIES_ORDER above).
+const COMING_SOON_SERIES = ['The Promise of AI'];
+
 // Footer kill switch. Temporarily hidden until launch; flip to true to restore
 // the footer on every page exactly as before (FOOTER_LINKS markup is unchanged).
 const SHOW_FOOTER = false;
@@ -446,9 +452,25 @@ function renderSeriesGroup(entry) {
     </details>`;
 }
 
-const postListHtml = posts.length === 0
+// A placeholder series section (no posts yet): the section header plus a
+// "Coming soon" line. Rendered after the real series/posts, at the bottom.
+function renderComingSoonGroup(name) {
+  return `
+    <div class="series-group series-soon">
+      <div class="series-summary">
+        <span class="series-name">${name}</span>
+      </div>
+      <div class="series-parts">
+        <span class="coming-soon">Coming soon</span>
+      </div>
+    </div>`;
+}
+
+const seriesHtml = posts.length === 0
   ? '<p class="empty">No posts yet.</p>'
   : indexEntries.map(e => e.type === 'series' ? renderSeriesGroup(e) : renderStandaloneRow(e.post)).join('\n');
+const comingSoonHtml = COMING_SOON_SERIES.map(renderComingSoonGroup).join('\n');
+const postListHtml = seriesHtml + comingSoonHtml;
 
 const writingBody = `
 <nav>
