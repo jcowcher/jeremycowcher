@@ -832,13 +832,16 @@ main.post {
   .footer-links a { font-size: 0.82rem; }
   .footer-meta { flex-direction: row; justify-content: space-between; align-items: center; gap: 0.3rem; }
 
-  /* Exhibit table: on phones, drop the fixed layout so the description column
-     gets room instead of being crushed by the fixed Product/Category widths. */
-  .post-body .ex-tbl { table-layout: auto; }
-  .post-body .ex-tbl th { width: auto !important; }   /* overrides the inline width:170px / 130px */
+  /* Exhibit table on phones: fixed layout with slim Product/Category columns so
+     the description keeps room, and cap the logos so a wide wordmark (Cloudflare)
+     can't overflow into the next column. */
+  .post-body .ex-tbl { table-layout: fixed; }
+  .post-body .ex-tbl th:nth-child(1) { width: 96px !important; }  /* Product, overrides inline 170px */
+  .post-body .ex-tbl th:nth-child(2) { width: 98px !important; }  /* Category, overrides inline 130px */
   .post-body .ex-tbl th,
-  .post-body .ex-tbl td { padding: 0.5rem 0.5rem; font-size: 0.75rem; }
-  .post-body .ex-tbl td.rk .lg { height: 16px; }
+  .post-body .ex-tbl td { padding: 0.4rem 0.45rem; font-size: 0.72rem; vertical-align: top; }
+  .post-body .ex-tbl td.rk { white-space: normal; }
+  .post-body .ex-tbl td.rk .lg { height: auto; max-height: 15px; max-width: 100%; width: auto; }
 }
 
 /* Large-screen scaling (mirrors gemtimer.com / gemtodo.com). On wide monitors
