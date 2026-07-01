@@ -19,10 +19,10 @@ const SERIES_ORDER = ['Learning with AI', 'AI Essentials'];
 // (e.g. AI Essentials renders "#3" instead of "Part 3").
 const SERIES_PART_PREFIX = { 'AI Essentials': '#' };
 
-// Placeholder series that have no posts yet: rendered at the bottom of /writing
-// as a section header with a "Coming soon" line beneath. Add a name here to show
-// a teaser section; remove it once the series has real posts (which then render
-// via SERIES_ORDER above).
+// Placeholder series that have no posts yet: rendered below the real series
+// groups (but above loose standalone posts) as a section header with a "Coming
+// soon" line beneath. Add a name here to show a teaser section; remove it once
+// the series has real posts (which then render via SERIES_ORDER above).
 const COMING_SOON_SERIES = ['The Promise of AI'];
 
 // Footer kill switch. Temporarily hidden until launch; flip to true to restore
@@ -453,7 +453,8 @@ function renderSeriesGroup(entry) {
 }
 
 // A placeholder series section (no posts yet): the section header plus a
-// "Coming soon" line. Rendered after the real series/posts, at the bottom.
+// "Coming soon" line. Rendered after the real series groups but above the
+// loose standalone posts.
 function renderComingSoonGroup(name) {
   return `
     <div class="series-group series-soon">
@@ -466,11 +467,19 @@ function renderComingSoonGroup(name) {
     </div>`;
 }
 
-const seriesHtml = posts.length === 0
-  ? '<p class="empty">No posts yet.</p>'
-  : indexEntries.map(e => e.type === 'series' ? renderSeriesGroup(e) : renderStandaloneRow(e.post)).join('\n');
+// Render order: real series groups first (SERIES_ORDER-pinned, in that order),
+// then the "Coming soon" placeholder series, then loose standalone posts at the
+// very bottom. So a no-series post like "Jaylen Brown" sits below The Promise of AI.
+const seriesGroupsHtml = indexEntries
+  .filter(e => e.type === 'series')
+  .map(renderSeriesGroup).join('\n');
+const standaloneHtml = indexEntries
+  .filter(e => e.type === 'post')
+  .map(e => renderStandaloneRow(e.post)).join('\n');
 const comingSoonHtml = COMING_SOON_SERIES.map(renderComingSoonGroup).join('\n');
-const postListHtml = seriesHtml + comingSoonHtml;
+const postListHtml = posts.length === 0
+  ? '<p class="empty">No posts yet.</p>'
+  : seriesGroupsHtml + comingSoonHtml + standaloneHtml;
 
 const writingBody = `
 <nav>
