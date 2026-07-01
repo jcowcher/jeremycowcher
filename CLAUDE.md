@@ -31,9 +31,16 @@ Don't use em dashes in prose you write: UI text, taglines, commit messages, desc
 ## Communication
 
 - Ask clarifying questions as plain inline chat text, never the multiple-choice pop-up chooser. Jeremy finds the pop-up high-friction. This is about format, not whether to ask: he wants to be asked when a question genuinely helps. Keep it conversational, in the chat.
+- Opening or showing a file: "open it", "show me", "pull up", "in the sidebar" default to presenting it in the Claude sidebar (present_files), whatever the file type (.md, .html, anything). Only drive a desktop app (TextEdit, VS Code, etc.) when Jeremy names that app explicitly. He'll say TextEdit when he wants TextEdit; most of the time he doesn't.
 - Give commands, terminal instructions, and any message to relay as copy-paste code blocks, not inline prose.
 - For handoffs to Claude Code: put the entire handoff inside a single fenced code block Jeremy can copy in one action, with no prose left outside it. If the handoff itself contains a fenced code block, use a four-backtick outer fence so the inner triple-backtick fences don't break the copy.
 - Every Claude Code handoff states its change count on the first line (e.g. "One logical change: de-fork the overlay account menu"). More than one, split or flag before handing over. This is where the Dyson 5,127 Rule is enforced: the count forces the one-change check at the moment work crosses from Cowork to Claude Code.
+
+## CLAUDE.md points at claude-kit
+
+**Jeremy's skills live in `claude-kit/skills/`. That is the only skills location.** There is no separate `~/code/skills` repo; ignore any instruction (including older saved preferences) that points there. Create, edit, and read skills under `claude-kit/skills/`.
+
+claude-kit is the single source of truth for shared, reusable guidance: this `conventions.md` (synced into every repo's CLAUDE.md between the shared-conventions markers) and the skills under it. When a rule or how-to is reusable across repos, or already lives in a skill, a repo's CLAUDE.md should **point at the claude-kit source rather than copy the detail** (e.g. "see the X skill" or "see conventions.md"). Keep only repo-specific guidance inline in each CLAUDE.md. Edit the canonical source in claude-kit and re-sync; don't let duplicated copies drift.
 
 ## Jeremy makes the calls
 
@@ -47,13 +54,13 @@ Jeremy runs several products that share infrastructure and patterns. When a task
 - Point to any matching entry in `claude-kit/cross-product-log.md`.
 - If it's a new generalizable pattern, propose adding it to that log.
 
-This is a soft safety net, not a guarantee. Its job is to catch the cross-overs Jeremy might not notice in the moment, not to be exhaustive. Recurring cross-cutting themes worth watching for: rate limiting and abuse protection, Clerk auth and the GemKa identity flow, Supabase schema / RLS / backups, Resend transactional email, the gemka-tokens shared design system, the cross-sell flow, and webhook / idempotency patterns.
+This is a soft safety net, not a guarantee. Its job is to catch the cross-overs Jeremy might not notice in the moment, not to be exhaustive. Recurring cross-cutting themes worth watching for: rate limiting and abuse protection, Clerk auth and the GemKa identity flow, Supabase schema / RLS / backups, Resend transactional email, the @gemka/core shared design system, the cross-sell flow, and webhook / idempotency patterns.
 
 <!-- shared-conventions:end -->
 
 ## Opening a repo file in TextEdit (computer use)
 
-When Jeremy asks to open a post in TextEdit, paste an absolute path; do not type a tilde path into the Go to Folder field. The reliable sequence: (1) request TextEdit access with `clipboardWrite: true` up front; (2) write the absolute path to the clipboard (e.g. `/Users/Jeremy/code/jeremycowcher/posts/_archive`, never `~/...`); (3) bring TextEdit forward, then Cmd+O, Cmd+Shift+G, Cmd+V to paste, Return, then double-click the file in the list.
+This applies ONLY when Jeremy explicitly says "TextEdit". The default opener for "open it" / "show me" / "in the sidebar" is the Claude sidebar (present_files) regardless of file type, see conventions.md. When Jeremy explicitly asks to open a post in TextEdit, paste an absolute path; do not type a tilde path into the Go to Folder field. The reliable sequence: (1) request TextEdit access with `clipboardWrite: true` up front; (2) write the absolute path to the clipboard (e.g. `/Users/Jeremy/code/jeremycowcher/posts/_archive`, never `~/...`); (3) bring TextEdit forward, then Cmd+O, Cmd+Shift+G, Cmd+V to paste, Return, then double-click the file in the list.
 
 Why paste: the "Go to Folder" field has live autocomplete. A typed path gets mangled (the slash after `~` often drops), and pressing Return while a suggestion is highlighted selects that suggestion instead of navigating, which leaves the sheet stuck. Pasting an absolute path sidesteps all of it.
 
@@ -61,8 +68,8 @@ Traps that remain: the sheet only resolves folders, so a file path fails silentl
 
 ## Tech stack
 
-- **Build:** `node build.js` (custom script) using `marked` for markdown→HTML. Dependencies: `marked` and `gemka-tokens` (canonical GemKa design tokens).
-- **Styling:** Single `style.css`, plain CSS with CSS variables, repointed onto the GemKa design system. The palette comes from the `gemka-tokens` npm package (`--gk-*` tokens): warm cream paper/bg, warm ink, oxblood accent. Fonts: Inter (body) + Fraunces (serif), both from Google Fonts.
+- **Build:** `node build.js` (custom script) using `marked` for markdown→HTML. Dependencies: `marked` and `@gemka/core` (canonical GemKa design tokens).
+- **Styling:** Single `style.css`, plain CSS with CSS variables, repointed onto the GemKa design system. The palette comes from the `@gemka/core` npm package (`--gk-*` tokens): warm cream paper/bg, warm ink, oxblood accent. Fonts: Inter (body) + Fraunces (serif), both from Google Fonts.
 - **Hosting:** Vercel. Config in `vercel.json` (clean URLs, no trailing slashes).
 - **Output:** Static HTML to `dist/` (gitignored, rebuilt on every deploy).
 - **No framework.** No React, no bundler, no TypeScript. Just Node, HTML, CSS, and one inline `<script>` for the clock.
@@ -73,6 +80,7 @@ Traps that remain: the sheet only resolves folders, so a file path fails silentl
 build.js          — Entire build pipeline (frontmatter parse → markdown → HTML)
 style.css         — All styles (~600 lines), responsive breakpoint at 640px
 posts/*.md        — Source content. YAML frontmatter (title, date, description) + markdown body
+posts/*.html      — Source content. Complete self-styled page + leading <!--post--> metadata comment (emitted verbatim, not re-wrapped)
 dist/             — Generated output (gitignored). index.html + posts/*.html + the-why.html + disclosures.html
 vercel.json       — Vercel config
 CONTEXT.md        — Project brief (what/who/why)
@@ -83,7 +91,7 @@ NOTES.md          — Non-obvious bugs and fixes with commit refs
 ## How to run
 
 ```
-npm install        # `marked` + `gemka-tokens`
+npm install        # `marked` + `@gemka/core`
 npm run build      # generates dist/
 ```
 
@@ -91,18 +99,20 @@ Open `dist/index.html` locally or push to deploy on Vercel.
 
 ## Build pipeline (build.js)
 
-1. Reads all `posts/*.md`, parses YAML frontmatter + markdown body
-2. Sorts posts by date descending, then by slug descending (for deterministic same-date ordering)
+1. Reads all `posts/*.md` (YAML frontmatter + markdown body → `marked` → wrapped in the page template) **and** all `posts/*.html` (a complete self-styled page with a leading `<!--post-->` metadata comment, emitted verbatim with the comment stripped — never re-wrapped). Both produce the same index-entry shape, so they share the sort/series/index pipeline.
+2. Sorts posts by date descending, then by slug descending (for deterministic same-date ordering); series groups are then pinned to the top in `SERIES_ORDER` (see Key patterns)
 3. Generates individual post pages with OG metadata + disclaimers
 4. Generates "The Why" page (no nav bar, standalone layout)
 5. Generates the "Disclosures" page at `/disclosures` (full nav, post-page layout) holding the site-wide disclaimer copy
 6. Generates index page with hero section + post list
-7. CSS is inlined into every page via `<style>` tags at build time: first `node_modules/gemka-tokens/tokens.css` (the `--gk-*` token `:root`), then `style.css`. Order matters — the tokens must be defined before `style.css` references them.
+7. CSS is inlined into every page via `<style>` tags at build time: first `node_modules/@gemka/core/tokens.css` (the `--gk-*` token `:root`), then `style.css`. Order matters — the tokens must be defined before `style.css` references them.
 
 ## Key patterns and conventions
 
 - **Frontmatter format:** `title`, `date` (YYYY-MM-DD), `description` — all required for proper rendering
-- **URLs:** `/posts/{slug}` (slug = markdown filename without `.md`). Clean URLs via Vercel.
+- **HTML posts (first-class, same as markdown):** A post can be authored as a complete self-styled `.html` page in `posts/` (full inlined CSS/nav/footer, like a real post page) instead of markdown. It must carry a leading `<!--post-->` metadata comment **before** `<!DOCTYPE html>` with `title`, `date`, `series`, `part`, `headline`, `description` (same `key: value` format as frontmatter). The build emits it verbatim to `dist/posts/<slug>.html` (comment stripped) without re-wrapping it in the page template, and feeds it into the **same** `/posts/<slug>` URL and series-grouping pipeline as markdown. Use `headline` for the per-part index label (markdown derives that label by stripping its `"(Part N) -"` title prefix; HTML titles don't follow that pattern, so `headline` supplies it). Example: `posts/ai-essentials-3-skills.html` is Part 3 of the "AI Essentials" series.
+- **Series order (`SERIES_ORDER`):** A single explicit list near the top of `build.js` pins which series groups render first on `/writing`, and in what order (currently `['Learning with AI', 'AI Essentials']`). Any series not in the list, and any standalone posts, fall below the listed groups sorted by date desc. Reorder the list to reorder the groups.
+- **URLs:** `/posts/{slug}` (slug = source filename without `.md` or `.html`). Clean URLs via Vercel.
 - **Disclosures page:** `/disclosures` (full nav, post-page layout) holds the Acquired-style site-wide disclaimer copy. It used to be an inline `.site-disclaimer` paragraph in the footer; it now lives on its own page, linked from the footer's utility group.
 - **Footer (matches the GemKa product sites, e.g. gemtimer.com):** rendered on every page from the `FOOTER_LINKS` constant in `build.js`. Row 1 is two middot-separated groups, `space-between`: family + social on the left (X.com, LinkedIn, GemTimer, GemTodo, GemKa, IdeaKache — all external, new tab) and utility on the right (Disclosures → `/disclosures`, Contact → `mailto:`). Row 2 is `© 2026 GemKa` (left) and the tagline `Writing to think` (right, Fraunces italic). The outer `.footer-links` mirrors the nav container (max-width 1100px, 40px insets) so its **2px oxblood (`var(--gk-accent)`) top divider** lines up exactly with the header divider (`nav::after`, also 2px oxblood). Between the two rows is a faint `rgba(0,0,0,0.06)` inter-row whisper. Spacing/height matched to gemtimer (font-size 0.72rem, padding 0.75rem, row-gap 0.25rem, `line-height: normal`).
 - **Post-specific disclaimer:** still inline on individual post pages.
@@ -139,7 +149,7 @@ The source of truth is the IdeaKache Supabase project (`content` table, filter `
 
 ## Current state (June 2026)
 
-- **Design:** Adopted the GemKa design system — `gemka-tokens` cream/oxblood palette and Inter + Fraunces type. Replaced the old white/black/#FF6600 look. Hero quotes lightened to Fraunces 360.
+- **Design:** Adopted the GemKa design system — `@gemka/core` cream/oxblood palette and Inter + Fraunces type. Replaced the old white/black/#FF6600 look. Hero quotes lightened to Fraunces 360.
 - **Posts offline:** All blog posts were moved to `posts/_archive/` ahead of the GemKa relaunch, so the live writing list is currently empty (the build skips `_`-prefixed folders). The "Learning with AI (Part IV) — Skills and CLAUDE.md" draft also lives in `_archive` as a work in progress.
 - **The Why page:** Full copy live, but the P.S. (gemtimer.com / ideakache.com links) is hidden for now (see Key patterns).
 - **In progress:** Drafting further essays (RTF files in repo root) and the "Learning with AI" series.
