@@ -872,15 +872,14 @@ main.post {
 .post-body .aside p { font-size: inherit; line-height: inherit; margin: 0; }
 .post-body .aside p + p { margin-top: 0.7rem; }
 .post-body .aside code { font-size: 0.78rem; }
-@media (min-width: 1440px) {
+@media (min-width: 1180px) {
   .post-body .aside {
     float: right;
     clear: right;
-    width: 330px;
-    /* small top so the box top-aligns beside the backup paragraph it elaborates
-       (the aside is placed just before that paragraph in the markup); negative
-       right pushes it fully into the empty right margin */
-    margin: 0.3rem -354px 1.25rem 1.5rem;
+    width: calc((100vw - 720px) / 2 - 40px);
+    max-width: 360px;
+    margin: 0.3rem 0 1.25rem 1.5rem;
+    margin-right: calc(-1 * ((100vw - 720px) / 2) + 24px);
   }
 }
 </style>

@@ -867,18 +867,18 @@ main.post {
   color: var(--gk-accent);
   margin-bottom: 0.35rem;
 }
-@media (min-width: 1440px) {
+@media (min-width: 1180px) {
   .post-body .aside {
     float: right;
     clear: right;
-    width: 330px;
-    /* tight top + bottom so a cleared box sits just below the previous one with
-       a small clean gap; negative right pushes it fully into the right margin */
-    margin: 0.3rem -354px 0.4rem 1.5rem;
+    /* size to the right gutter beside the 720px column and pin the right edge
+       ~24px from the viewport edge, so the box floats and fills the available
+       room at any width from 1180px up (covers laptops, not just >=1440) */
+    width: calc((100vw - 720px) / 2 - 40px);
+    max-width: 360px;
+    margin: 0.3rem 0 0.4rem 1.5rem;
+    margin-right: calc(-1 * ((100vw - 720px) / 2) + 24px);
   }
-  /* lift the first box up so its top sits level with the "How websites get
-     built" heading (top-aligned beside its own section, not floating above it
-     beside the intro). The headless box clears below it. */
   .post-body .aside:first-of-type {
     margin-top: -2.5rem;
   }
