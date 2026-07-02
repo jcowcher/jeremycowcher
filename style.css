@@ -355,7 +355,7 @@ body.landing .hero {
 
 .post-card-content h2 {
   font-family: 'Fraunces', Georgia, serif;
-  font-size: 1.2rem;
+  font-size: 1.02rem;
   font-weight: 500;
   letter-spacing: -0.01em;
   line-height: 1.3;
@@ -437,14 +437,21 @@ body.landing .hero {
   padding-left: 1.5rem;
 }
 
+/* Series part rows: keep the "Part N" label on the same line as the title. */
+.series-part .post-card-content {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
 .series-part-label {
-  display: block;
   font-size: 0.7rem;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--gk-accent);
-  margin-bottom: 0.15rem;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 /* Loose standalone post rows sit directly under .post-list, unlike series
