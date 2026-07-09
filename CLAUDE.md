@@ -13,6 +13,8 @@ Split the work by what it touches, not by which repo it is:
 
 When a task is a code change, scope or discuss it in Cowork if that helps, then hand Claude Code a ready-to-paste prompt. A skill being available in Cowork's skill list is not permission to run a code or deploy skill there.
 
+Database changes (e.g. Supabase) run in Cowork, split by risk: pure adds (a new table or other new object that touches nothing existing) are fine to run directly. Alterations and deletions (changing or dropping existing tables or columns, bulk updates, deleting rows) get discussed with Jeremy first, every time. If it's unclear which side a change falls on, treat it as an alteration and ask.
+
 ## The Dyson 5,127 Rule
 
 James Dyson built and tested 5,127 handmade prototypes of his cyclonic vacuum. It took four years. Dyson followed the Edisonian principle that you only ever make one change at a time. This is so you can know which changes improved your product and which did not.
