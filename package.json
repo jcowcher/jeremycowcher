@@ -5,7 +5,7 @@
     "build": "node build.js"
   },
   "dependencies": {
-    "@gemka/core": "^0.5.2",
+    "@gemka/core": "^0.7.0",
     "marked": "^15.0.0"
   }
 }

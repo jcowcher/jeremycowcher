@@ -50,3 +50,8 @@ Both pages needed to fit all content (including footer disclaimer) in a single d
 
 **June 4, 2026 — added site favicon (charcoal disc, white serif J); repo previously had none.**
 `build.js` now copies `favicon.ico` + `icon.png` from the repo root into `dist/` on every build (since `dist/` is wiped), and `htmlTemplate` emits `<link rel="icon">` + `<link rel="apple-touch-icon">` in the head of every page.
+
+**Claude Code auto mode on by default (global) — 2026-06-09**
+Turned on Claude Code "auto" permission mode globally: ran `claude --enable-auto-mode` once, then set `permissions.defaultMode: "auto"` in `~/.claude/settings.json`. That's the only scope where `auto` is honored — as of Claude Code v2.1.142 it's ignored in per-repo `.claude/settings.json`, so a repo can't self-grant it. Every Claude Code session now starts in auto: edits and bash run without per-action approval, with a Sonnet-based safety classifier still blocking catastrophic actions (mass deletion, data exfiltration, prompt-injection escalation).
+
+Why it's safe: the per-click approval was redundant friction. The approach/prompt is reviewed in Cowork before it reaches Claude Code, and the Dyson 5,127 rule is the real safety net — one logical change per prompt/commit, verified on staging before the next. Small, attributable changes mean auto mode drops the mechanical clicks without removing the control points that actually catch mistakes.
