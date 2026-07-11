@@ -872,6 +872,24 @@ main.post {
 .post-body .aside p { font-size: inherit; line-height: inherit; margin: 0; }
 .post-body .aside p + p { margin-top: 0.7rem; }
 .post-body .aside code { font-size: 0.78rem; }
+/* Post-publication update section: thin oxblood rule down the left and a small
+   dated label, so later additions are visibly marked without changing the body
+   text itself. */
+.post-body .post-update {
+  border-left: 3px solid var(--gk-accent);
+  padding-left: 1.25rem;
+  margin: 2.5rem 0 0;
+}
+.post-body .post-update h2 {
+  margin-top: 0.35rem;
+}
+.post-update-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gk-accent);
+}
 @media (min-width: 1180px) {
   .post-body .aside {
     float: right;
@@ -917,9 +935,18 @@ main.post {
 <p>I also needed to back up these Skills somewhere safe so they can't get wiped on my Mac and lost forever. To do that, I first commit to <code>.git</code>; my Mac looks at what changed since the last snapshot and records just that difference into <code>.git</code>. Then I push that difference up to GitHub's servers, and because GitHub already had the prior version, it now has the full project again. If anything happens to my Mac, I can recreate my work from GitHub.</p>
 
 <h2>The fourth approach</h2>
+<aside class="aside"><div class="at">Update, July 10, 2026</div><p>"Finally" lasted about a week. A Claude update changed the rules on shortcuts and the fourth approach stopped working.</p><p>The reason the fourth approach stopped working is that Claude Code published a security update requiring <code>~/.claude/skills</code> to be a real folder, not a shortcut.</p><p>The top-level symlink may no longer work because of the risk of letting the whole skills folder be a shortcut. If the folder is a shortcut, everything Claude does there is silently redirected to wherever the shortcut points. Someone could repoint it and use Claude to read passwords, tax records, and private emails, or to install a program that gives them control of the computer.</p></aside>
 <p>The third approach worked well except that if I created any new Skills, I was going to get drift between <code>~/code/claude-kit</code> and <code>~/.claude/skills</code>. That's because the symlink was at the individual Skill level and I would have to remember to set the symlink up at the same time I created the new Skill. That was a 50/50 bet at best.</p>
 <p>The fix was a single symlink at the top: instead of one shortcut per Skill, <code>~/.claude/skills</code> is now one shortcut to the Skills folder in <code>~/code/claude-kit</code>. Now, any new Skill I drop into that folder automatically hits <code>~/.claude/skills</code> through that one shortcut.</p>
-<p>Finally, I have both things I wanted: Skills can be edited in both Cowork and Claude Code and they are looking at the same thing, at the same time.</p></article>
+<p>Finally, I have both things I wanted: Skills can be edited in both Cowork and Claude Code and they are looking at the same thing, at the same time.</p>
+
+<section class="post-update">
+<div class="post-update-label">Added July 10, 2026</div>
+<h2>The fifth approach</h2>
+<aside class="aside"><div class="at">What's a startup hook?</div><p>A piece of code that automatically runs at the beginning of every new session, kind of like how Claude reads <code>CLAUDE.md</code> at the beginning of each session.</p></aside>
+<p>After the fourth approach stopped working, I reverted back to the third approach. To address the drift issue between <code>~/code/claude-kit</code> and <code>~/.claude/skills</code>, I added a new script that runs automatically every time Claude Code starts (i.e., open a new session in VS Code or your Terminal with Claude) as a "startup hook". If I create a new Skill in claude-kit, its shortcut appears in <code>~/.claude/skills</code> at the next start, and so Claude Code can find the new Skill.</p>
+<p>I did the top-level symlink fix originally because it was simpler. You can think of the fifth approach as the third approach, plus a robot to make sure Claude Code knows when a new Skill has been created.</p>
+</section></article>
   <div class="post-disclaimer">This post is provided for general information, commentary and discussion purposes only. It is not legal, investing or other professional advice, and it should not be relied upon as such. Any errors or omissions are unintentional. The views expressed are those of the author in a personal capacity and do not represent the views of any employer, client, partner or affiliated organization. Generative AI tools were used to assist with research and editing.</div>
   <footer class="post-footer"><a href="/writing">&larr; All posts</a></footer>
 </main>
