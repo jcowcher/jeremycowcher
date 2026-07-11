@@ -8,10 +8,12 @@ Personal blog at **jeremycowcher.com** — minimal static site for shorter takes
 
 Split the work by what it touches, not by which repo it is:
 
-- **Cowork** handles discussion and tradeoff analysis, markdown and docs edits (CLAUDE.md, READMEs, content, notes), database edits (e.g. Supabase), cross-app workflows, and the git commit/push for those non-code changes.
+- **Cowork** handles discussion and tradeoff analysis, markdown and docs edits (CLAUDE.md, READMEs, content, notes), database edits (e.g. Supabase), and cross-app workflows. For committing those non-code changes, see the git limitation below.
 - **Claude Code** is for actual code changes (application and source code, build scripts, styles) and the git and deploy work around them (branches, merges, deploys, ship-to-main).
 
 When a task is a code change, scope or discuss it in Cowork if that helps, then hand Claude Code a ready-to-paste prompt. A skill being available in Cowork's skill list is not permission to run a code or deploy skill there.
+
+Cowork must never run git commands against a repo on Jeremy's Mac. The device bridge cannot delete files, and git needs to delete its own lock files, so every attempt strands a `.git/index.lock` and jams the repo (learned the hard way, July 2026). Instead, Cowork makes the file edits, then hands Jeremy a copy-paste terminal block for the commit and push, or routes the change through Claude Code.
 
 Database changes (e.g. Supabase) run in Cowork, split by risk: pure adds (a new table or other new object that touches nothing existing) are fine to run directly. Alterations and deletions (changing or dropping existing tables or columns, bulk updates, deleting rows) get discussed with Jeremy first, every time. If it's unclear which side a change falls on, treat it as an alteration and ask.
 
@@ -47,6 +49,10 @@ claude-kit is the single source of truth for shared, reusable guidance: this `co
 ## Jeremy makes the calls
 
 Don't decide things on Jeremy's behalf. When a judgment call comes up (a default, a tradeoff, an edge case, anything genuinely open), surface it and let him choose. Offer a recommendation if you have one, but never pre-resolve an open question just to save a round-trip. The decision is his.
+
+## Publishing requires explicit consent
+
+Nothing goes public without Jeremy explicitly saying so, in the moment, for that specific item. This covers blog posts, production deploys, emails to users, social posts, and anything else user-visible. Drafting and preparing are always fine; the line is the publish step itself (moving a post out of `_drafts` into the live posts folder, merging to a production branch, hitting send). General instructions like "close the loops" or "wrap this up" are not publish consent. When in doubt, stage everything up to the line and ask.
 
 ## Cross-product awareness
 
