@@ -149,9 +149,10 @@ The source of truth is the IdeaKache Supabase project (`content` table, filter `
 - **Production branch:** `main`. Pushes to `main` trigger production Vercel builds; pushes to `dev` trigger preview builds. Other branches are skipped (configured in `vercel.json` under `git.deploymentEnabled`).
 - **Merging dev → main:** Always write a descriptive merge commit message summarising what changed since the last deploy. Don't use the default merge message.
 
-## Current state (June 2026)
+## Current state (July 2026)
 
 - **Design:** Adopted the GemKa design system — `@gemka/core` cream/oxblood palette and Inter + Fraunces type. Replaced the old white/black/#FF6600 look. Hero quotes lightened to Fraunces 360.
-- **Posts offline:** All blog posts were moved to `posts/_archive/` ahead of the GemKa relaunch, so the live writing list is currently empty (the build skips `_`-prefixed folders). The "Learning with AI (Part IV) — Skills and CLAUDE.md" draft also lives in `_archive` as a work in progress.
+- **Posts live again:** 10 posts published on /writing: Learning with AI Parts 0-3 (Part 3, smoke tests, is an HTML post), AI Essentials Parts 0-4, and the Jaylen Brown standalone. The old "6 posts on one screen" layout note below predates this.
+- **Drafts queue (`posts/_drafts/`):** Learning with AI Part 4 (The Checklist Robot; written, awaiting Jeremy's publish decision), Part 5 (AI search), Part 6 (calendar integration), plus several AI Essentials drafts. Publishing any of these requires Jeremy's explicit consent (see conventions above).
 - **The Why page:** Full copy live, but the P.S. (gemtimer.com / ideakache.com links) is hidden for now (see Key patterns).
 - **In progress:** Drafting further essays (RTF files in repo root) and the "Learning with AI" series.
