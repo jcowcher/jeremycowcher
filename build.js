@@ -25,8 +25,9 @@ const SERIES_PART_PREFIX = { 'AI Essentials': '#' };
 // the series has real posts (which then render via SERIES_ORDER above).
 const COMING_SOON_SERIES = ['The Promise of AI'];
 
-// Footer kill switch. Temporarily hidden until launch; flip to true to restore
-// the footer on every page exactly as before (FOOTER_LINKS markup is unchanged).
+// Footer kill switch. Temporarily hidden until launch; flip to true to render
+// the footer on every page. The footer now drops GemKa from the family row and
+// reads "© 2026 Jeremy Cowcher".
 const SHOW_FOOTER = false;
 
 // GemKa-family footer (rendered on every page). Two middot-separated groups
@@ -41,8 +42,6 @@ const FOOTER_LINKS = `<footer class="footer-links">
       <a href="https://gemtodo.com" target="_blank" rel="noopener noreferrer">GemTodo</a>
       <span class="footer-sep" aria-hidden="true">·</span>
       <a href="https://ideakache.com" target="_blank" rel="noopener noreferrer">IdeaKache</a>
-      <span class="footer-sep" aria-hidden="true">·</span>
-      <a href="https://gemka.co" target="_blank" rel="noopener noreferrer">GemKa</a>
     </div>
     <div class="footer-group footer-right">
       <a href="/disclosures">Disclosures</a>
@@ -52,7 +51,7 @@ const FOOTER_LINKS = `<footer class="footer-links">
   </div>
   <div class="footer-divider" aria-hidden="true"></div>
   <div class="footer-meta">
-    <span class="footer-copy">&copy; 2026 GemKa</span>
+    <span class="footer-copy">&copy; 2026 Jeremy Cowcher</span>
     <span class="footer-tagline">Writing to think.</span>
   </div>
 </footer>`;
