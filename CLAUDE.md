@@ -17,6 +17,10 @@ Cowork must never run git commands against a repo on Jeremy's Mac. The device br
 
 Database changes (e.g. Supabase) run in Cowork, split by risk: pure adds (a new table or other new object that touches nothing existing) are fine to run directly. Alterations and deletions (changing or dropping existing tables or columns, bulk updates, deleting rows) get discussed with Jeremy first, every time. If it's unclear which side a change falls on, treat it as an alteration and ask.
 
+## Cloud sessions base off dev
+
+The GemKa products develop on their `dev` branch, not `main`. When work runs in a cloud or Slack Claude Code session (as opposed to the local terminal), base the session off `dev` and open the PR into `dev`, never `main`. This is soft guidance the session reads: the hard lever is each repo's GitHub default branch, so any repo meant for the dev flow should have its GitHub default set to `dev`. If a session starts on the wrong base, stop and reset it before doing any work.
+
 ## The Dyson 5,127 Rule
 
 James Dyson built and tested 5,127 handmade prototypes of his cyclonic vacuum. It took four years. Dyson followed the Edisonian principle that you only ever make one change at a time. This is so you can know which changes improved your product and which did not.
@@ -38,6 +42,7 @@ Don't use em dashes in prose you write: UI text, taglines, commit messages, desc
 - Opening or showing a file: "open it", "show me", "pull up", "in the sidebar" default to presenting it in the Claude sidebar (present_files), whatever the file type (.md, .html, anything). Only drive a desktop app (TextEdit, VS Code, etc.) when Jeremy names that app explicitly. He'll say TextEdit when he wants TextEdit; most of the time he doesn't.
 - Give commands, terminal instructions, and any message to relay as copy-paste code blocks, not inline prose.
 - For handoffs to Claude Code: put the entire handoff inside a single fenced code block Jeremy can copy in one action, with no prose left outside it. If the handoff itself contains a fenced code block, use a four-backtick outer fence so the inner triple-backtick fences don't break the copy.
+- Every handoff prompt names its target repo on the first line (e.g. "REPO: gemtimer (run in the gemtimer Claude Code session)"). With multiple Claude Code sessions open across repos, an unlabeled prompt gets run in the wrong one.
 - Every Claude Code handoff states its change count on the first line (e.g. "One logical change: de-fork the overlay account menu"). More than one, split or flag before handing over. This is where the Dyson 5,127 Rule is enforced: the count forces the one-change check at the moment work crosses from Cowork to Claude Code.
 
 ## CLAUDE.md points at claude-kit
