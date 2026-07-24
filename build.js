@@ -311,7 +311,7 @@ const whyBody = `
     <h1>The Why</h1>
   </header>
   <article class="post-body">
-    <p>Writing things out helps me think through problems. When I'm building a new feature or trying to solve a problem, I like to start with a fresh HTML file. I'll then go back and forth with Claude and start writing out the why and the how for that topic, including what my options are. Most of these files I'll turn into posts here. That was the original idea behind the Learning with AI series.</p>
+    <p>Writing things out helps me think. When I'm building a new feature or trying to solve a problem, I like to start with a fresh HTML file. I'll then go back and forth with Claude and start writing out the why and the how for that topic, including what my options are. Most of these files I'll turn into posts here. That was the original idea behind the Learning with AI series.</p>
     <p>As well as what I'm up to, this website will have shorter takes on topics I'm interested in. Expect to see takes on business and sports, particularly the NBA.</p>
     <p>I'll probably get things wrong and that's fine. No one bats a thousand. I enjoy a great takesman; it's one reason I've been reading and listening to Bill Simmons for 15 years. What I can guarantee is that everything here was written by me, and reflects what I believed when I wrote it.</p>
     <p>There is no comment section. If you've got a thought that can improve anything I've written, email me at <a href="mailto:jeremy@gemka.co">jeremy@gemka.co</a>.</p>
