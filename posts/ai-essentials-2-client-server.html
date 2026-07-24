@@ -123,9 +123,23 @@ nav::after {
 
 .nav-left {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 1.5rem;
 }
+
+.nav-logo {
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  color: var(--black);
+  text-decoration: none;
+}
+
+.nav-logo .gk-ka { color: var(--orange); }
+
+/* Mobile hamburger + dropdown (gemtimer pattern) — hidden above 640px, shown in the media block below */
+.nav-menu-btn { display: none; }
+.nav-mobile-menu { display: none; }
 
 .nav-link {
   font-size: 0.88rem;
@@ -796,6 +810,67 @@ main.post {
 @media (max-width: 640px) {
   nav { padding: 1rem 1.25rem; }
   nav::after { left: 1.25rem; right: 1.25rem; }
+
+  /* Mobile nav (gemtimer pattern): centered wordmark + hamburger, clock and inline links hidden */
+  .nav-clock { display: none; }
+  .nav-left { flex: 1; justify-content: center; gap: 0; }
+  .nav-left .nav-link { display: none; }
+  .nav-right { display: none; }
+  .nav-logo { font-size: 1.06rem; }
+
+  /* Hamburger: absolute on the right so the wordmark stays truly centered in the flex:1 nav-left */
+  .nav-menu-btn {
+    position: absolute;
+    right: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    z-index: 10;
+  }
+  .nav-menu-btn span {
+    display: block;
+    width: 16px;
+    height: 1.5px;
+    background: var(--gk-ink);
+    border-radius: 1px;
+  }
+  .nav-mobile-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 1.25rem;
+    display: none;
+    min-width: 200px;
+    padding: 8px;
+    background: var(--gk-paper);
+    border: 1px solid var(--gk-border);
+    border-radius: 14px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
+    z-index: 100;
+  }
+  .nav-mobile-menu.open { display: block; }
+  .nav-mobile-menu-item {
+    display: block;
+    padding: 11px 14px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--gk-ink);
+    text-decoration: none;
+    cursor: pointer;
+    white-space: nowrap;
+    border-radius: 8px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .nav-mobile-menu-item:hover { background: var(--gk-hover-cream); }
   .hero { height: auto; padding: 1.5rem 1.25rem 2rem; flex-direction: column; justify-content: space-evenly; gap: 1.75rem; }
   .hero-content { flex: 0 0 auto; }
   .hero-subtitle { font-size: 1.3rem; }
@@ -955,6 +1030,7 @@ main.post {
 
 <nav>
   <div class="nav-left">
+    <a href="/" class="nav-logo"><span>Gem</span><span class="gk-ka">Ka</span></a>
     <a href="/the-why" class="nav-link">The Why</a>
   </div>
   <div class="nav-clock" id="clock"></div>
@@ -962,6 +1038,15 @@ main.post {
     <a href="https://github.com/jcowcher" target="_blank" rel="noopener" class="nav-github" aria-label="GitHub">
       <svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
     </a>
+  </div>
+  <button class="nav-menu-btn" aria-label="Menu" aria-haspopup="menu" aria-expanded="false" type="button">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div class="nav-mobile-menu" role="menu">
+    <a class="nav-mobile-menu-item" href="/the-why" role="menuitem">The Why</a>
+    <a class="nav-mobile-menu-item" href="https://github.com/jcowcher" target="_blank" rel="noopener" role="menuitem">GitHub</a>
   </div>
 </nav>
 <main class="post">
@@ -1018,8 +1103,47 @@ main.post {
   <div class="post-disclaimer">This post is provided for general information, commentary and discussion purposes only. It is not legal, investing or other professional advice, and it should not be relied upon as such. Any errors or omissions are unintentional. The views expressed are those of the author in a personal capacity and do not represent the views of any employer, client, partner or affiliated organization. Generative AI tools were used to assist with research and editing.</div>
   <footer class="post-footer"><a href="/writing">&larr; All posts</a></footer>
 </main>
+<footer class="footer-links">
+  <div class="footer-row">
+    <div class="footer-group footer-left">
+      <a href="https://gemtimer.com" target="_blank" rel="noopener noreferrer">GemTimer</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <a href="https://gemtodo.com" target="_blank" rel="noopener noreferrer">GemTodo</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <a href="https://ideakache.com" target="_blank" rel="noopener noreferrer">IdeaKache</a>
+    </div>
+    <div class="footer-group footer-right">
+      <a href="/disclosures">Disclosures</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <a href="mailto:jeremy@gemka.co">Contact</a>
+    </div>
+  </div>
+  <div class="footer-divider" aria-hidden="true"></div>
+  <div class="footer-meta">
+    <span class="footer-copy">&copy; 2026 Jeremy Cowcher</span>
+    <span class="footer-tagline">Writing to think.</span>
+  </div>
+</footer>
 <script>
 (function(){
+  var btn=document.querySelector('.nav-menu-btn');
+  var menu=document.querySelector('.nav-mobile-menu');
+  if(btn&&menu){
+    function closeMenu(){menu.classList.remove('open');btn.setAttribute('aria-expanded','false');}
+    btn.addEventListener('click',function(e){
+      e.stopPropagation();
+      var willOpen=!menu.classList.contains('open');
+      menu.classList.toggle('open',willOpen);
+      btn.setAttribute('aria-expanded',willOpen?'true':'false');
+    });
+    menu.addEventListener('click',closeMenu);
+    document.addEventListener('click',function(e){
+      if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target))closeMenu();
+    });
+    document.addEventListener('keydown',function(e){
+      if(e.key==='Escape'&&menu.classList.contains('open')){closeMenu();btn.focus();}
+    });
+  }
   var el=document.getElementById('clock');
   if(!el)return;
   function tick(){
