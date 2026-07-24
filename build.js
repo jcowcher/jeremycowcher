@@ -69,7 +69,7 @@ const FOOTER_LINKS = `<footer class="footer-links">
 // injectChrome() (below) swaps these same canonical versions into the self-styled HTML posts.
 const NAV = `<nav>
   <div class="nav-left">
-    <a href="/" class="nav-logo"><span>Gem</span><span class="gk-ka">Ka</span></a>
+    <a href="/" class="nav-logo"><span>Jeremy</span> <span class="gk-ka">Cowcher</span></a>
     <a href="/the-why" class="nav-link">The Why</a>
   </div>
   <div class="nav-clock" id="clock"></div>
