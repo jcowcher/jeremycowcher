@@ -231,16 +231,6 @@ body.landing .hero {
   color: var(--orange);
 }
 
-.scroll-arrow .scroll-name {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--black);
-  letter-spacing: -0.01em;
-  text-transform: none;
-  text-decoration: none;
-  margin-bottom: 0.5rem;
-}
-
 .scroll-arrow .scroll-cta {
   font-size: 1rem;
   font-weight: 400;

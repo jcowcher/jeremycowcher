@@ -147,7 +147,6 @@ The source of truth is the IdeaKache Supabase project (`content` table, filter `
 ## Non-obvious things that will bite you
 
 - **`100svh` not `100vh`** for the hero. `100vh` on mobile doesn't account for browser chrome, hiding the Read button. Commit `68dd49e`.
-- **CSS specificity on `.scroll-name`** — must be `.scroll-arrow .scroll-name` or underline bleeds through. Commit `a87b7a7`.
 - **`--gray-300: #ccc`** was missing from `:root` and failed silently. All CSS variables must be defined.
 - **Post sort is date DESC then slug DESC** (`localeCompare`). This ensures Part II sorts above Part I for same-date posts.
 - **Frontmatter parser has a fallback** — missing frontmatter won't crash, defaults date to `2026-01-01`.
