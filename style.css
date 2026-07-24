@@ -64,9 +64,23 @@ nav::after {
 
 .nav-left {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 1.5rem;
 }
+
+.nav-logo {
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  color: var(--black);
+  text-decoration: none;
+}
+
+.nav-logo .gk-ka { color: var(--orange); }
+
+/* Mobile hamburger + dropdown (gemtimer pattern) — hidden above 640px, shown in the media block below */
+.nav-menu-btn { display: none; }
+.nav-mobile-menu { display: none; }
 
 .nav-link {
   font-size: 0.88rem;
@@ -767,6 +781,67 @@ main.post {
 @media (max-width: 640px) {
   nav { padding: 1rem 1.25rem; }
   nav::after { left: 1.25rem; right: 1.25rem; }
+
+  /* Mobile nav (gemtimer pattern): centered wordmark + hamburger, clock and inline links hidden */
+  .nav-clock { display: none; }
+  .nav-left { flex: 1; justify-content: center; gap: 0; }
+  .nav-left .nav-link { display: none; }
+  .nav-right { display: none; }
+  .nav-logo { font-size: 1.06rem; }
+
+  /* Hamburger: absolute on the right so the wordmark stays truly centered in the flex:1 nav-left */
+  .nav-menu-btn {
+    position: absolute;
+    right: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    z-index: 10;
+  }
+  .nav-menu-btn span {
+    display: block;
+    width: 16px;
+    height: 1.5px;
+    background: var(--gk-ink);
+    border-radius: 1px;
+  }
+  .nav-mobile-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 1.25rem;
+    display: none;
+    min-width: 200px;
+    padding: 8px;
+    background: var(--gk-paper);
+    border: 1px solid var(--gk-border);
+    border-radius: 14px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
+    z-index: 100;
+  }
+  .nav-mobile-menu.open { display: block; }
+  .nav-mobile-menu-item {
+    display: block;
+    padding: 11px 14px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--gk-ink);
+    text-decoration: none;
+    cursor: pointer;
+    white-space: nowrap;
+    border-radius: 8px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .nav-mobile-menu-item:hover { background: var(--gk-hover-cream); }
   .hero { height: auto; padding: 1.5rem 1.25rem 2rem; flex-direction: column; justify-content: space-evenly; gap: 1.75rem; }
   .hero-content { flex: 0 0 auto; }
   .hero-subtitle { font-size: 1.3rem; }
