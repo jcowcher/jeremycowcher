@@ -4,21 +4,12 @@
    @gemka/core/tokens.css, inlined before this file at build time). Warm cream
    surfaces, soft warm ink, oxblood accent — no pure white/black/orange. */
 :root {
-  --black: var(--gk-ink);
-  --gray-700: var(--gk-muted-deep);
-  --gray-500: var(--gk-muted);
-  --gray-400: var(--gk-faint);
-  --gray-300: var(--gk-faint);
-  --gray-200: var(--gk-border);
-  --gray-100: var(--gk-surface-2);
-  --white: var(--gk-paper);
-  --orange: var(--gk-accent);
 }
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background: var(--gk-bg);
-  color: var(--black);
+  color: var(--gk-ink);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -53,13 +44,13 @@ nav::after {
 .nav-home {
   font-size: 0.95rem;
   font-weight: 600;
-  color: var(--black);
+  color: var(--gk-ink);
   text-decoration: none;
   letter-spacing: -0.02em;
 }
 
 .nav-home:hover {
-  color: var(--orange);
+  color: var(--gk-accent);
 }
 
 .nav-left {
@@ -72,11 +63,11 @@ nav::after {
   font-size: 1.25rem;
   font-weight: 500;
   letter-spacing: -0.5px;
-  color: var(--black);
+  color: var(--gk-ink);
   text-decoration: none;
 }
 
-.nav-logo .gk-ka { color: var(--orange); }
+.nav-logo .gk-ka { color: var(--gk-accent); }
 
 /* Mobile hamburger + dropdown (gemtimer pattern) — hidden above 640px, shown in the media block below */
 .nav-menu-btn { display: none; }
@@ -85,13 +76,13 @@ nav::after {
 .nav-link {
   font-size: 0.88rem;
   font-weight: 400;
-  color: var(--gray-700);
+  color: var(--gk-muted-deep);
   text-decoration: none;
   letter-spacing: -0.01em;
 }
 
 .nav-link:hover {
-  color: var(--orange);
+  color: var(--gk-accent);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -102,7 +93,7 @@ nav::after {
 }
 
 .nav-github {
-  color: var(--black);
+  color: var(--gk-ink);
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -110,7 +101,7 @@ nav::after {
 }
 
 .nav-github:hover {
-  color: var(--orange);
+  color: var(--gk-accent);
 }
 
 /* Nav clock (post pages) */
@@ -123,7 +114,7 @@ nav::after {
   font-variant-numeric: tabular-nums;
   font-size: 0.8rem;
   font-weight: 400;
-  color: var(--gray-400);
+  color: var(--gk-faint);
   letter-spacing: 0.05em;
 }
 
@@ -180,7 +171,7 @@ body.landing .hero {
   gap: 0.75rem;
   font-size: 0.8rem;
   font-weight: 400;
-  color: var(--gray-400);
+  color: var(--gk-faint);
   letter-spacing: 0.05em;
   font-variant-numeric: tabular-nums;
 }
@@ -188,7 +179,7 @@ body.landing .hero {
 .hero-subtitle {
   font-family: 'Fraunces', Georgia, serif;
   font-size: 1.6rem;
-  color: var(--gray-700);
+  color: var(--gk-muted-deep);
   font-weight: 360;
   font-style: italic;
   max-width: 520px;
@@ -197,14 +188,14 @@ body.landing .hero {
 
 .hero-attr {
   font-size: 0.85rem;
-  color: var(--gray-400);
+  color: var(--gk-faint);
   font-weight: 500;
   margin-top: 0.75rem;
   letter-spacing: 0.02em;
 }
 
 .hero-attr a {
-  color: var(--gray-400);
+  color: var(--gk-faint);
   text-decoration: none;
 }
 
@@ -223,12 +214,12 @@ body.landing .hero {
   align-items: center;
   gap: 0.4rem;
   text-decoration: none;
-  color: var(--gray-400);
+  color: var(--gk-faint);
   transition: color 0.2s;
 }
 
 .scroll-arrow:hover {
-  color: var(--orange);
+  color: var(--gk-accent);
 }
 
 .scroll-arrow .scroll-cta {
@@ -236,7 +227,7 @@ body.landing .hero {
   font-weight: 400;
   text-transform: none;
   letter-spacing: 0.02em;
-  color: var(--gray-500);
+  color: var(--gk-muted);
   text-decoration: none;
   text-underline-offset: 3px;
   transition: text-decoration-color 0.2s;
@@ -245,7 +236,7 @@ body.landing .hero {
 .scroll-arrow:hover .scroll-cta {
   text-decoration: underline;
   text-underline-offset: 3px;
-  color: var(--orange);
+  color: var(--gk-accent);
 }
 
 .scroll-arrow span {
@@ -253,7 +244,7 @@ body.landing .hero {
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--gray-700);
+  color: var(--gk-muted-deep);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -261,7 +252,7 @@ body.landing .hero {
 .scroll-arrow svg {
   width: 44px;
   height: 36px;
-  fill: var(--black);
+  fill: var(--gk-ink);
   animation: bounce 2s ease-in-out infinite;
 }
 
@@ -276,13 +267,13 @@ body.landing .hero {
 
 .posts-back a {
   font-size: 0.88rem;
-  color: var(--gray-500);
+  color: var(--gk-muted);
   text-decoration: none;
   font-weight: 500;
 }
 
 .posts-back a:hover {
-  color: var(--orange);
+  color: var(--gk-accent);
 }
 
 /* Posts section */
@@ -298,7 +289,7 @@ body.landing .hero {
   justify-content: space-between;
   padding-bottom: 0.5rem;
   margin-bottom: 0.25rem;
-  border-bottom: 2px solid var(--black);
+  border-bottom: 2px solid var(--gk-ink);
 }
 
 .posts-section-title {
@@ -306,12 +297,12 @@ body.landing .hero {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--black);
+  color: var(--gk-ink);
 }
 
 .posts-section-count {
   font-size: 0.75rem;
-  color: var(--gray-500);
+  color: var(--gk-muted);
   font-weight: 400;
 }
 
@@ -324,7 +315,7 @@ body.landing .hero {
 .post-link {
   text-decoration: none;
   color: inherit;
-  border-bottom: 1px solid var(--gray-200);
+  border-bottom: 1px solid var(--gk-border);
 }
 
 .post-link:last-child {
@@ -345,7 +336,7 @@ body.landing .hero {
 
 .post-card-date {
   font-size: 0.75rem;
-  color: var(--gray-400);
+  color: var(--gk-faint);
   font-weight: 400;
   white-space: nowrap;
   padding-top: 0.2rem;
@@ -367,17 +358,17 @@ body.landing .hero {
 }
 
 .post-link:hover .post-card-content h2 {
-  color: var(--orange);
+  color: var(--gk-accent);
 }
 
 .post-card-content p {
   font-size: 0.78rem;
-  color: var(--gray-700);
+  color: var(--gk-muted-deep);
   line-height: 1.45;
 }
 
 .post-card-arrow {
-  color: var(--gray-300);
+  color: var(--gk-faint);
   font-size: 1.1rem;
   padding-top: 0.15rem;
   transition: color 0.15s, transform 0.15s;
@@ -385,13 +376,13 @@ body.landing .hero {
 }
 
 .post-link:hover .post-card-arrow {
-  color: var(--orange);
+  color: var(--gk-accent);
   transform: translateX(3px);
 }
 
 /* Collapsible series groups (native <details>, no JS) */
 .post-list > .series-group {
-  border-bottom: 1px solid var(--gray-200);
+  border-bottom: 1px solid var(--gk-border);
 }
 
 .post-list > .series-group:last-child {
@@ -433,7 +424,7 @@ body.landing .hero {
 
 .series-count {
   font-size: 0.75rem;
-  color: var(--gray-400);
+  color: var(--gk-faint);
   font-weight: 400;
 }
 
@@ -466,7 +457,7 @@ body.landing .hero {
 }
 
 .empty {
-  color: var(--gray-400);
+  color: var(--gk-faint);
   font-style: italic;
   padding: 2rem 0;
 }
@@ -483,7 +474,7 @@ body.landing .hero {
   display: block;
   font-size: 0.78rem;
   font-style: italic;
-  color: var(--gray-400);
+  color: var(--gk-faint);
   padding-bottom: 0.4rem;
 }
 
@@ -500,7 +491,7 @@ main.post {
 
 .post-header time {
   font-size: 0.78rem;
-  color: var(--gray-500);
+  color: var(--gk-muted);
   display: block;
   margin-bottom: 0.5rem;
 }
@@ -517,7 +508,7 @@ main.post {
 .post-body {
   font-size: 1.05rem;
   line-height: 1.75;
-  color: var(--black);
+  color: var(--gk-ink);
 }
 
 .post-body h2 {
@@ -540,13 +531,13 @@ main.post {
 }
 
 .post-body a {
-  color: var(--orange);
+  color: var(--gk-accent);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
 .post-body a:hover {
-  color: var(--black);
+  color: var(--gk-ink);
 }
 
 .post-body ul, .post-body ol {
@@ -558,11 +549,11 @@ main.post {
 }
 
 .post-body blockquote {
-  border-left: 3px solid var(--gray-300);
-  background: var(--gray-100);
+  border-left: 3px solid var(--gk-faint);
+  background: var(--gk-surface-2);
   padding: 0.5rem 1.25rem;
   margin: 1rem 0;
-  color: var(--gray-700);
+  color: var(--gk-muted-deep);
   font-style: normal;
   border-radius: 0 4px 4px 0;
 }
@@ -583,13 +574,13 @@ main.post {
 .post-body code {
   font-family: 'SF Mono', 'Fira Code', monospace;
   font-size: 0.9em;
-  background: var(--gray-100);
+  background: var(--gk-surface-2);
   padding: 0.15em 0.35em;
   border-radius: 4px;
 }
 
 .post-body pre {
-  background: var(--gray-100);
+  background: var(--gk-surface-2);
   border-radius: 6px;
   padding: 1.25rem;
   overflow-x: auto;
@@ -611,7 +602,7 @@ main.post {
 
 .post-body hr {
   border: none;
-  border-top: 1px solid var(--gray-200);
+  border-top: 1px solid var(--gk-border);
   margin: 2.5rem 0;
 }
 
@@ -619,9 +610,9 @@ main.post {
 .post-disclaimer {
   margin-top: 3rem;
   padding-top: 1.5rem;
-  border-top: 1px solid var(--gray-200);
+  border-top: 1px solid var(--gk-border);
   font-size: 0.75rem;
-  color: var(--gray-400);
+  color: var(--gk-faint);
   line-height: 1.6;
   font-style: italic;
 }
@@ -630,18 +621,18 @@ main.post {
 .post-footer {
   margin-top: 3rem;
   padding-top: 1.5rem;
-  border-top: 1px solid var(--gray-200);
+  border-top: 1px solid var(--gk-border);
 }
 
 .post-footer a {
   font-size: 0.88rem;
-  color: var(--gray-500);
+  color: var(--gk-muted);
   text-decoration: none;
   font-weight: 500;
 }
 
 .post-footer a:hover {
-  color: var(--orange);
+  color: var(--gk-accent);
 }
 
 /* Footer (GemKa family): a links row (social/family left, utility right) and a
