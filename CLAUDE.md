@@ -115,7 +115,7 @@ Open `dist/index.html` locally or push to deploy on Vercel.
 1. Reads all `posts/*.md` (YAML frontmatter + markdown body → `marked` → wrapped in the page template) **and** all `posts/*.html` (a complete self-styled page with a leading `<!--post-->` metadata comment, emitted verbatim with the comment stripped — never re-wrapped). Both produce the same index-entry shape, so they share the sort/series/index pipeline.
 2. Sorts posts by date descending, then by slug descending (for deterministic same-date ordering); series groups are then pinned to the top in `SERIES_ORDER` (see Key patterns)
 3. Generates individual post pages with OG metadata + disclaimers
-4. Generates "The Why" page (no nav bar, standalone layout)
+4. Generates "The Why" page (full nav, post-page layout)
 5. Generates the "Disclosures" page at `/disclosures` (full nav, post-page layout) holding the site-wide disclaimer copy
 6. Generates index page with hero section + post list
 7. CSS is inlined into every page via `<style>` tags at build time: first `node_modules/@gemka/core/tokens.css` (the `--gk-*` token `:root`), then `style.css`. Order matters — the tokens must be defined before `style.css` references them.
@@ -131,8 +131,7 @@ Open `dist/index.html` locally or push to deploy on Vercel.
 - **Post-specific disclaimer:** still inline on individual post pages.
 - **Clock widget:** Inline JS on every page, updates every second. Uses `tabular-nums` to prevent layout shift.
 - **Hero:** Full-viewport (`100svh`, not `100vh` — see below). Rotating quotes (Roosevelt, Shaw, Collison) + "My takes" CTA scroll button.
-- **The Why page:** Standalone page at `/the-why` explaining the blog's purpose. No nav bar (no clock, no GitHub icon) — just the title and body. All other pages keep the full nav. The italicized P.S. paragraph (links to gemtimer.com and ideakache.com, opening in new tabs) is **currently hidden**: it's wrapped in an HTML comment in `whyBody` so it doesn't render, since the products aren't public yet. Unwrap it to restore.
-- **The Why page width:** `max-width: 860px` (wider than post pages at 640px).
+- **The Why page:** Standard post-layout page at `/the-why` explaining the blog's purpose. It uses the full nav (wordmark, clock, GitHub icon, mobile hamburger) and the site footer, exactly like the Disclosures page: `whyBody` in `build.js` is the same `<nav>` block followed by `<main class="post">` (post-header + post-body + `post-footer` "All posts" link). No date line, no post disclaimer. The product links (gemtimer.com / ideakache.com) that used to live in a hidden P.S. here now live in the site footer.
 - **Accent color:** oxblood `var(--gk-accent)` (`#c8102e`) for links, hovers, and interactive elements. (Was `#FF6600` orange before the GemKa adoption.)
 - **Palette via GemKa tokens:** `style.css`'s legacy color vars (`--black`, `--white`, `--orange`, `--gray-*`) are now thin aliases onto `--gk-*` tokens rather than literal hex — e.g. `--black: var(--gk-ink)`, `--white: var(--gk-paper)`, `--orange: var(--gk-accent)`, page background uses `--gk-bg`. No pure white/black/orange anywhere. `--gray-100` maps to `--gk-surface-2` (it's a fill, not a border); `--gray-300`/`--gray-400` both collapse to `--gk-faint`.
 - **Fraunces (serif) at weight 500** — the GemKa system's heading weight, shared across the other GemKa sites, for post titles, section and "The Why" headings. **Exception:** the large italic hero rotating quotes (`.hero-subtitle`) are weight **360** — 500 reads too heavy at display size. Body stays Inter. (Was Instrument Serif at 400 before the GemKa font swap.)
@@ -152,7 +151,7 @@ The source of truth is the IdeaKache Supabase project (`content` table, filter `
 - **Frontmatter parser has a fallback** — missing frontmatter won't crash, defaults date to `2026-01-01`.
 - **`dist/` is blown away on every build** (`rmSync` + `mkdirSync`). Never put anything in `dist/` you want to keep.
 - **Post list was carefully compacted** to fit all 6 posts on one screen. If adding a 7th post, the layout may need revisiting.
-- **The Why page has no nav bar** — the `whyBody` in `build.js` omits the `<nav>` element entirely. Don't add it back.
+- **The Why page is a standard post-layout page** — `whyBody` in `build.js` carries the full `<nav>` and renders as `<main class="post">`, matching the Disclosures page. (It used to be a bespoke nav-less `.why-page` layout; those styles have been removed.)
 
 ## Deploy workflow
 
@@ -165,5 +164,5 @@ The source of truth is the IdeaKache Supabase project (`content` table, filter `
 - **Design:** Adopted the GemKa design system — `@gemka/core` cream/oxblood palette and Inter + Fraunces type. Replaced the old white/black/#FF6600 look. Hero quotes lightened to Fraunces 360.
 - **Posts live again:** 10 posts published on /writing: Learning with AI Parts 0-3 (Part 3, smoke tests, is an HTML post), AI Essentials Parts 0-4, and the Jaylen Brown standalone. The old "6 posts on one screen" layout note below predates this.
 - **Drafts queue (`posts/_drafts/`):** Learning with AI Part 4 (The Checklist Robot; written, awaiting Jeremy's publish decision), Part 5 (AI search), Part 6 (calendar integration), plus several AI Essentials drafts. Publishing any of these requires Jeremy's explicit consent (see conventions above).
-- **The Why page:** Full copy live, but the P.S. (gemtimer.com / ideakache.com links) is hidden for now (see Key patterns).
+- **The Why page:** Rebuilt on the standard post layout (full nav + footer) with new copy. The old hidden P.S. is gone; the product links now live in the site footer.
 - **In progress:** Drafting further essays (RTF files in repo root) and the "Learning with AI" series.

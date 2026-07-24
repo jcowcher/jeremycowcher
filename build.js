@@ -285,16 +285,38 @@ posts.forEach(post => {
 
 // Generate "The Why" page
 const whyBody = `
-<main class="why-page">
-  <h1>The Why</h1>
-  <p>Writing helps me think. This website is the vehicle for that: it will be a mix of what I'm up to and shorter takes on topics I'm interested in. Expect to see takes on AI, building products, business, and sports, particularly the NBA.</p>
-  <p>I enjoy great takesmen; it's one reason I've been reading and listening to Bill Simmons for 15 years. I'll have good takes and bad takes. No one bats a thousand. What I can guarantee is that they'll be authentic and reflect what I believed when I wrote them.</p>
-  <p>There is no comment section. To paraphrase Colin Cowherd, I play offense (on this website). If you have constructive feedback, you'll be able to reach me online.</p>
-  <p>Thanks for visiting,</p>
-  <p>Jeremy</p>
-  <!-- P.S. hidden for now: names/links the products before they're public. Restore when ready.
-  <p><em>P.S. If you want to check out the products I've built with myself as the first customer, visit <a href="https://gemtimer.com" target="_blank" rel="noopener">gemtimer.com</a> to better manage your time and <a href="https://ideakache.com" target="_blank" rel="noopener">ideakache.com</a> to find the thoughts of remarkable thinkers and entrepreneurs.</em></p>
-  -->
+<nav>
+  <div class="nav-left">
+    <a href="/" class="nav-logo"><span>Gem</span><span class="gk-ka">Ka</span></a>
+    <a href="/the-why" class="nav-link">The Why</a>
+  </div>
+  <div class="nav-clock" id="clock"></div>
+  <div class="nav-right">
+    <a href="https://github.com/jcowcher" target="_blank" rel="noopener" class="nav-github" aria-label="GitHub">
+      <svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+    </a>
+  </div>
+  <button class="nav-menu-btn" aria-label="Menu" aria-haspopup="menu" aria-expanded="false" type="button">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div class="nav-mobile-menu" role="menu">
+    <a class="nav-mobile-menu-item" href="/the-why" role="menuitem">The Why</a>
+    <a class="nav-mobile-menu-item" href="https://github.com/jcowcher" target="_blank" rel="noopener" role="menuitem">GitHub</a>
+  </div>
+</nav>
+<main class="post">
+  <header class="post-header">
+    <h1>The Why</h1>
+  </header>
+  <article class="post-body">
+    <p>Writing things out helps me think through problems. When I'm building a new feature or trying to solve a problem, I like to start with a fresh HTML file. I'll then go back and forth with Claude and start writing out the why and the how for that topic, including what my options are. Most of these files I'll turn into posts here. That was the original idea behind the Learning with AI series.</p>
+    <p>As well as what I'm up to, this website will have shorter takes on topics I'm interested in. Expect to see takes on business and sports, particularly the NBA.</p>
+    <p>I'll probably get things wrong and that's fine. No one bats a thousand. I enjoy a great takesman; it's one reason I've been reading and listening to Bill Simmons for 15 years. What I can guarantee is that everything here was written by me, and reflects what I believed when I wrote it.</p>
+    <p>There is no comment section. If you've got a thought that can improve anything I've written, email me at <a href="mailto:jeremy@gemka.co">jeremy@gemka.co</a>.</p>
+    <p>Thanks for visiting,<br>Jeremy</p>
+  </article>
   <footer class="post-footer"><a href="/writing">&larr; All posts</a></footer>
 </main>`;
 
