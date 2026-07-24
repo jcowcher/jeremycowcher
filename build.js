@@ -1,6 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 const { marked } = require('marked');
+// Family footer data + wordmark rendering, single-sourced from @gemka/core.
+// footer.js is ESM but zero-dependency and synchronous, so require() works on
+// Node >=22.12 (see package.json engines). Never hardcode the family list here.
+const { productLinks, productWordmark, FOOTER_PRODUCTS } = require('@gemka/core/footer');
 
 const POSTS_DIR = path.join(__dirname, 'posts');
 const DIST_DIR = path.join(__dirname, 'dist');
@@ -34,14 +38,18 @@ const SHOW_FOOTER = true;
 // like the product sites (gemtimer.com): social + family on the left, utility
 // on the right. External links open in a new tab; order and styling mirror the
 // other GemKa sites.
+// GemKa is the family parent (parent: true), so it never appears in the family
+// row; it is the attribution instead. Compose the attribution locally so the
+// noun reads "site" (this blog is a site, not a product); the href and wordmark
+// coloring still come from @gemka/core, only the noun is ours.
+const GEMKA = FOOTER_PRODUCTS.find(p => p.parent);
+const GEMKA_ATTRIBUTION =
+  `A <a href="${GEMKA.href}" target="_blank" rel="noopener noreferrer">${productWordmark(GEMKA)}</a> site`;
+
 const FOOTER_LINKS = `<footer class="footer-links">
   <div class="footer-row">
     <div class="footer-group footer-left">
-      <a href="https://gemtimer.com" target="_blank" rel="noopener noreferrer">GemTimer</a>
-      <span class="footer-sep" aria-hidden="true">·</span>
-      <a href="https://gemtodo.com" target="_blank" rel="noopener noreferrer">GemTodo</a>
-      <span class="footer-sep" aria-hidden="true">·</span>
-      <a href="https://ideakache.com" target="_blank" rel="noopener noreferrer">IdeaKache</a>
+      ${productLinks({ separator: '<span class="footer-sep" aria-hidden="true">·</span>' })}
     </div>
     <div class="footer-group footer-right">
       <a href="/disclosures">Disclosures</a>
@@ -52,6 +60,7 @@ const FOOTER_LINKS = `<footer class="footer-links">
   <div class="footer-divider" aria-hidden="true"></div>
   <div class="footer-meta">
     <span class="footer-copy">&copy; 2026 Jeremy Cowcher</span>
+    <span class="footer-attribution">${GEMKA_ATTRIBUTION}</span>
     <span class="footer-tagline">Writing to think.</span>
   </div>
 </footer>`;

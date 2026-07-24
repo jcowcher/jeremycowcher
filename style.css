@@ -713,6 +713,19 @@ main.post {
   color: var(--gk-muted);
 }
 
+.footer-attribution {
+  color: var(--gk-muted);
+}
+
+/* Product wordmark coloring. Copied verbatim from @gemka/core/chrome.css, which
+   the blog does not load (it inlines only tokens.css + style.css). Without these
+   the family-row and GemKa-attribution wordmarks would render flat. --gk-brand-kache
+   ships in the installed tokens.css. */
+.gk-prod { display: inline-block; font-size: inherit; font-weight: inherit; }
+.gk-prod-ink    { color: var(--gk-ink); }
+.gk-prod-accent { color: var(--gk-accent); }
+.gk-prod-brick  { color: var(--gk-brand-kache); }
+
 .footer-tagline {
   font-family: 'Fraunces', Georgia, serif;
   font-style: italic;
