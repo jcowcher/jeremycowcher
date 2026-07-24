@@ -15,6 +15,8 @@ When a task is a code change, scope or discuss it in Cowork if that helps, then 
 
 Cowork must never run git commands against a repo on Jeremy's Mac. The device bridge cannot delete files, and git needs to delete its own lock files, so every attempt strands a `.git/index.lock` and jams the repo (learned the hard way, July 2026). Instead, Cowork makes the file edits, then hands Jeremy a copy-paste terminal block for the commit and push, or routes the change through Claude Code.
 
+**Commit is not push.** A commit is local only. Until it is pushed, no preview build, no reviewer, and no other machine can see it. Any instruction to commit includes pushing to the same branch's remote unless it says otherwise in as many words. "No deploy" means do not merge to the production branch; it never means do not push. Pushing a working branch is how work becomes reviewable, and on repos with preview builds it is a preview, not a deploy.
+
 Database changes (e.g. Supabase) run in Cowork, split by risk: pure adds (a new table or other new object that touches nothing existing) are fine to run directly. Alterations and deletions (changing or dropping existing tables or columns, bulk updates, deleting rows) get discussed with Jeremy first, every time. If it's unclear which side a change falls on, treat it as an alteration and ask.
 
 ## Cloud sessions base off dev
