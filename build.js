@@ -28,7 +28,7 @@ const COMING_SOON_SERIES = ['The Promise of AI'];
 // Footer kill switch. Temporarily hidden until launch; flip to true to render
 // the footer on every page. The footer now drops GemKa from the family row and
 // reads "© 2026 Jeremy Cowcher".
-const SHOW_FOOTER = false;
+const SHOW_FOOTER = true;
 
 // GemKa-family footer (rendered on every page). Two middot-separated groups
 // like the product sites (gemtimer.com): social + family on the left, utility
