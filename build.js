@@ -266,28 +266,19 @@ const posts = collectPostFiles(POSTS_DIR)
   })
   .sort((a, b) => new Date(b.date) - new Date(a.date) || b.slug.localeCompare(a.slug));
 
-// Single-source the shared chrome in a self-styled HTML post: swap its inlined
-// nav, footer, the two chrome <style> blocks (@gemka tokens + site style.css),
-// and the clock/menu <script> for the canonical versions used by every other
-// page. Bespoke per-post <style> blocks (the 3rd onward) and the post body pass
+// Single-source the shared chrome in a self-styled HTML post: swap its marker
+// placeholders (<!--gk:tokens--> / <!--gk:style-->) plus its nav, footer and the
+// clock/menu <script> for the canonical versions used by every other page. Every
+// real <style> block in a post source is the author's own bespoke CSS and passes
 // through untouched. Assertions throw (failing the build) if a post's structure
 // doesn't match the expected chrome anchors, so drift can't silently slip past.
 function injectChrome(page, slug) {
-  const styleCount = (page.match(/<style>[\s\S]*?<\/style>/g) || []).length;
-  if (styleCount < 2) throw new Error(`injectChrome[${slug}]: expected >=2 <style> blocks, found ${styleCount}`);
-  let i = 0;
-  page = page.replace(/<style>([\s\S]*?)<\/style>/g, (m, inner) => {
-    i++;
-    if (i === 1) {
-      if (!inner.startsWith(':root')) throw new Error(`injectChrome[${slug}]: 1st <style> is not the token block`);
-      return `<style>${TOKENS}</style>`;
-    }
-    if (i === 2) {
-      if (!inner.startsWith('* {')) throw new Error(`injectChrome[${slug}]: 2nd <style> is not the site stylesheet`);
-      return `<style>${STYLE}</style>`;
-    }
-    return m; // 3rd+ <style>: bespoke per-post CSS, untouched
-  });
+  const tokensCount = (page.match(/<!--gk:tokens-->/g) || []).length;
+  if (tokensCount !== 1) throw new Error(`injectChrome[${slug}]: expected exactly 1 <!--gk:tokens--> marker, found ${tokensCount}`);
+  const styleCount = (page.match(/<!--gk:style-->/g) || []).length;
+  if (styleCount !== 1) throw new Error(`injectChrome[${slug}]: expected exactly 1 <!--gk:style--> marker, found ${styleCount}`);
+  page = page.replace('<!--gk:tokens-->', () => `<style>${TOKENS}</style>`);
+  page = page.replace('<!--gk:style-->', () => `<style>${STYLE}</style>`);
   const nav = page.match(/<nav>[\s\S]*?<\/nav>/g) || [];
   if (nav.length !== 1) throw new Error(`injectChrome[${slug}]: expected 1 <nav>, found ${nav.length}`);
   page = page.replace(/<nav>[\s\S]*?<\/nav>/, () => NAV);
