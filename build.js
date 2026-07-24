@@ -56,6 +56,73 @@ const FOOTER_LINKS = `<footer class="footer-links">
   </div>
 </footer>`;
 
+// Shared site chrome, single-sourced. The templated pages interpolate ${NAV}/${SCRIPT};
+// injectChrome() (below) swaps these same canonical versions into the self-styled HTML posts.
+const NAV = `<nav>
+  <div class="nav-left">
+    <a href="/" class="nav-logo"><span>Gem</span><span class="gk-ka">Ka</span></a>
+    <a href="/the-why" class="nav-link">The Why</a>
+  </div>
+  <div class="nav-clock" id="clock"></div>
+  <div class="nav-right">
+    <a href="https://github.com/jcowcher" target="_blank" rel="noopener" class="nav-github" aria-label="GitHub">
+      <svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+    </a>
+  </div>
+  <button class="nav-menu-btn" aria-label="Menu" aria-haspopup="menu" aria-expanded="false" type="button">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div class="nav-mobile-menu" role="menu">
+    <a class="nav-mobile-menu-item" href="/the-why" role="menuitem">The Why</a>
+    <a class="nav-mobile-menu-item" href="https://github.com/jcowcher" target="_blank" rel="noopener" role="menuitem">GitHub</a>
+  </div>
+</nav>`;
+
+const SCRIPT = `<script>
+(function(){
+  var q=document.getElementById('hero-quote');
+  if(q){
+    var quotes=[
+      {text:'It is not the critic who counts; not the man who points out how the strong man stumbles, or where the doer of deeds could have done them better. The credit belongs to the man who is actually in the arena.',attr:'Theodore Roosevelt',url:'https://www.presidency.ucsb.edu/documents/address-the-sorbonne-paris-france-citizenship-republic'},
+      {text:'The reasonable man adapts himself to the world: the unreasonable one persists in trying to adapt the world to himself. Therefore all progress depends on the unreasonable man.',attr:'George Bernard Shaw',url:'https://en.wikipedia.org/wiki/Man_and_Superman'},
+      {text:'As you become an adult, you realize that things around you weren\u2019t just always there; people made them happen. But only recently have I started to internalize how much tenacity <em>everything</em> requires. That hotel, that park, that railway. The world is a museum of passion projects.',attr:'John Collison'}
+    ];
+    var pick=quotes[Math.floor(Math.random()*quotes.length)];
+    var attrHtml=pick.url?'<a href="'+pick.url+'" target="_blank" rel="noopener">'+pick.attr+'</a>':pick.attr;
+    q.innerHTML='<p class="hero-subtitle">'+pick.text+'</p><p class="hero-attr">&mdash; '+attrHtml+'</p>';
+  }
+  var btn=document.querySelector('.nav-menu-btn');
+  var menu=document.querySelector('.nav-mobile-menu');
+  if(btn&&menu){
+    function closeMenu(){menu.classList.remove('open');btn.setAttribute('aria-expanded','false');}
+    btn.addEventListener('click',function(e){
+      e.stopPropagation();
+      var willOpen=!menu.classList.contains('open');
+      menu.classList.toggle('open',willOpen);
+      btn.setAttribute('aria-expanded',willOpen?'true':'false');
+    });
+    menu.addEventListener('click',closeMenu);
+    document.addEventListener('click',function(e){
+      if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target))closeMenu();
+    });
+    document.addEventListener('keydown',function(e){
+      if(e.key==='Escape'&&menu.classList.contains('open')){closeMenu();btn.focus();}
+    });
+  }
+  var el=document.getElementById('clock');
+  if(!el)return;
+  function tick(){
+    var d=new Date();
+    var date=d.toLocaleDateString('en-US',{month:'numeric',day:'numeric',year:'numeric'});
+    var time=d.toLocaleTimeString('en-US',{hour12:false,hour:'2-digit',minute:'2-digit',second:'2-digit'});
+    el.innerHTML='<span class="clock-half clock-date">'+date+'</span><span class="clock-half clock-time">'+time+'</span>';
+  }
+  tick();setInterval(tick,1000);
+})();
+</script>`;
+
 // Parse frontmatter from markdown files
 function parseFrontmatter(content) {
   const match = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
@@ -117,48 +184,7 @@ ${extra}
 </head>
 <body class="${bodyClass}">
 ${body}
-${SHOW_FOOTER ? FOOTER_LINKS + '\n' : ''}<script>
-(function(){
-  var q=document.getElementById('hero-quote');
-  if(q){
-    var quotes=[
-      {text:'It is not the critic who counts; not the man who points out how the strong man stumbles, or where the doer of deeds could have done them better. The credit belongs to the man who is actually in the arena.',attr:'Theodore Roosevelt',url:'https://www.presidency.ucsb.edu/documents/address-the-sorbonne-paris-france-citizenship-republic'},
-      {text:'The reasonable man adapts himself to the world: the unreasonable one persists in trying to adapt the world to himself. Therefore all progress depends on the unreasonable man.',attr:'George Bernard Shaw',url:'https://en.wikipedia.org/wiki/Man_and_Superman'},
-      {text:'As you become an adult, you realize that things around you weren\u2019t just always there; people made them happen. But only recently have I started to internalize how much tenacity <em>everything</em> requires. That hotel, that park, that railway. The world is a museum of passion projects.',attr:'John Collison'}
-    ];
-    var pick=quotes[Math.floor(Math.random()*quotes.length)];
-    var attrHtml=pick.url?'<a href="'+pick.url+'" target="_blank" rel="noopener">'+pick.attr+'</a>':pick.attr;
-    q.innerHTML='<p class="hero-subtitle">'+pick.text+'</p><p class="hero-attr">&mdash; '+attrHtml+'</p>';
-  }
-  var btn=document.querySelector('.nav-menu-btn');
-  var menu=document.querySelector('.nav-mobile-menu');
-  if(btn&&menu){
-    function closeMenu(){menu.classList.remove('open');btn.setAttribute('aria-expanded','false');}
-    btn.addEventListener('click',function(e){
-      e.stopPropagation();
-      var willOpen=!menu.classList.contains('open');
-      menu.classList.toggle('open',willOpen);
-      btn.setAttribute('aria-expanded',willOpen?'true':'false');
-    });
-    menu.addEventListener('click',closeMenu);
-    document.addEventListener('click',function(e){
-      if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target))closeMenu();
-    });
-    document.addEventListener('keydown',function(e){
-      if(e.key==='Escape'&&menu.classList.contains('open')){closeMenu();btn.focus();}
-    });
-  }
-  var el=document.getElementById('clock');
-  if(!el)return;
-  function tick(){
-    var d=new Date();
-    var date=d.toLocaleDateString('en-US',{month:'numeric',day:'numeric',year:'numeric'});
-    var time=d.toLocaleTimeString('en-US',{hour12:false,hour:'2-digit',minute:'2-digit',second:'2-digit'});
-    el.innerHTML='<span class="clock-half clock-date">'+date+'</span><span class="clock-half clock-time">'+time+'</span>';
-  }
-  tick();setInterval(tick,1000);
-})();
-</script>
+${SHOW_FOOTER ? FOOTER_LINKS + '\n' : ''}${SCRIPT}
 </body>
 </html>`;
 }
@@ -231,37 +257,52 @@ const posts = collectPostFiles(POSTS_DIR)
   })
   .sort((a, b) => new Date(b.date) - new Date(a.date) || b.slug.localeCompare(a.slug));
 
+// Single-source the shared chrome in a self-styled HTML post: swap its inlined
+// nav, footer, the two chrome <style> blocks (@gemka tokens + site style.css),
+// and the clock/menu <script> for the canonical versions used by every other
+// page. Bespoke per-post <style> blocks (the 3rd onward) and the post body pass
+// through untouched. Assertions throw (failing the build) if a post's structure
+// doesn't match the expected chrome anchors, so drift can't silently slip past.
+function injectChrome(page, slug) {
+  const styleCount = (page.match(/<style>[\s\S]*?<\/style>/g) || []).length;
+  if (styleCount < 2) throw new Error(`injectChrome[${slug}]: expected >=2 <style> blocks, found ${styleCount}`);
+  let i = 0;
+  page = page.replace(/<style>([\s\S]*?)<\/style>/g, (m, inner) => {
+    i++;
+    if (i === 1) {
+      if (!inner.startsWith(':root')) throw new Error(`injectChrome[${slug}]: 1st <style> is not the token block`);
+      return `<style>${TOKENS}</style>`;
+    }
+    if (i === 2) {
+      if (!inner.startsWith('* {')) throw new Error(`injectChrome[${slug}]: 2nd <style> is not the site stylesheet`);
+      return `<style>${STYLE}</style>`;
+    }
+    return m; // 3rd+ <style>: bespoke per-post CSS, untouched
+  });
+  const nav = page.match(/<nav>[\s\S]*?<\/nav>/g) || [];
+  if (nav.length !== 1) throw new Error(`injectChrome[${slug}]: expected 1 <nav>, found ${nav.length}`);
+  page = page.replace(/<nav>[\s\S]*?<\/nav>/, () => NAV);
+  const footer = page.match(/<footer class="footer-links">[\s\S]*?<\/footer>/g) || [];
+  if (footer.length !== 1) throw new Error(`injectChrome[${slug}]: expected 1 .footer-links footer, found ${footer.length}`);
+  page = page.replace(/<footer class="footer-links">[\s\S]*?<\/footer>/, () => FOOTER_LINKS);
+  const script = page.match(/<script>[\s\S]*?<\/script>/g) || [];
+  if (script.length !== 1) throw new Error(`injectChrome[${slug}]: expected 1 <script>, found ${script.length}`);
+  page = page.replace(/<script>[\s\S]*?<\/script>/, () => SCRIPT);
+  return page;
+}
+
 // Generate individual post pages
 posts.forEach(post => {
-  // HTML posts are already complete pages — write them verbatim (the <!--post-->
-  // comment was already stripped during parsing), never re-wrapped in htmlTemplate.
+  // HTML posts are already complete pages, but their shared chrome (nav, footer,
+  // chrome CSS, menu/clock script) is injected from the canonical source at build
+  // time so it never drifts; only their bespoke body/CSS is truly per-post.
   if (post.kind === 'html') {
-    fs.writeFileSync(path.join(DIST_DIR, 'posts', post.slug + '.html'), post.page);
+    fs.writeFileSync(path.join(DIST_DIR, 'posts', post.slug + '.html'), injectChrome(post.page, post.slug));
     return;
   }
 
   const body = `
-<nav>
-  <div class="nav-left">
-    <a href="/" class="nav-logo"><span>Gem</span><span class="gk-ka">Ka</span></a>
-    <a href="/the-why" class="nav-link">The Why</a>
-  </div>
-  <div class="nav-clock" id="clock"></div>
-  <div class="nav-right">
-    <a href="https://github.com/jcowcher" target="_blank" rel="noopener" class="nav-github" aria-label="GitHub">
-      <svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
-    </a>
-  </div>
-  <button class="nav-menu-btn" aria-label="Menu" aria-haspopup="menu" aria-expanded="false" type="button">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-  <div class="nav-mobile-menu" role="menu">
-    <a class="nav-mobile-menu-item" href="/the-why" role="menuitem">The Why</a>
-    <a class="nav-mobile-menu-item" href="https://github.com/jcowcher" target="_blank" rel="noopener" role="menuitem">GitHub</a>
-  </div>
-</nav>
+${NAV}
 <main class="post">
   <header class="post-header">
     <time>${formatDate(post.date)}</time>
@@ -285,27 +326,7 @@ posts.forEach(post => {
 
 // Generate "The Why" page
 const whyBody = `
-<nav>
-  <div class="nav-left">
-    <a href="/" class="nav-logo"><span>Gem</span><span class="gk-ka">Ka</span></a>
-    <a href="/the-why" class="nav-link">The Why</a>
-  </div>
-  <div class="nav-clock" id="clock"></div>
-  <div class="nav-right">
-    <a href="https://github.com/jcowcher" target="_blank" rel="noopener" class="nav-github" aria-label="GitHub">
-      <svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
-    </a>
-  </div>
-  <button class="nav-menu-btn" aria-label="Menu" aria-haspopup="menu" aria-expanded="false" type="button">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-  <div class="nav-mobile-menu" role="menu">
-    <a class="nav-mobile-menu-item" href="/the-why" role="menuitem">The Why</a>
-    <a class="nav-mobile-menu-item" href="https://github.com/jcowcher" target="_blank" rel="noopener" role="menuitem">GitHub</a>
-  </div>
-</nav>
+${NAV}
 <main class="post">
   <header class="post-header">
     <h1>The Why</h1>
@@ -328,27 +349,7 @@ fs.writeFileSync(
 // Generate "Disclosures" page — standard page layout with the full nav, holding
 // the site-wide disclaimer text (the same copy shown in the footer).
 const disclosuresBody = `
-<nav>
-  <div class="nav-left">
-    <a href="/" class="nav-logo"><span>Gem</span><span class="gk-ka">Ka</span></a>
-    <a href="/the-why" class="nav-link">The Why</a>
-  </div>
-  <div class="nav-clock" id="clock"></div>
-  <div class="nav-right">
-    <a href="https://github.com/jcowcher" target="_blank" rel="noopener" class="nav-github" aria-label="GitHub">
-      <svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
-    </a>
-  </div>
-  <button class="nav-menu-btn" aria-label="Menu" aria-haspopup="menu" aria-expanded="false" type="button">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-  <div class="nav-mobile-menu" role="menu">
-    <a class="nav-mobile-menu-item" href="/the-why" role="menuitem">The Why</a>
-    <a class="nav-mobile-menu-item" href="https://github.com/jcowcher" target="_blank" rel="noopener" role="menuitem">GitHub</a>
-  </div>
-</nav>
+${NAV}
 <main class="post">
   <header class="post-header">
     <h1>Disclosures</h1>
@@ -403,27 +404,7 @@ const partZeroQuotesHtml = partZeroQuotes.map(q => `
     </blockquote>`).join('\n');
 
 const partZeroBody = `
-<nav>
-  <div class="nav-left">
-    <a href="/" class="nav-logo"><span>Gem</span><span class="gk-ka">Ka</span></a>
-    <a href="/the-why" class="nav-link">The Why</a>
-  </div>
-  <div class="nav-clock" id="clock"></div>
-  <div class="nav-right">
-    <a href="https://github.com/jcowcher" target="_blank" rel="noopener" class="nav-github" aria-label="GitHub">
-      <svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
-    </a>
-  </div>
-  <button class="nav-menu-btn" aria-label="Menu" aria-haspopup="menu" aria-expanded="false" type="button">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-  <div class="nav-mobile-menu" role="menu">
-    <a class="nav-mobile-menu-item" href="/the-why" role="menuitem">The Why</a>
-    <a class="nav-mobile-menu-item" href="https://github.com/jcowcher" target="_blank" rel="noopener" role="menuitem">GitHub</a>
-  </div>
-</nav>
+${NAV}
 <main class="post part-0-quotes">
   <header class="post-header">
     <h1>There's no grand plan you've missed</h1>
@@ -551,27 +532,7 @@ const postListHtml = posts.length === 0
   : seriesGroupsHtml + comingSoonHtml + standaloneHtml;
 
 const writingBody = `
-<nav>
-  <div class="nav-left">
-    <a href="/" class="nav-logo"><span>Gem</span><span class="gk-ka">Ka</span></a>
-    <a href="/the-why" class="nav-link">The Why</a>
-  </div>
-  <div class="nav-clock" id="clock"></div>
-  <div class="nav-right">
-    <a href="https://github.com/jcowcher" target="_blank" rel="noopener" class="nav-github" aria-label="GitHub">
-      <svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
-    </a>
-  </div>
-  <button class="nav-menu-btn" aria-label="Menu" aria-haspopup="menu" aria-expanded="false" type="button">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-  <div class="nav-mobile-menu" role="menu">
-    <a class="nav-mobile-menu-item" href="/the-why" role="menuitem">The Why</a>
-    <a class="nav-mobile-menu-item" href="https://github.com/jcowcher" target="_blank" rel="noopener" role="menuitem">GitHub</a>
-  </div>
-</nav>
+${NAV}
 <div class="posts-section">
   <div class="posts-section-header">
     <span class="posts-section-title">Writing</span>
@@ -598,27 +559,7 @@ fs.writeFileSync(
 // Generate the landing (index) page: nav + hero + footer only, sized to one
 // screen via the "landing" body class. The article list lives on /writing.
 const indexBody = `
-<nav>
-  <div class="nav-left">
-    <a href="/" class="nav-logo"><span>Gem</span><span class="gk-ka">Ka</span></a>
-    <a href="/the-why" class="nav-link">The Why</a>
-  </div>
-  <div class="nav-clock" id="clock"></div>
-  <div class="nav-right">
-    <a href="https://github.com/jcowcher" target="_blank" rel="noopener" class="nav-github" aria-label="GitHub">
-      <svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
-    </a>
-  </div>
-  <button class="nav-menu-btn" aria-label="Menu" aria-haspopup="menu" aria-expanded="false" type="button">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-  <div class="nav-mobile-menu" role="menu">
-    <a class="nav-mobile-menu-item" href="/the-why" role="menuitem">The Why</a>
-    <a class="nav-mobile-menu-item" href="https://github.com/jcowcher" target="_blank" rel="noopener" role="menuitem">GitHub</a>
-  </div>
-</nav>
+${NAV}
 <section class="hero">
   <div class="hero-content" id="hero-quote">
     <p class="hero-subtitle">It is not the critic who counts; not the man who points out how the strong man stumbles, or where the doer of deeds could have done them better. The credit belongs to the man who is actually in the arena.</p>
