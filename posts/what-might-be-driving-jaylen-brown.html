@@ -15,833 +15,8 @@ description: Putting myself in Jaylen Brown's shoes to follow the logic behind a
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>:root {
-  /* Surfaces — warm paper */
-  --gk-bg:            #f1e9d2;
-  --gk-paper:         #faf6ea;
-  --gk-surface-2:     #ece3cb;
-  --gk-surface-3:  #e6ddc4;   /* darkest warm surface — reads against the page bg,
-                                 e.g. an empty chart-track channel */
-
-  /* Ink — warm, soft contrast (never pure black) */
-  --gk-ink:           #1c1a14;
-  --gk-muted:         #6b6354;
-  --gk-muted-deep:    #4a4438;
-  --gk-faint:         #9c8f6f;
-
-  /* Borders */
-  --gk-border:        #d9cba8;
-  --gk-border-strong: #b8a87e;
-
-  /* Accent — oxblood */
-  --gk-accent:        #c8102e;
-  --gk-accent-deep:   #960c22;
-  --gk-accent-wash:        rgba(200, 16, 46, 0.06);
-  --gk-accent-wash-hover:  rgba(200, 16, 46, 0.10);
-
-  /* Shared row-hover tint */
-  --gk-hover-cream:   #f0ece0;
-
-  /* Type */
-  --gk-font-sans:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --gk-font-serif: "Fraunces", Georgia, "Times New Roman", serif;
-
-  /* Chrome primitives: non-color dimensions consumed by chrome.css */
-  --gk-nav-rule:      1px;             /* nav / dd-nav oxblood underline (base 2px folds to the vintage 1px) */
-  --gk-avatar:        30px;            /* auth-avatar diameter */
-  --gk-clock-half:    5.5rem;          /* nav clock date/time half width */
-  --gk-heatmap-cell:  14px;            /* deep-dive heatmap cell + day-label row height */
-  --gk-stat-card-pad: 0.5rem 0.65rem;  /* deep-dive stat / peak-hour card padding */
-}
-</style>
-<style>* { margin: 0; padding: 0; box-sizing: border-box; }
-
-/* Palette repointed onto the canonical GemKa tokens (defined in node_modules/
-   @gemka/core/tokens.css, inlined before this file at build time). Warm cream
-   surfaces, soft warm ink, oxblood accent — no pure white/black/orange. */
-:root {
-  --black: var(--gk-ink);
-  --gray-700: var(--gk-muted-deep);
-  --gray-500: var(--gk-muted);
-  --gray-400: var(--gk-faint);
-  --gray-300: var(--gk-faint);
-  --gray-200: var(--gk-border);
-  --gray-100: var(--gk-surface-2);
-  --white: var(--gk-paper);
-  --orange: var(--gk-accent);
-}
-
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: var(--gk-bg);
-  color: var(--black);
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-html {
-  scrollbar-gutter: stable;
-}
-
-/* Nav */
-nav {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 40px;
-  max-width: 1100px;
-  width: 100%;
-  box-sizing: border-box;
-  margin: 0 auto;
-}
-
-nav::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 40px;
-  right: 40px;
-  border-bottom: 2px solid var(--gk-accent);
-}
-
-.nav-home {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--black);
-  text-decoration: none;
-  letter-spacing: -0.02em;
-}
-
-.nav-home:hover {
-  color: var(--orange);
-}
-
-.nav-left {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.nav-link {
-  font-size: 0.88rem;
-  font-weight: 400;
-  color: var(--gray-700);
-  text-decoration: none;
-  letter-spacing: -0.01em;
-}
-
-.nav-link:hover {
-  color: var(--orange);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.nav-right {
-  display: flex;
-  align-items: center;
-}
-
-.nav-github {
-  color: var(--black);
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  transition: color 0.15s;
-}
-
-.nav-github:hover {
-  color: var(--orange);
-}
-
-/* Nav clock (post pages) */
-.nav-clock {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 0.75rem;
-  font-variant-numeric: tabular-nums;
-  font-size: 0.8rem;
-  font-weight: 400;
-  color: var(--gray-400);
-  letter-spacing: 0.05em;
-}
-
-.clock-half {
-  width: 5.5rem;
-}
-
-.clock-date {
-  text-align: right;
-}
-
-.clock-time {
-  text-align: left;
-}
-
-/* Hero section — full viewport */
-.hero {
-  height: calc(100svh - 53px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 2rem 2rem calc(2rem + 53px);
-  position: relative;
-}
-
-/* Landing (index only): stack nav + hero + footer to fill one screen with the
-   footer at the bottom of the viewport. The hero grows to fill the space
-   between nav and footer instead of using its own fixed height. Scoped to
-   body.landing so all other pages keep the default layout. */
-body.landing {
-  display: flex;
-  flex-direction: column;
-  min-height: 100svh;
-}
-
-body.landing .hero {
-  flex: 1 1 auto;
-  height: auto;
-}
-
-.hero-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.hero-clock {
-  position: absolute;
-  top: 1.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 0.75rem;
-  font-size: 0.8rem;
-  font-weight: 400;
-  color: var(--gray-400);
-  letter-spacing: 0.05em;
-  font-variant-numeric: tabular-nums;
-}
-
-.hero-subtitle {
-  font-family: 'Fraunces', Georgia, serif;
-  font-size: 1.6rem;
-  color: var(--gray-700);
-  font-weight: 360;
-  font-style: italic;
-  max-width: 520px;
-  line-height: 1.5;
-}
-
-.hero-attr {
-  font-size: 0.85rem;
-  color: var(--gray-400);
-  font-weight: 500;
-  margin-top: 0.75rem;
-  letter-spacing: 0.02em;
-}
-
-.hero-attr a {
-  color: var(--gray-400);
-  text-decoration: none;
-}
-
-.hero-attr a:hover {
-  text-decoration: underline;
-}
-
-/* Scroll arrow */
-.scroll-arrow {
-  position: absolute;
-  bottom: 2.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.4rem;
-  text-decoration: none;
-  color: var(--gray-400);
-  transition: color 0.2s;
-}
-
-.scroll-arrow:hover {
-  color: var(--orange);
-}
-
-.scroll-arrow .scroll-name {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--black);
-  letter-spacing: -0.01em;
-  text-transform: none;
-  text-decoration: none;
-  margin-bottom: 0.5rem;
-}
-
-.scroll-arrow .scroll-cta {
-  font-size: 1rem;
-  font-weight: 400;
-  text-transform: none;
-  letter-spacing: 0.02em;
-  color: var(--gray-500);
-  text-decoration: none;
-  text-underline-offset: 3px;
-  transition: text-decoration-color 0.2s;
-}
-
-.scroll-arrow:hover .scroll-cta {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  color: var(--orange);
-}
-
-.scroll-arrow span {
-  font-size: 0.8rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--gray-700);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.scroll-arrow svg {
-  width: 44px;
-  height: 36px;
-  fill: var(--black);
-  animation: bounce 2s ease-in-out infinite;
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(5px); }
-}
-
-.posts-back {
-  margin-top: 0.75rem;
-}
-
-.posts-back a {
-  font-size: 0.88rem;
-  color: var(--gray-500);
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.posts-back a:hover {
-  color: var(--orange);
-}
-
-/* Posts section */
-.posts-section {
-  max-width: 680px;
-  margin: 0 auto;
-  padding: 1rem 1.5rem 1rem;
-}
-
-.posts-section-header {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  padding-bottom: 0.5rem;
-  margin-bottom: 0.25rem;
-  border-bottom: 2px solid var(--black);
-}
-
-.posts-section-title {
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--black);
-}
-
-.posts-section-count {
-  font-size: 0.75rem;
-  color: var(--gray-500);
-  font-weight: 400;
-}
-
-/* Post list */
-.post-list {
-  display: flex;
-  flex-direction: column;
-}
-
-.post-link {
-  text-decoration: none;
-  color: inherit;
-  border-bottom: 1px solid var(--gray-200);
-}
-
-.post-link:last-child {
-  border-bottom: none;
-}
-
-.post-card {
-  padding: 0.45rem 0;
-  display: flex;
-  align-items: flex-start;
-  gap: 1.5rem;
-  transition: padding-left 0.15s ease;
-}
-
-.post-link:hover .post-card {
-  padding-left: 0.5rem;
-}
-
-.post-card-date {
-  font-size: 0.75rem;
-  color: var(--gray-400);
-  font-weight: 400;
-  white-space: nowrap;
-  padding-top: 0.2rem;
-  min-width: 72px;
-  font-variant-numeric: tabular-nums;
-}
-
-.post-card-content {
-  flex: 1;
-}
-
-.post-card-content h2 {
-  font-family: 'Fraunces', Georgia, serif;
-  font-size: 1.2rem;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  line-height: 1.3;
-  margin-bottom: 0.3rem;
-}
-
-.post-link:hover .post-card-content h2 {
-  color: var(--orange);
-}
-
-.post-card-content p {
-  font-size: 0.78rem;
-  color: var(--gray-700);
-  line-height: 1.45;
-}
-
-.post-card-arrow {
-  color: var(--gray-300);
-  font-size: 1.1rem;
-  padding-top: 0.15rem;
-  transition: color 0.15s, transform 0.15s;
-  flex-shrink: 0;
-}
-
-.post-link:hover .post-card-arrow {
-  color: var(--orange);
-  transform: translateX(3px);
-}
-
-/* Collapsible series groups (native <details>, no JS) */
-.post-list > .series-group {
-  border-bottom: 1px solid var(--gray-200);
-}
-
-.post-list > .series-group:last-child {
-  border-bottom: none;
-}
-
-.series-summary {
-  list-style: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.55rem 0;
-}
-
-.series-summary::-webkit-details-marker {
-  display: none;
-}
-
-.series-chevron {
-  width: 1rem;
-  height: 1rem;
-  fill: var(--gk-accent);
-  flex-shrink: 0;
-  transition: transform 0.15s ease;
-}
-
-.series-group[open] .series-chevron {
-  transform: rotate(90deg);
-}
-
-.series-name {
-  font-family: 'Fraunces', Georgia, serif;
-  font-weight: 500;
-  font-size: 1.25rem;
-  letter-spacing: -0.01em;
-  line-height: 1.3;
-}
-
-.series-count {
-  font-size: 0.75rem;
-  color: var(--gray-400);
-  font-weight: 400;
-}
-
-.series-parts {
-  padding-left: 1.5rem;
-}
-
-.series-part-label {
-  display: block;
-  font-size: 0.7rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--gk-accent);
-  margin-bottom: 0.15rem;
-}
-
-.empty {
-  color: var(--gray-400);
-  font-style: italic;
-  padding: 2rem 0;
-}
-
-/* Post page */
-main.post {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 1.5rem 1.5rem 5rem;
-}
-
-.post-header {
-  margin-bottom: 1rem;
-}
-
-.post-header time {
-  font-size: 0.78rem;
-  color: var(--gray-500);
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-.post-header h1 {
-  font-family: 'Fraunces', Georgia, serif;
-  font-size: 1.85rem;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-}
-
-/* Article body */
-.post-body {
-  font-size: 1.05rem;
-  line-height: 1.75;
-  color: var(--black);
-}
-
-.post-body h2 {
-  font-family: 'Fraunces', Georgia, serif;
-  font-size: 1.5rem;
-  font-weight: 500;
-  margin: 2.5rem 0 0.75rem;
-  letter-spacing: -0.01em;
-}
-
-.post-body h3 {
-  font-family: 'Fraunces', Georgia, serif;
-  font-size: 1.2rem;
-  font-weight: 500;
-  margin: 2rem 0 0.5rem;
-}
-
-.post-body p {
-  margin-bottom: 1.25rem;
-}
-
-.post-body a {
-  color: var(--orange);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-.post-body a:hover {
-  color: var(--black);
-}
-
-.post-body ul, .post-body ol {
-  margin: 0 0 1.25rem 1.5rem;
-}
-
-.post-body li {
-  margin-bottom: 0.4rem;
-}
-
-.post-body blockquote {
-  border-left: 3px solid var(--gray-300);
-  background: var(--gray-100);
-  padding: 0.5rem 1.25rem;
-  margin: 1rem 0;
-  color: var(--gray-700);
-  font-style: normal;
-  border-radius: 0 4px 4px 0;
-}
-
-.post-body blockquote p {
-  margin-bottom: 0.35rem;
-}
-
-.post-body blockquote p:last-child {
-  margin-bottom: 0;
-}
-
-/* Tighter quote spacing on the /part-0-quotes page only */
-.part-0-quotes .post-body blockquote {
-  margin: 0.6rem 0;
-}
-
-.post-body code {
-  font-family: 'SF Mono', 'Fira Code', monospace;
-  font-size: 0.9em;
-  background: var(--gray-100);
-  padding: 0.15em 0.35em;
-  border-radius: 4px;
-}
-
-.post-body pre {
-  background: var(--gray-100);
-  border-radius: 6px;
-  padding: 1.25rem;
-  overflow-x: auto;
-  margin-bottom: 1.5rem;
-}
-
-.post-body pre code {
-  background: none;
-  padding: 0;
-  font-size: 0.85rem;
-  line-height: 1.6;
-}
-
-.post-body img {
-  max-width: 100%;
-  border-radius: 6px;
-  margin: 1.5rem 0;
-}
-
-.post-body hr {
-  border: none;
-  border-top: 1px solid var(--gray-200);
-  margin: 2.5rem 0;
-}
-
-/* Post disclaimer */
-.post-disclaimer {
-  margin-top: 3rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--gray-200);
-  font-size: 0.75rem;
-  color: var(--gray-400);
-  line-height: 1.6;
-  font-style: italic;
-}
-
-/* Post footer */
-.post-footer {
-  margin-top: 3rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--gray-200);
-}
-
-.post-footer a {
-  font-size: 0.88rem;
-  color: var(--gray-500);
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.post-footer a:hover {
-  color: var(--orange);
-}
-
-/* Footer (GemKa family): a links row (social/family left, utility right) and a
-   meta row (copyright left, tagline right). The outer .footer-links mirrors the
-   nav container (max-width 1100px, 40px insets) and draws its top divider via a
-   pseudo-element, so the footer line matches the header line (nav::after)
-   exactly. Both rows span the full content box (space-between, edges aligned
-   with the divider lines); a faint .footer-divider sits between them.
-   Disclaimer text now lives on /disclosures. */
-.footer-links {
-  position: relative;
-  max-width: 1100px;
-  width: 100%;
-  box-sizing: border-box;
-  margin: 0.5rem auto 0;
-  padding: 0.75rem 40px;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  font-size: 0.72rem;
-  line-height: normal;
-}
-
-.footer-links::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 40px;
-  right: 40px;
-  border-top: 2px solid var(--gk-accent);
-}
-
-.footer-row,
-.footer-meta {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.4rem 1rem;
-}
-
-/* Faint hairline between the links row and the meta row. As a flex item it
-   stretches to fill the container's content box (inset 40px by the padding),
-   so it spans the same width as the top divider (::before). A true whisper —
-   rgba(0,0,0,0.06), matching gemtimer.com; the row gap comes from the parent. */
-.footer-divider {
-  height: 1px;
-  background: rgba(0, 0, 0, 0.06);
-}
-
-.footer-group {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-}
-
-.footer-copy {
-  color: var(--gk-muted);
-}
-
-.footer-tagline {
-  font-family: 'Fraunces', Georgia, serif;
-  font-style: italic;
-  font-weight: 400;
-  color: var(--gk-muted);
-}
-
-.footer-links a {
-  color: var(--gk-muted);
-  text-decoration: none;
-  white-space: nowrap;
-  transition: color 0.15s;
-}
-
-.footer-links a:hover {
-  color: var(--gk-accent);
-}
-
-.footer-sep {
-  color: var(--gk-faint);
-  margin: 0 0.55rem;
-}
-
-/* The Why page */
-.why-page {
-  max-width: 860px;
-  margin: 0 auto;
-  padding: 1rem 1.5rem 0.5rem;
-}
-
-.why-page h1 {
-  font-family: 'Fraunces', Georgia, serif;
-  font-size: 2.4rem;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-  margin-bottom: 1rem;
-}
-
-.why-page p {
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: var(--gray-700);
-  margin-bottom: 1rem;
-}
-
-.why-page .post-footer {
-  margin-top: 1rem;
-  padding-top: 0.75rem;
-  padding-bottom: 0;
-  margin-bottom: 0;
-}
-
-.why-page p a,
-.why-page p a:visited {
-  color: var(--orange);
-  text-decoration: none;
-}
-
-.why-page p a:hover {
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-/* Responsive */
-@media (max-width: 640px) {
-  nav { padding: 1rem 1.25rem; }
-  nav::after { left: 1.25rem; right: 1.25rem; }
-  .hero { height: auto; padding: 1.5rem 1.25rem 2rem; flex-direction: column; justify-content: space-evenly; gap: 1.75rem; }
-  .hero-content { flex: 0 0 auto; }
-  .hero-subtitle { font-size: 1.3rem; }
-  /* Return the scroll arrow to normal flow on mobile so a long rotating quote
-     can't collide with the absolutely-positioned name/CTA. */
-  .scroll-arrow { position: static; transform: none; bottom: auto; }
-  .posts-section { padding: 1.5rem 1.25rem 1.5rem; }
-  .post-card { flex-direction: row; gap: 0.75rem; }
-  .post-card { padding: 0.35rem 0; }
-  .post-card-date { min-width: 60px; font-size: 0.7rem; }
-  .post-card-arrow { display: none; }
-  .post-card-content h2 { font-size: 1rem; margin-bottom: 0.15rem; }
-  .post-card-content p { font-size: 0.72rem; line-height: 1.35; }
-  main.post { padding: 2rem 1.25rem 3rem; }
-  .post-header h1 { font-size: 1.7rem; }
-  .post-body { font-size: 1rem; }
-  .why-page { padding: 0.25rem 1.25rem 0.25rem; }
-  .why-page h1 { font-size: 2rem; margin-bottom: 0.75rem; }
-  .footer-links { padding: 0.75rem 1.25rem; }
-  .footer-links::before { left: 1.25rem; right: 1.25rem; }
-  /* Mobile: two stacked link columns (family/social left, utility right),
-     mirroring gemtimer.com. The inline middot separators hide; the hairline
-     divider and the copyright/tagline row stay, with copyright left and tagline
-     right like gemtimer's bottom row. */
-  .footer-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0 24px;
-    align-items: start;
-  }
-  .footer-group { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
-  .footer-right { align-items: flex-end; text-align: right; }
-  .footer-sep { display: none; }
-  .footer-links a { font-size: 0.82rem; }
-  .footer-meta { flex-direction: row; justify-content: space-between; align-items: center; gap: 0.3rem; }
-}
-
-/* Large-screen scaling (mirrors gemtimer.com / gemtodo.com). On wide monitors
-   bump the root font-size so all rem-based type and spacing grow together, and
-   widen each page's content column so the reading measure keeps pace with the
-   type. Tunable knobs: the html font-size and the four max-width values below. */
-@media (min-width: 1600px) {
-  html { font-size: 18px; }                     /* default 16px, about +12% */
-  nav, .footer-links { max-width: 1280px; }     /* was 1100px */
-  .posts-section { max-width: 820px; }          /* was 680px */
-  main.post, .post-body { max-width: 760px; }   /* was 640px */
-  .why-page { max-width: 1000px; }              /* was 860px */
-}
-</style>
+<!--gk:tokens-->
+<!--gk:style-->
 <style>
 /* Right-margin side-note callout, matching the .aside boxes on AI Essentials
    #2: GemKa surface fill, faint full border, rounded corners, oxblood Fraunces
@@ -885,6 +60,7 @@ main.post {
 
 <nav>
   <div class="nav-left">
+    <a href="/" class="nav-logo"><span>Gem</span><span class="gk-ka">Ka</span></a>
     <a href="/the-why" class="nav-link">The Why</a>
   </div>
   <div class="nav-clock" id="clock"></div>
@@ -892,6 +68,15 @@ main.post {
     <a href="https://github.com/jcowcher" target="_blank" rel="noopener" class="nav-github" aria-label="GitHub">
       <svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
     </a>
+  </div>
+  <button class="nav-menu-btn" aria-label="Menu" aria-haspopup="menu" aria-expanded="false" type="button">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div class="nav-mobile-menu" role="menu">
+    <a class="nav-mobile-menu-item" href="/the-why" role="menuitem">The Why</a>
+    <a class="nav-mobile-menu-item" href="https://github.com/jcowcher" target="_blank" rel="noopener" role="menuitem">GitHub</a>
   </div>
 </nav>
 <main class="post">
@@ -916,8 +101,58 @@ main.post {
   <div class="post-disclaimer">This post is provided for general information, commentary and discussion purposes only. It is not legal, investing or other professional advice, and it should not be relied upon as such. Any errors or omissions are unintentional. The views expressed are those of the author in a personal capacity and do not represent the views of any employer, client, partner or affiliated organization. Generative AI tools were used to assist with research and editing.</div>
   <footer class="post-footer"><a href="/writing">&larr; All posts</a></footer>
 </main>
+<footer class="footer-links">
+  <div class="footer-row">
+    <div class="footer-group footer-left">
+      <a href="https://gemtimer.com" target="_blank" rel="noopener noreferrer">GemTimer</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <a href="https://gemtodo.com" target="_blank" rel="noopener noreferrer">GemTodo</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <a href="https://ideakache.com" target="_blank" rel="noopener noreferrer">IdeaKache</a>
+    </div>
+    <div class="footer-group footer-right">
+      <a href="/disclosures">Disclosures</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <a href="mailto:jeremy@gemka.co">Contact</a>
+    </div>
+  </div>
+  <div class="footer-divider" aria-hidden="true"></div>
+  <div class="footer-meta">
+    <span class="footer-copy">&copy; 2026 Jeremy Cowcher</span>
+    <span class="footer-tagline">Writing to think.</span>
+  </div>
+</footer>
 <script>
 (function(){
+  var q=document.getElementById('hero-quote');
+  if(q){
+    var quotes=[
+      {text:'It is not the critic who counts; not the man who points out how the strong man stumbles, or where the doer of deeds could have done them better. The credit belongs to the man who is actually in the arena.',attr:'Theodore Roosevelt',url:'https://www.presidency.ucsb.edu/documents/address-the-sorbonne-paris-france-citizenship-republic'},
+      {text:'The reasonable man adapts himself to the world: the unreasonable one persists in trying to adapt the world to himself. Therefore all progress depends on the unreasonable man.',attr:'George Bernard Shaw',url:'https://en.wikipedia.org/wiki/Man_and_Superman'},
+      {text:'As you become an adult, you realize that things around you weren’t just always there; people made them happen. But only recently have I started to internalize how much tenacity <em>everything</em> requires. That hotel, that park, that railway. The world is a museum of passion projects.',attr:'John Collison'}
+    ];
+    var pick=quotes[Math.floor(Math.random()*quotes.length)];
+    var attrHtml=pick.url?'<a href="'+pick.url+'" target="_blank" rel="noopener">'+pick.attr+'</a>':pick.attr;
+    q.innerHTML='<p class="hero-subtitle">'+pick.text+'</p><p class="hero-attr">&mdash; '+attrHtml+'</p>';
+  }
+  var btn=document.querySelector('.nav-menu-btn');
+  var menu=document.querySelector('.nav-mobile-menu');
+  if(btn&&menu){
+    function closeMenu(){menu.classList.remove('open');btn.setAttribute('aria-expanded','false');}
+    btn.addEventListener('click',function(e){
+      e.stopPropagation();
+      var willOpen=!menu.classList.contains('open');
+      menu.classList.toggle('open',willOpen);
+      btn.setAttribute('aria-expanded',willOpen?'true':'false');
+    });
+    menu.addEventListener('click',closeMenu);
+    document.addEventListener('click',function(e){
+      if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target))closeMenu();
+    });
+    document.addEventListener('keydown',function(e){
+      if(e.key==='Escape'&&menu.classList.contains('open')){closeMenu();btn.focus();}
+    });
+  }
   var el=document.getElementById('clock');
   if(!el)return;
   function tick(){
