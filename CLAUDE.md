@@ -71,6 +71,12 @@ Jeremy runs several products that share infrastructure and patterns. When a task
 
 This is a soft safety net, not a guarantee. Its job is to catch the cross-overs Jeremy might not notice in the moment, not to be exhaustive. Recurring cross-cutting themes worth watching for: rate limiting and abuse protection, Clerk auth and the GemKa identity flow, Supabase schema / RLS / backups, Resend transactional email, the @gemka/core shared design system, the cross-sell flow, and webhook / idempotency patterns.
 
+**Read the log before proposing infrastructure.** Before proposing anything new and infrastructural (a rate limiter, a counter store, a cache, a queue, an auth or monitoring layer), search `cross-product-log.md` and `claude-kit/notes/` for the theme FIRST. Those files record what is already live, what was considered and rejected, and why. Proposing something already ruled out, or rebuilding something already shipped, is worse than useless: it burns a round trip and it buries the real gap under a redundant plan. Inventory before design. The connected folders are context to read at the start of the work, not a haystack to search only once someone pushes back.
+
+## Residual risks get a trigger
+
+When a decision knowingly leaves a gap (an accepted tradeoff, a bound that is good enough for launch, a mitigation that only works if someone notices something), the note recording it must also say what would make it a problem and what signal would surface that. A residual risk written as prose and nothing else goes invisible within weeks: it reads back as a settled decision rather than an open item. Give it a trigger, meaning the thing to watch, the threshold that matters, or the condition that reopens it, and file it in the repo's Open / parked list as well as the note.
+
 <!-- shared-conventions:end -->
 
 ## Opening a repo file in TextEdit (computer use)
