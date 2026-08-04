@@ -661,14 +661,34 @@ main.post {
   border-top: 2px solid var(--gk-accent);
 }
 
-.footer-row,
-.footer-meta {
+.footer-row {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   gap: 0.4rem 1rem;
 }
+
+/* The meta row centers the GemKa attribution on the row's true center. This
+   used to share the flex/space-between rule above, but space-between only
+   centers a middle child when the two side children are the same width, and
+   here they are not ("© 2026 Jeremy Cowcher" is wider than "Writing to
+   think."), so the attribution sat visibly left of page center on a monitor.
+   A 1fr auto 1fr grid pins the middle column to the center whatever the side
+   items measure, while justify-self keeps the outer two flush with the row
+   edges. Same shape as gemtimer's .gk-footer-grid. The fr columns use
+   minmax(0, 1fr) rather than a bare 1fr so a wide side item can never push its
+   own column past the other and drag the center off. */
+.footer-meta {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.4rem 1rem;
+}
+
+.footer-meta .footer-copy { justify-self: start; }
+.footer-meta .footer-attribution { justify-self: center; }
+.footer-meta .footer-tagline { justify-self: end; }
 
 /* Faint hairline between the links row and the meta row. As a flex item it
    stretches to fill the container's content box (inset 40px by the padding),
@@ -863,7 +883,11 @@ main.post {
   /* row-gap matters at 320, where the three items can't share one line: the
      tagline drops to a second line and would otherwise sit tight under the
      copyright. */
+  /* display:flex is restated because the desktop rule is now a grid; without it
+     the phone row would inherit that grid and the three items would be forced
+     into three columns instead of the stacked posture shipped in fb4ee7f. */
   .footer-meta {
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
