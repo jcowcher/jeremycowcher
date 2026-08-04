@@ -435,11 +435,17 @@ body.landing .hero {
   gap: 0.5rem;
 }
 
+/* The label renders the source text as written, "Part 0" rather than "PART 0".
+   It used to be uppercased here, which also meant the 0.08em tracking was doing
+   the job tracking does for caps, opening up letterforms that sit shoulder to
+   shoulder. Mixed case does not want that, so the tracking goes with the
+   transform and the label sits at normal spacing, matching the date beside it
+   on the phone line. The "#N" labels on AI Essentials have no letters, so the
+   transform never affected them; dropping the tracking narrows them by about
+   1.8px, which is the only change they see. */
 .series-part-label {
   font-size: 0.7rem;
   font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
   color: var(--gk-accent);
   white-space: nowrap;
   flex-shrink: 0;
