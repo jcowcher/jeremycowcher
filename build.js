@@ -329,14 +329,15 @@ const whyBody = `
 ${NAV}
 <main class="post">
   <header class="post-header">
+    <time datetime="2026-08-04">August 4, 2026</time>
     <h1>The Why</h1>
   </header>
   <article class="post-body">
-    <p>Writing things out helps me think. When I'm building a new feature or trying to solve a problem, I like to start with a fresh HTML file. I'll then go back and forth with Claude and start writing out the why and the how for that topic, including what my options are. Most of these files I'll turn into posts here. That was the original idea behind the Learning with AI series.</p>
-    <p>As well as what I'm up to, this website will have shorter takes on topics I'm interested in. Expect to see takes on business and sports, particularly the NBA.</p>
-    <p>I'll probably get things wrong and that's fine. No one bats a thousand. I enjoy a great takesman; it's one reason I've been reading and listening to Bill Simmons for 15 years. What I can guarantee is that everything here was written by me, and reflects what I believed when I wrote it.</p>
-    <p>There is no comment section. If you've got a thought that can improve anything I've written, email me at <a href="mailto:jeremy@gemka.co">jeremy@gemka.co</a>.</p>
-    <p>Thanks for visiting,<br>Jeremy</p>
+    <p>Writing things down helps me think. When I'm building a new feature or trying to solve a problem, I like to start with a fresh HTML file. I'll then go back and forth with AI tools and write out the why and the how for that topic. Many of those files become posts on this website. That's how the posts on AI topics have come about.</p>
+    <p>This website will have shorter takes on topics I'm interested in across business and sports. I enjoy reading and listening to takes; it's one reason I've been following Bill Simmons for 15+ years. What I can guarantee is that everything here was written by me, and reflects what I believed when I wrote it.</p>
+    <p>This is meant to be fun and to share what I've learnt as I build. It's great that you're here.</p>
+    <p>Jeremy</p>
+    <p>P.S. If you want to own your time, go to <a href="https://gemtimer.com">gemtimer.com</a>; to get more things done, try <a href="https://gemtodo.com">gemtodo.com</a>; and to learn from great thinkers, visit <a href="https://ideakache.com">ideakache.com</a>.</p>
   </article>
   <footer class="post-footer"><a href="/writing">&larr; All posts</a></footer>
 </main>`;
