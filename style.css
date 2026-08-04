@@ -804,11 +804,31 @@ main.post {
      can't collide with the absolutely-positioned name/CTA. */
   .scroll-arrow { position: static; transform: none; bottom: auto; }
   .posts-section { padding: 1.5rem 1.25rem 1.5rem; }
-  .post-card { flex-direction: row; gap: 0.75rem; }
-  .post-card { padding: 0.35rem 0; }
-  .post-card-date { min-width: 60px; font-size: 0.7rem; }
+  /* Phone rows: the date and the part label share one small muted line, and the
+     title gets the full measure on its own line below. Desktop reserves a date
+     gutter (72px, 60px here) plus a 1.5rem gap for a date that only renders
+     about 38px wide, so on a phone the title was left wrapping raggedly inside
+     what remained. Making .post-card-content display:contents lifts the part
+     label and the title out of their wrapper and turns them into flex items of
+     the row itself, which is what lets the title claim a full-width line while
+     the label stays next to the date. Standalone rows have no label and get the
+     same shape with just the date on the small line. Desktop is untouched, so
+     the markup build.js emits does not change. */
+  .post-card {
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.2rem 0.5rem;
+    padding: 0.35rem 0;
+  }
+  /* Both selectors are needed: the desktop rule .series-part .post-card-content
+     (which lays the label and title out on one line) outranks a bare
+     .post-card-content, so without the second selector series rows would keep
+     the desktop shape and only standalone rows would restack. */
+  .post-card-content,
+  .series-part .post-card-content { display: contents; }
+  .post-card-date { min-width: 0; padding-top: 0; font-size: 0.7rem; }
   .post-card-arrow { display: none; }
-  .post-card-content h2 { font-size: 1rem; margin-bottom: 0.15rem; }
+  .post-card-content h2 { flex-basis: 100%; font-size: 1rem; margin-bottom: 0; }
   .post-card-content p { font-size: 0.72rem; line-height: 1.35; }
   main.post { padding: 2rem 1.25rem 3rem; }
   .post-header h1 { font-size: 1.7rem; }
