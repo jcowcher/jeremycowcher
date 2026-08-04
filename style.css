@@ -738,7 +738,12 @@ main.post {
   .nav-right { display: none; }
   .nav-logo { font-size: 1.06rem; }
 
-  /* Hamburger: absolute on the right so the wordmark stays truly centered in the flex:1 nav-left */
+  /* Hamburger: absolute on the right so the wordmark stays truly centered in the flex:1 nav-left.
+     Icon treatment is gemtimer.com's .landing-mobile-menu-btn verbatim — the 36x36 box, 4px bar
+     gap and 16x1.5px bars already matched; the pill outline (border-radius 100px + 1px border +
+     paper fill) is what was missing, so the bars used to float bare. gemtimer's --gray-200 border
+     and --white fill map onto --gk-border / --gk-paper, the same mapping .nav-mobile-menu below
+     already uses for the same two gemtimer values. */
   .nav-menu-btn {
     position: absolute;
     right: 1.25rem;
@@ -752,8 +757,9 @@ main.post {
     width: 36px;
     height: 36px;
     padding: 0;
-    border: none;
-    background: transparent;
+    border: 1px solid var(--gk-border);
+    border-radius: 100px;
+    background: var(--gk-paper);
     cursor: pointer;
     z-index: 10;
   }
@@ -798,16 +804,44 @@ main.post {
      can't collide with the absolutely-positioned name/CTA. */
   .scroll-arrow { position: static; transform: none; bottom: auto; }
   .posts-section { padding: 1.5rem 1.25rem 1.5rem; }
-  .post-card { flex-direction: row; gap: 0.75rem; }
-  .post-card { padding: 0.35rem 0; }
-  .post-card-date { min-width: 60px; font-size: 0.7rem; }
+  /* Phone rows: the date and the part label share one small muted line, and the
+     title gets the full measure on its own line below. Desktop reserves a date
+     gutter (72px, 60px here) plus a 1.5rem gap for a date that only renders
+     about 38px wide, so on a phone the title was left wrapping raggedly inside
+     what remained. Making .post-card-content display:contents lifts the part
+     label and the title out of their wrapper and turns them into flex items of
+     the row itself, which is what lets the title claim a full-width line while
+     the label stays next to the date. Standalone rows have no label and get the
+     same shape with just the date on the small line. Desktop is untouched, so
+     the markup build.js emits does not change. */
+  .post-card {
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.2rem 0.5rem;
+    padding: 0.35rem 0;
+  }
+  /* Both selectors are needed: the desktop rule .series-part .post-card-content
+     (which lays the label and title out on one line) outranks a bare
+     .post-card-content, so without the second selector series rows would keep
+     the desktop shape and only standalone rows would restack. */
+  .post-card-content,
+  .series-part .post-card-content { display: contents; }
+  .post-card-date { min-width: 0; padding-top: 0; font-size: 0.7rem; }
   .post-card-arrow { display: none; }
-  .post-card-content h2 { font-size: 1rem; margin-bottom: 0.15rem; }
+  .post-card-content h2 { flex-basis: 100%; font-size: 1rem; margin-bottom: 0; }
   .post-card-content p { font-size: 0.72rem; line-height: 1.35; }
   main.post { padding: 2rem 1.25rem 3rem; }
   .post-header h1 { font-size: 1.7rem; }
   .post-body { font-size: 1rem; }
-  .footer-links { padding: 0.75rem 1.25rem; }
+  /* Phone footer breathing room, on gemtimer's stacked-footer register. The
+     desktop values (0.75rem block padding, 0.25rem row gap) are tuned for one
+     wide line; stacked into two columns they left the links 6px apart with
+     16px tap targets and the whole block flush against the bottom of the
+     document. gemtimer's .gk-footer a carries padding 6px 0 and its
+     .gk-footer-menu-bottom puts 12px above and below the hairline, so those
+     are the values used here. Block padding grows top and bottom so the footer
+     stops hugging the viewport edge. */
+  .footer-links { padding: 1.1rem 1.25rem 1.5rem; gap: 0; }
   .footer-links::before { left: 1.25rem; right: 1.25rem; }
   /* Mobile: two stacked link columns (family/social left, utility right),
      mirroring gemtimer.com. The inline middot separators hide; the hairline
@@ -819,11 +853,23 @@ main.post {
     gap: 0 24px;
     align-items: start;
   }
-  .footer-group { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
+  /* Row spacing comes from the per-link padding below, not a group gap, so the
+     gap and the tap target are the same number in one place. */
+  .footer-group { flex-direction: column; align-items: flex-start; gap: 0; }
   .footer-right { align-items: flex-end; text-align: right; }
   .footer-sep { display: none; }
-  .footer-links a { font-size: 0.82rem; }
-  .footer-meta { flex-direction: row; justify-content: space-between; align-items: center; gap: 0.3rem; }
+  .footer-links a { font-size: 0.82rem; display: inline-block; padding: 6px 0; }
+  .footer-divider { margin: 12px 0; }
+  /* row-gap matters at 320, where the three items can't share one line: the
+     tagline drops to a second line and would otherwise sit tight under the
+     copyright. */
+  .footer-meta {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.45rem 0.75rem;
+  }
 }
 
 /* Large-screen scaling (mirrors gemtimer.com / gemtodo.com). On wide monitors

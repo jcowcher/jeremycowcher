@@ -15,6 +15,8 @@ When a task is a code change, scope or discuss it in Cowork if that helps, then 
 
 Cowork must never run git commands against a repo on Jeremy's Mac. The device bridge cannot delete files, and git needs to delete its own lock files, so every attempt strands a `.git/index.lock` and jams the repo (learned the hard way, July 2026). Instead, Cowork makes the file edits, then hands Jeremy a copy-paste terminal block for the commit and push, or routes the change through Claude Code.
 
+**Commit is not push.** A commit is local only. Until it is pushed, no preview build, no reviewer, and no other machine can see it. Any instruction to commit includes pushing to the same branch's remote unless it says otherwise in as many words. "No deploy" means do not merge to the production branch; it never means do not push. Pushing a working branch is how work becomes reviewable, and on repos with preview builds it is a preview, not a deploy.
+
 Database changes (e.g. Supabase) run in Cowork, split by risk: pure adds (a new table or other new object that touches nothing existing) are fine to run directly. Alterations and deletions (changing or dropping existing tables or columns, bulk updates, deleting rows) get discussed with Jeremy first, every time. If it's unclear which side a change falls on, treat it as an alteration and ask.
 
 ## Cloud sessions base off dev
@@ -68,6 +70,12 @@ Jeremy runs several products that share infrastructure and patterns. When a task
 - If it's a new generalizable pattern, propose adding it to that log.
 
 This is a soft safety net, not a guarantee. Its job is to catch the cross-overs Jeremy might not notice in the moment, not to be exhaustive. Recurring cross-cutting themes worth watching for: rate limiting and abuse protection, Clerk auth and the GemKa identity flow, Supabase schema / RLS / backups, Resend transactional email, the @gemka/core shared design system, the cross-sell flow, and webhook / idempotency patterns.
+
+**Read the log before proposing infrastructure.** Before proposing anything new and infrastructural (a rate limiter, a counter store, a cache, a queue, an auth or monitoring layer), search `cross-product-log.md` and `claude-kit/notes/` for the theme FIRST. Those files record what is already live, what was considered and rejected, and why. Proposing something already ruled out, or rebuilding something already shipped, is worse than useless: it burns a round trip and it buries the real gap under a redundant plan. Inventory before design. The connected folders are context to read at the start of the work, not a haystack to search only once someone pushes back.
+
+## Residual risks get a trigger
+
+When a decision knowingly leaves a gap (an accepted tradeoff, a bound that is good enough for launch, a mitigation that only works if someone notices something), the note recording it must also say what would make it a problem and what signal would surface that. A residual risk written as prose and nothing else goes invisible within weeks: it reads back as a settled decision rather than an open item. Give it a trigger, meaning the thing to watch, the threshold that matters, or the condition that reopens it, and file it in the repo's Open / parked list as well as the note.
 
 <!-- shared-conventions:end -->
 

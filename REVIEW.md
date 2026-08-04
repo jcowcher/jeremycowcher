@@ -24,7 +24,7 @@ The block between the shared-review markers is synced from `claude-kit/review.md
 
 ## Server logging
 
-- [ ] Server code (API routes, webhooks, server-imported lib modules, cron handlers, scripts) logs through Pino (`pino({ name: 'moduleName' })`), never `console.*`. Client and browser code is exempt. Any intentional server `console.*` carries a comment on the line above saying why. (code-standards-audit Rule 2.)
+- [ ] Server runtime code (API routes, webhooks, server-imported lib modules, cron handlers) logs through Pino (`pino({ name: 'moduleName' })`), never `console.*`. Client and browser code is exempt, and so are CLI scripts under `scripts/`: Pino exists to make runtime logs machine-parseable, while a script's output is read live by the person who ran it. Any intentional `console.*` in server runtime code carries a comment on the line above saying why. (code-standards-audit Rule 2.)
 
 ## API surface
 
