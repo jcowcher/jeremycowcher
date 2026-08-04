@@ -738,7 +738,12 @@ main.post {
   .nav-right { display: none; }
   .nav-logo { font-size: 1.06rem; }
 
-  /* Hamburger: absolute on the right so the wordmark stays truly centered in the flex:1 nav-left */
+  /* Hamburger: absolute on the right so the wordmark stays truly centered in the flex:1 nav-left.
+     Icon treatment is gemtimer.com's .landing-mobile-menu-btn verbatim — the 36x36 box, 4px bar
+     gap and 16x1.5px bars already matched; the pill outline (border-radius 100px + 1px border +
+     paper fill) is what was missing, so the bars used to float bare. gemtimer's --gray-200 border
+     and --white fill map onto --gk-border / --gk-paper, the same mapping .nav-mobile-menu below
+     already uses for the same two gemtimer values. */
   .nav-menu-btn {
     position: absolute;
     right: 1.25rem;
@@ -752,8 +757,9 @@ main.post {
     width: 36px;
     height: 36px;
     padding: 0;
-    border: none;
-    background: transparent;
+    border: 1px solid var(--gk-border);
+    border-radius: 100px;
+    background: var(--gk-paper);
     cursor: pointer;
     z-index: 10;
   }
