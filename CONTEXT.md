@@ -26,3 +26,6 @@ Tech entrepreneurs, non-technical founders considering building in the AI era, a
 ## What I'm actively working on
 - Drafting Part VI ("Asking good questions") and other essays (RTF drafts in repo root)
 - Planning future topics (see `20260305 Future topics.rtf`)
+
+## Open / parked
+- **Footer meta row wraps below about 360px (parked 2026-08-03).** At 320 the copyright / GemKa / tagline line cannot fit on one line, so the tagline drops to a second line, left-aligned under the copyright. It does not collide (it has an 8px row gap as of `fb4ee7f`), it just reads slightly orphaned. Left as is deliberately: `space-between` keeps the row's edges flush with the divider lines, which is the footer's design intent, and every device in the manual check rotation is 390-class, so the wrap never shows in practice. **Trigger: a 320-class device (iPhone SE and similar) entering the manual check rotation.** That is the signal to add a `max-width: 360px` rule centering and stacking the three items instead. Until then the cost is invisible.
