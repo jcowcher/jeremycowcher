@@ -494,6 +494,21 @@ main.post {
   padding: 1.5rem 1.5rem 5rem;
 }
 
+/* /about is a single-screen bio, not a reading page, so it runs wider and
+   tighter than a post: a longer measure to fold the body onto fewer lines, and
+   less air above the "About" heading and below the footer link. Scoped with
+   main.post-about (same specificity as main.post, declared later) so the 720px
+   measure every real post uses is untouched. */
+main.post-about {
+  max-width: 900px;
+  padding-top: 0.75rem;
+  padding-bottom: 2rem;
+}
+
+.post-about .post-header {
+  margin-bottom: 0.5rem;
+}
+
 .post-header {
   margin-bottom: 1rem;
 }

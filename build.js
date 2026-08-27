@@ -372,7 +372,7 @@ fs.writeFileSync(
 // the Disclosures page (no date line, no post disclaimer).
 const aboutBody = `
 ${NAV}
-<main class="post">
+<main class="post post-about">
   <header class="post-header">
     <h1>About</h1>
   </header>
