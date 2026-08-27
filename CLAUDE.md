@@ -102,7 +102,7 @@ build.js          — Entire build pipeline (frontmatter parse → markdown → 
 style.css         — All styles (~600 lines), responsive breakpoint at 640px
 posts/*.md        — Source content. YAML frontmatter (title, date, description) + markdown body
 posts/*.html      — Source content. Complete self-styled page + leading <!--post--> metadata comment (body emitted as-is with shared chrome injected at build time, not re-wrapped in the template)
-dist/             — Generated output (gitignored). index.html + posts/*.html + the-why.html + disclosures.html
+dist/             — Generated output (gitignored). index.html + posts/*.html + the-why.html + disclosures.html + about.html
 vercel.json       — Vercel config
 CONTEXT.md        — Project brief (what/who/why)
 NOTES.md          — Non-obvious bugs and fixes with commit refs
@@ -125,8 +125,9 @@ Open `dist/index.html` locally or push to deploy on Vercel.
 3. Generates individual post pages with OG metadata + disclaimers
 4. Generates "The Why" page (full nav, post-page layout)
 5. Generates the "Disclosures" page at `/disclosures` (full nav, post-page layout) holding the site-wide disclaimer copy
-6. Generates index page with hero section + post list
-7. CSS is inlined into every page via `<style>` tags at build time: first `node_modules/@gemka/core/tokens.css` (the `--gk-*` token `:root`), then `style.css`. Order matters — the tokens must be defined before `style.css` references them.
+6. Generates the "About" page at `/about` (full nav, post-page layout) with Jeremy's bio
+7. Generates index page with hero section + post list
+8. CSS is inlined into every page via `<style>` tags at build time: first `node_modules/@gemka/core/tokens.css` (the `--gk-*` token `:root`), then `style.css`. Order matters — the tokens must be defined before `style.css` references them.
 
 ## Key patterns and conventions
 
@@ -136,6 +137,7 @@ Open `dist/index.html` locally or push to deploy on Vercel.
 - **Series order (`SERIES_ORDER`):** A single explicit list near the top of `build.js` pins which series groups render first on `/writing`, and in what order (currently `['Learning with AI', 'AI Essentials']`). Any series not in the list, and any standalone posts, fall below the listed groups sorted by date desc. Reorder the list to reorder the groups.
 - **URLs:** `/posts/{slug}` (slug = source filename without `.md` or `.html`). Clean URLs via Vercel.
 - **Disclosures page:** `/disclosures` (full nav, post-page layout) holds the Acquired-style site-wide disclaimer copy. It used to be an inline `.site-disclaimer` paragraph in the footer; it now lives on its own page, linked from the footer's utility group.
+- **About page:** `/about` (full nav, post-page layout), `aboutBody` in `build.js`. Bio in sections: "Current" is a standalone `<h2>`; the other section labels (Before that / The rest / Reach) are run-in `<strong>` at the start of their paragraphs. Linked from `.nav-right` immediately before the GitHub icon, plus a mobile-menu item after The Why. No date line, no post disclaimer. Copy sourced from Jeremy's CV and the GemKa welcome-email product blurbs; edits to it are content changes Jeremy signs off on.
 - **Footer (matches the GemKa product sites, e.g. gemtimer.com):** rendered on every page from the `FOOTER_LINKS` constant in `build.js`. Row 1 is two middot-separated groups, `space-between`: the GemKa family products on the left, utility on the right (Disclosures → `/disclosures`, Contact → `mailto:`). **The family row and the GemKa attribution come from `@gemka/core/footer` — never hardcode the family list, order, or wordmark coloring here.** The left group is `${productLinks({ separator })}` (all three peers — GemTimer, GemTodo, IdeaKache — as two-tone colored wordmarks; `current` is left unset because the blog isn't a family product). **GemKa is the family parent (`parent: true`), so it never appears as a peer in this row** — it is the attribution instead. Row 2 (`.footer-meta`, three children `space-between`): `© 2026 Jeremy Cowcher` (left), the **GemKa attribution** `A ⟨GemKa wordmark⟩ site` (center), and the tagline `Writing to think.` (right, Fraunces italic). The attribution is composed **locally** in `build.js` (`GEMKA_ATTRIBUTION`, built from `FOOTER_PRODUCTS.find(p => p.parent)` + `productWordmark()`) so the noun reads **"site"** — `@gemka/core`'s own `gemkaAttribution()` hardcodes "product"; only the noun is ours, the href and coloring still come from the package. **Wordmark coloring:** the blog inlines only `tokens.css` + `style.css` (never `chrome.css`), so the `.gk-prod` / `.gk-prod-ink` / `.gk-prod-accent` / `.gk-prod-brick` rules are **copied verbatim into `style.css`** next to the footer rules; `.gk-prod-brick` uses `--gk-brand-kache` (IdeaKache's "Kache" half), which ships in `tokens.css`. **Requires `@gemka/core >= 0.9.3`** (the version that adds the `./footer` export); `footer.js` is ESM but zero-dependency and synchronous, so CommonJS `build.js` can `require()` it on Node `>=22.12` (pinned via `package.json` `engines`). The outer `.footer-links` mirrors the nav container (max-width 1100px, 40px insets) so its **2px oxblood (`var(--gk-accent)`) top divider** lines up exactly with the header divider (`nav::after`, also 2px oxblood). Spacing/height matched to gemtimer (font-size 0.72rem, padding 0.75rem, row-gap 0.25rem, `line-height: normal`).
 - **Nav wordmark = the author's name:** the `.nav-logo` in `build.js`'s `NAV` constant renders **`Jeremy Cowcher`** two-tone in the GemKa style — `Jeremy` in ink, `Cowcher` in accent (oxblood) via `.nav-logo .gk-ka` — with a **literal space between the two spans** (a name, so it is not fused, unlike the product wordmarks). It was `GemKa` until GemKa moved to the footer attribution. Note the `.gk-ka` class name now means "the accent-toned half of the wordmark," not literally "the Ka in GemKa"; a neutral rename is a deferred, separate change.
 - **Post-specific disclaimer:** still inline on individual post pages.
@@ -168,10 +170,11 @@ The source of truth is the IdeaKache Supabase project (`content` table, filter `
 - **Production branch:** `main`. Pushes to `main` trigger production Vercel builds; pushes to `dev` trigger preview builds. Other branches are skipped (configured in `vercel.json` under `git.deploymentEnabled`).
 - **Merging dev → main:** Always write a descriptive merge commit message summarising what changed since the last deploy. Don't use the default merge message.
 
-## Current state (July 2026)
+## Current state (August 2026)
 
 - **Design:** Adopted the GemKa design system — `@gemka/core` cream/oxblood palette and Inter + Fraunces type. Replaced the old white/black/#FF6600 look. Hero quotes lightened to Fraunces 360.
 - **Posts live again:** 10 posts published on /writing: Learning with AI Parts 0-3 (Part 3, smoke tests, is an HTML post), AI Essentials Parts 0-4, and the Jaylen Brown standalone. The old "6 posts on one screen" layout note below predates this.
 - **Drafts queue (`posts/_drafts/`):** Learning with AI Part 4 (The Checklist Robot; written, awaiting Jeremy's publish decision), Part 5 (AI search), Part 6 (calendar integration), plus several AI Essentials drafts. Publishing any of these requires Jeremy's explicit consent (see conventions above).
+- **About page:** `/about` live in production (Aug 2026), linked from the nav next to the GitHub icon.
 - **The Why page:** Rebuilt on the standard post layout (full nav + footer) with new copy. The old hidden P.S. is gone; the product links now live in the site footer.
 - **In progress:** Drafting further essays (RTF files in repo root) and the "Learning with AI" series.
