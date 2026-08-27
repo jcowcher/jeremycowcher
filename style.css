@@ -20,7 +20,7 @@ nav {
   position: relative;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   padding: 16px 40px;
   max-width: 1100px;
   width: 100%;
@@ -49,15 +49,13 @@ nav::after {
   color: var(--gk-accent);
 }
 
-/* align-items is center, not baseline, so the two nav links sit on one plane.
-   Under baseline, "The Why" locked onto the 20px wordmark's baseline, which put it
-   about 2px below the nav's vertical center; "About" over in .nav-right is centered
-   against the 20px GitHub icon and so sat that 2px higher. Centering both groups is
-   what makes the two links line up. Don't switch this back to baseline without
-   giving .nav-right the same treatment. */
+/* The whole nav bottom-aligns: the wordmark, both links and the GitHub icon share
+   one bottom edge. flex-end on nav and on both groups is what guarantees it, and it
+   holds whatever the font metrics turn out to be, which center and baseline did not.
+   Changing any of these three back to center or baseline breaks the alignment. */
 .nav-left {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 1.5rem;
 }
 
@@ -91,7 +89,7 @@ nav::after {
 
 .nav-right {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 1.5rem;
 }
 
