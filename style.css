@@ -105,6 +105,15 @@ nav::after {
    Measured: The Why 38 before and after, About 36.5 to 38. */
 .nav-github {
   align-self: center;
+  /* Nudged back up to where it sat before the nav went baseline-aligned. The icon
+     centres inside .nav-right, and .nav-right is itself pushed down so "About"
+     lands on the shared baseline, so the icon inherited that push and hung 3px
+     low. A relative offset rather than a margin: the icon already fills
+     .nav-right's cross size, so a margin only grows the container and moves
+     nothing. In rem so it scales with the root font at the 1600px breakpoint.
+     Measured: icon bottom back to 38, its pre-About value. */
+  position: relative;
+  top: -0.1875rem;
   color: var(--gk-ink);
   text-decoration: none;
   display: flex;
