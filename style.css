@@ -20,7 +20,7 @@ nav {
   position: relative;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
   padding: 16px 40px;
   max-width: 1100px;
   width: 100%;
@@ -83,9 +83,14 @@ nav::after {
   text-underline-offset: 3px;
 }
 
+/* baseline, not center, so "About" shares a baseline with "The Why". Both links
+   are the same size, so a shared baseline puts their bottom edges on the same
+   line. .nav-left is already baseline and nav is too, which is what carries the
+   wordmark's baseline across to this group. Measured: the two link bottoms sit
+   at the same y, where center left About 1.5px high. */
 .nav-right {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 1.5rem;
 }
 
