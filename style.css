@@ -488,21 +488,18 @@ main.post {
   padding: 1.5rem 1.5rem 5rem;
 }
 
-/* /about keeps the shared post spacing; the only override is a wider measure,
-   so the bio fills fewer lines. Scoped with main.post-about (same specificity
-   as main.post, declared later) so every real post keeps the 720px measure.
-   The mobile block later in this file still overrides the padding, so phones
-   are unaffected. */
-main.post-about {
-  max-width: 1100px;
-  padding-left: 40px;
-  padding-right: 40px;
-}
-
 /* The one spacing override kept: the first heading sits directly under the page
    title, and a heading top margin exists to separate it from the paragraph
    above it. With no paragraph above, it is only dead air between "About" and
    "Current". */
+/* /about uses the site's shared reading measure. It was widened to 900px, then
+   1100px, then 1280px to try to pull the page above the fold; at the 18px root
+   font this breakpoint sets, that last one ran about 126 characters a line and
+   was unreadable. The shared measure is already about 80 characters, the top of
+   the comfortable range, so there is no wider setting worth having. The only
+   override left is below: the first heading sits directly under the page title,
+   so its top margin, which exists to separate a heading from the paragraph above
+   it, is only dead air between "About" and "Current". */
 .post-about .post-body h3:first-child {
   margin-top: 0;
 }
@@ -931,12 +928,4 @@ main.post-about {
   nav, .footer-links { max-width: 1280px; }     /* was 1100px */
   .posts-section { max-width: 820px; }          /* was 680px */
   main.post, .post-body { max-width: 760px; }   /* was 640px */
-  /* /about opts out of the 760px reading measure and matches the nav container
-     instead, so its text spans the full width of the page furniture. This has to
-     live inside the media block: main.post above has the same specificity as
-     main.post-about and sits later in the file, so a width set outside here is
-     overridden on any screen 1600px or wider. .post-body needs its own override
-     for the same reason. */
-  main.post-about { max-width: 1280px; }
-  .post-about .post-body { max-width: none; }
 }
