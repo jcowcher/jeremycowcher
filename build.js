@@ -377,14 +377,16 @@ ${NAV}
     <h1>About</h1>
   </header>
   <article class="post-body">
-    <h2>Current</h2>
+    <h3>Current</h3>
     <p>Solo founder and engineer of GemKa: three live products, all launched in August 2026.</p>
     <p><a href="https://gemtimer.com">GemTimer</a> is the timer I use every day. I track what projects I work on and how much deep work I do.</p>
     <p><a href="https://gemtodo.com">GemTodo</a> is my way of doing to-do lists, iterated on for nine years. Every todo goes to a project and into Action, Someday or Reference.</p>
     <p><a href="https://ideakache.com">IdeaKache</a> is a collection of ideas gathered from books, podcasts, X and corners of the internet. Every one of them has taught me something.</p>
     <p>Everything I've learnt in 2026 is from getting started: single sign-on across the products, a shared design system published as a package, staged releases, nightly automated tests and off-site backups proven by restore drills.</p>
-    <p><strong>Before that.</strong> Ten years at McKinsey focusing on enterprise-wide Transformations across technology, financial services, retail, industrials and natural resources companies. Drove new outside-in diligence offering using AI. Learned what excellence looks like.</p>
-    <p><strong>The rest.</strong> Started as a solicitor at Mallesons in Perth, Australia. CFA charterholder since 2022. High proficiency in building LBOs and financial models.</p>
+    <h3>Before that</h3>
+    <p>Ten years at McKinsey focusing on enterprise-wide Transformations across technology, financial services, retail, industrials and natural resources companies. Drove new outside-in diligence offering using AI. Learned what excellence looks like.</p>
+    <h3>The rest</h3>
+    <p>Started as a solicitor at Mallesons in Perth, Australia. CFA charterholder since 2022. High proficiency in building LBOs and financial models.</p>
     <p><strong>Reach.</strong> <a href="mailto:jeremy@gemka.co">jeremy@gemka.co</a> &middot; <a href="https://www.linkedin.com/in/jeremycowcher" target="_blank" rel="noopener">LinkedIn</a> &middot; <a href="https://x.com/jeremycowcher" target="_blank" rel="noopener">X</a></p>
   </article>
   <footer class="post-footer"><a href="/writing">&larr; All posts</a></footer>
