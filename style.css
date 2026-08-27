@@ -561,11 +561,19 @@ main.post-about {
 
 /* Tighter paragraph gaps than a post. On the shared 1.25rem the bio read as a
    list of separated statements rather than continuous prose; the paragraphs here
-   are short, so they need less air between them than an essay does. Heading gaps
-   are untouched, so the sections still separate more strongly than the
-   paragraphs inside them. */
+   are short, so they need less air between them than an essay does. The heading
+   gaps below come down too, but by proportionally less, so the sections still
+   separate more strongly than the paragraphs inside them. */
 .post-about .post-body p {
   margin-bottom: 0.75rem;
+}
+
+/* Section gaps come in with the paragraph gaps, so the page keeps one rhythm
+   rather than tight paragraphs sitting inside post-sized section breaks. Still
+   comfortably larger than the 0.75rem paragraph gap, which is what keeps the
+   sections reading as sections. */
+.post-about .post-body h3 {
+  margin: 1.5rem 0 0.4rem;
 }
 
 .post-about .post-body h3:first-child {
