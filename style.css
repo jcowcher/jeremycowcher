@@ -20,7 +20,7 @@ nav {
   position: relative;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   padding: 16px 40px;
   max-width: 1100px;
   width: 100%;
@@ -49,13 +49,9 @@ nav::after {
   color: var(--gk-accent);
 }
 
-/* The whole nav bottom-aligns: the wordmark, both links and the GitHub icon share
-   one bottom edge. flex-end on nav and on both groups is what guarantees it, and it
-   holds whatever the font metrics turn out to be, which center and baseline did not.
-   Changing any of these three back to center or baseline breaks the alignment. */
 .nav-left {
   display: flex;
-  align-items: flex-end;
+  align-items: baseline;
   gap: 1.5rem;
 }
 
@@ -89,7 +85,7 @@ nav::after {
 
 .nav-right {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   gap: 1.5rem;
 }
 
