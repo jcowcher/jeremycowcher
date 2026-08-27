@@ -500,13 +500,41 @@ main.post {
    main.post-about (same specificity as main.post, declared later) so the 720px
    measure every real post uses is untouched. */
 main.post-about {
-  max-width: 900px;
+  max-width: 1100px;
   padding-top: 0.75rem;
   padding-bottom: 2rem;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 .post-about .post-header {
   margin-bottom: 0.5rem;
+}
+
+/* The rest of the single-screen budget. The About page's height was never the
+   text (about 15 lines); it was the air around it, which on the shared post
+   rhythm came to roughly 470px of heading gaps, paragraph gaps, leading and
+   footer margin. These four rules take about 200px of that back. All scoped to
+   .post-about, so the reading rhythm on real posts is unchanged. */
+.post-about .post-body {
+  line-height: 1.6;
+}
+
+.post-about .post-body p {
+  margin-bottom: 0.7rem;
+}
+
+.post-about .post-body h3 {
+  margin: 1.35rem 0 0.35rem;
+}
+
+.post-about .post-body h3:first-child {
+  margin-top: 0;
+}
+
+.post-about .post-footer {
+  margin-top: 1.25rem;
+  padding-top: 0.75rem;
 }
 
 .post-header {
