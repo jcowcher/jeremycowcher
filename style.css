@@ -21,7 +21,11 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding: 16px 40px;
+  /* 15px bottom, not 16px: baseline alignment lets .nav-right sit a pixel lower
+     than .nav-left, which grew the nav by 1px and pushed the divider and the whole
+     page down with it. The pixel comes back here. Measured: nav height 56, the
+     same as before the alignment change. */
+  padding: 16px 40px 15px;
   max-width: 1100px;
   width: 100%;
   box-sizing: border-box;
