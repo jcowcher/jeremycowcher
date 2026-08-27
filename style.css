@@ -494,47 +494,23 @@ main.post {
   padding: 1.5rem 1.5rem 5rem;
 }
 
-/* /about is a single-screen bio, not a reading page, so it runs wider and
-   tighter than a post: a longer measure to fold the body onto fewer lines, and
-   less air above the "About" heading and below the footer link. Scoped with
-   main.post-about (same specificity as main.post, declared later) so the 720px
-   measure every real post uses is untouched. */
+/* /about keeps the shared post spacing; the only override is a wider measure,
+   so the bio fills fewer lines. Scoped with main.post-about (same specificity
+   as main.post, declared later) so every real post keeps the 720px measure.
+   The mobile block later in this file still overrides the padding, so phones
+   are unaffected. */
 main.post-about {
   max-width: 1100px;
-  padding-top: 0.75rem;
-  padding-bottom: 2rem;
   padding-left: 40px;
   padding-right: 40px;
 }
 
-.post-about .post-header {
-  margin-bottom: 0.5rem;
-}
-
-/* The rest of the single-screen budget. The About page's height was never the
-   text (about 15 lines); it was the air around it, which on the shared post
-   rhythm came to roughly 470px of heading gaps, paragraph gaps, leading and
-   footer margin. These four rules take about 200px of that back. All scoped to
-   .post-about, so the reading rhythm on real posts is unchanged. */
-.post-about .post-body {
-  line-height: 1.6;
-}
-
-.post-about .post-body p {
-  margin-bottom: 0.7rem;
-}
-
-.post-about .post-body h3 {
-  margin: 1.35rem 0 0.35rem;
-}
-
+/* The one spacing override kept: the first heading sits directly under the page
+   title, and a heading top margin exists to separate it from the paragraph
+   above it. With no paragraph above, it is only dead air between "About" and
+   "Current". */
 .post-about .post-body h3:first-child {
   margin-top: 0;
-}
-
-.post-about .post-footer {
-  margin-top: 1.25rem;
-  padding-top: 0.75rem;
 }
 
 .post-header {
