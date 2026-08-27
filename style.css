@@ -20,7 +20,7 @@ nav {
   position: relative;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   padding: 16px 40px;
   max-width: 1100px;
   width: 100%;
@@ -49,15 +49,13 @@ nav::after {
   color: var(--gk-accent);
 }
 
-/* align-items is center, not baseline, so the two nav links sit on one plane.
-   Under baseline, "The Why" locked onto the 20px wordmark's baseline, which put it
-   about 2px below the nav's vertical center; "About" over in .nav-right is centered
-   against the 20px GitHub icon and so sat that 2px higher. Centering both groups is
-   what makes the two links line up. Don't switch this back to baseline without
-   giving .nav-right the same treatment. */
+/* The whole nav bottom-aligns: the wordmark, both links and the GitHub icon share
+   one bottom edge. flex-end on nav and on both groups is what guarantees it, and it
+   holds whatever the font metrics turn out to be, which center and baseline did not.
+   Changing any of these three back to center or baseline breaks the alignment. */
 .nav-left {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 1.5rem;
 }
 
@@ -91,7 +89,7 @@ nav::after {
 
 .nav-right {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 1.5rem;
 }
 
@@ -494,47 +492,23 @@ main.post {
   padding: 1.5rem 1.5rem 5rem;
 }
 
-/* /about is a single-screen bio, not a reading page, so it runs wider and
-   tighter than a post: a longer measure to fold the body onto fewer lines, and
-   less air above the "About" heading and below the footer link. Scoped with
-   main.post-about (same specificity as main.post, declared later) so the 720px
-   measure every real post uses is untouched. */
+/* /about keeps the shared post spacing; the only override is a wider measure,
+   so the bio fills fewer lines. Scoped with main.post-about (same specificity
+   as main.post, declared later) so every real post keeps the 720px measure.
+   The mobile block later in this file still overrides the padding, so phones
+   are unaffected. */
 main.post-about {
   max-width: 1100px;
-  padding-top: 0.75rem;
-  padding-bottom: 2rem;
   padding-left: 40px;
   padding-right: 40px;
 }
 
-.post-about .post-header {
-  margin-bottom: 0.5rem;
-}
-
-/* The rest of the single-screen budget. The About page's height was never the
-   text (about 15 lines); it was the air around it, which on the shared post
-   rhythm came to roughly 470px of heading gaps, paragraph gaps, leading and
-   footer margin. These four rules take about 200px of that back. All scoped to
-   .post-about, so the reading rhythm on real posts is unchanged. */
-.post-about .post-body {
-  line-height: 1.6;
-}
-
-.post-about .post-body p {
-  margin-bottom: 0.7rem;
-}
-
-.post-about .post-body h3 {
-  margin: 1.35rem 0 0.35rem;
-}
-
+/* The one spacing override kept: the first heading sits directly under the page
+   title, and a heading top margin exists to separate it from the paragraph
+   above it. With no paragraph above, it is only dead air between "About" and
+   "Current". */
 .post-about .post-body h3:first-child {
   margin-top: 0;
-}
-
-.post-about .post-footer {
-  margin-top: 1.25rem;
-  padding-top: 0.75rem;
 }
 
 .post-header {
