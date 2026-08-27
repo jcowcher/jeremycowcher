@@ -122,9 +122,22 @@ nav::after {
    flex child, which means nav's align-items moves it: switching nav to baseline
    for the link alignment pulled it 4.5px up. Centring it here restores it and
    makes it independent of nav's alignment. */
+/* The clock stays smaller than the nav links (0.8rem vs 0.88rem) but sits on
+   their baseline. align-self centres it; the margin then drops it onto the
+   baseline the wordmark, "The Why" and "About" all share.
+
+   Why a margin and not a size or line-height tweak: the clock is absolutely
+   positioned, so its vertical placement is its static position as a centred flex
+   child, and in that centring its own box height cancels out of the baseline
+   arithmetic. No line-height or font-size value moves its baseline; only an
+   explicit offset does. The offset also lands at half its value, because
+   centring redistributes it, which is why 0.25rem buys the 2px needed. It is in
+   rem so it scales with the root font at the 1600px breakpoint.
+   Measured: clock baseline 35, links 35. */
 .nav-clock {
   position: absolute;
   align-self: center;
+  margin-top: 0.25rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
