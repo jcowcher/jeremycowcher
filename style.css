@@ -113,8 +113,14 @@ nav::after {
 }
 
 /* Nav clock (post pages) */
+/* align-self keeps the clock vertically centred. It is absolutely positioned but
+   sets no top or bottom, so its vertical placement is its static position as a
+   flex child, which means nav's align-items moves it: switching nav to baseline
+   for the link alignment pulled it 4.5px up. Centring it here restores it and
+   makes it independent of nav's alignment. */
 .nav-clock {
   position: absolute;
+  align-self: center;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
