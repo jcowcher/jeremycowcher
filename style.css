@@ -505,8 +505,41 @@ main.post {
    override left is below: the first heading sits directly under the page title,
    so its top margin, which exists to separate a heading from the paragraph above
    it, is only dead air between "About" and "Current". */
+/* /about is a bio read at a glance, not an essay, so it is set smaller and
+   tighter than a post to fit one screen. Measured on a 814px-tall window: the
+   page ran 1192px on post defaults. Type size alone bottoms out around 206px
+   over, even at an uncomfortably small 13.6px, so the leading, paragraph gaps,
+   heading gaps and footer margin all have to come in with it. Together they
+   land the page at 817px. Scoped to .post-about; real posts keep their
+   reading rhythm. */
+main.post-about {
+  padding-top: 0.5rem;
+  padding-bottom: 0.75rem;
+}
+
+.post-about .post-body {
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.post-about .post-body p {
+  margin-bottom: 0.6rem;
+}
+
+.post-about .post-body h3 {
+  margin: 1rem 0 0.3rem;
+}
+
+/* The first heading sits directly under the page title, so its top margin,
+   which exists to separate a heading from the paragraph above it, is only dead
+   air between "About" and "Current". */
 .post-about .post-body h3:first-child {
   margin-top: 0;
+}
+
+.post-about .post-footer {
+  margin-top: 1rem;
+  padding-top: 0.6rem;
 }
 
 .post-header {
