@@ -94,7 +94,13 @@ nav::after {
   gap: 1.5rem;
 }
 
+/* The icon opts out of the nav's baseline row. A flex item with no text has its
+   baseline synthesised from its bottom edge, and at 20px that sits below the
+   wordmark's baseline, which drags .nav-left (and so "The Why") down. Centering
+   it keeps "The Why" exactly where it has always been while "About" aligns to it.
+   Measured: The Why 38 before and after, About 36.5 to 38. */
 .nav-github {
+  align-self: center;
   color: var(--gk-ink);
   text-decoration: none;
   display: flex;
