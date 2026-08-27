@@ -49,9 +49,15 @@ nav::after {
   color: var(--gk-accent);
 }
 
+/* align-items is center, not baseline, so the two nav links sit on one plane.
+   Under baseline, "The Why" locked onto the 20px wordmark's baseline, which put it
+   about 2px below the nav's vertical center; "About" over in .nav-right is centered
+   against the 20px GitHub icon and so sat that 2px higher. Centering both groups is
+   what makes the two links line up. Don't switch this back to baseline without
+   giving .nav-right the same treatment. */
 .nav-left {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 1.5rem;
 }
 
