@@ -74,6 +74,7 @@ const NAV = `<nav>
   </div>
   <div class="nav-clock" id="clock"></div>
   <div class="nav-right">
+    <a href="/about" class="nav-link">About</a>
     <a href="https://github.com/jcowcher" target="_blank" rel="noopener" class="nav-github" aria-label="GitHub">
       <svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
     </a>
@@ -85,6 +86,7 @@ const NAV = `<nav>
   </button>
   <div class="nav-mobile-menu" role="menu">
     <a class="nav-mobile-menu-item" href="/the-why" role="menuitem">The Why</a>
+    <a class="nav-mobile-menu-item" href="/about" role="menuitem">About</a>
     <a class="nav-mobile-menu-item" href="https://github.com/jcowcher" target="_blank" rel="noopener" role="menuitem">GitHub</a>
   </div>
 </nav>`;
@@ -364,6 +366,33 @@ ${NAV}
 fs.writeFileSync(
   path.join(DIST_DIR, 'disclosures.html'),
   htmlTemplate('Disclosures — Jeremy Cowcher', disclosuresBody)
+);
+
+// Generate "About" page — standard page layout with the full nav, same shape as
+// the Disclosures page (no date line, no post disclaimer).
+const aboutBody = `
+${NAV}
+<main class="post">
+  <header class="post-header">
+    <h1>About</h1>
+  </header>
+  <article class="post-body">
+    <h2>Current</h2>
+    <p>Solo founder and engineer of GemKa: three live products, all launched in August 2026.</p>
+    <p><a href="https://gemtimer.com">GemTimer</a> is the timer I use every day. I track what projects I work on and how much deep work I do.</p>
+    <p><a href="https://gemtodo.com">GemTodo</a> is my way of doing to-do lists, iterated on for nine years. Every todo goes to a project and into Action, Someday or Reference.</p>
+    <p><a href="https://ideakache.com">IdeaKache</a> is a collection of ideas gathered from books, podcasts, X and corners of the internet. Every one of them has taught me something.</p>
+    <p>Everything I've learnt in 2026 is from getting started: single sign-on across the products, a shared design system published as a package, staged releases, nightly automated tests and off-site backups proven by restore drills.</p>
+    <p><strong>Before that.</strong> Ten years at McKinsey focusing on enterprise-wide Transformations across technology, financial services, retail, industrials and natural resources companies. Drove new outside-in diligence offering using AI. Learned what excellence looks like.</p>
+    <p><strong>The rest.</strong> Started as a solicitor at Mallesons in Perth, Australia. CFA charterholder since 2022. High proficiency in building LBOs and financial models.</p>
+    <p><strong>Reach.</strong> <a href="mailto:jeremy@gemka.co">jeremy@gemka.co</a> &middot; <a href="https://www.linkedin.com/in/jeremycowcher" target="_blank" rel="noopener">LinkedIn</a> &middot; <a href="https://x.com/jeremycowcher" target="_blank" rel="noopener">X</a></p>
+  </article>
+  <footer class="post-footer"><a href="/writing">&larr; All posts</a></footer>
+</main>`;
+
+fs.writeFileSync(
+  path.join(DIST_DIR, 'about.html'),
+  htmlTemplate('About — Jeremy Cowcher', aboutBody)
 );
 
 // Generate the "Nobody knows anything" quotes page at /part-0-quotes — same
