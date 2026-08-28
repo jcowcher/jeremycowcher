@@ -1,0 +1,200 @@
+<!--post
+title: Claude Cowork needs to show the dust
+date: 2026-08-28
+description: Claude Code shows the "dust" of code changes; Cowork does not. A lesson from James Dyson's clear bin on why Cowork should show Claude's work.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Cowork needs to show the dust — Jeremy Cowcher</title>
+<link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/icon.png">
+<meta name="description" content="Claude Code shows the &quot;dust&quot; of code changes; Cowork does not. A lesson from James Dyson's clear bin on why Cowork should show Claude's work.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!--gk:tokens-->
+<!--gk:style-->
+<style>
+.post-body ul { list-style: square; margin: 0 0 1.25rem 1.5rem; }
+.post-body li { margin-bottom: 0.4rem; }
+.post-body .draft-note { font-style: italic; color: var(--gk-muted); font-size: 0.92rem; }
+/* Right-margin side-note callout, matching the .aside boxes on AI Essentials
+   #2: GemKa surface fill, faint full border, rounded corners, oxblood Fraunces
+   title. Below the wide breakpoint it sits inline as a bordered box; at >=1440px
+   it floats out into the empty right margin beside the post column, pulled up to
+   sit centred against its paragraph. */
+.post-body .aside {
+  background: var(--gk-surface-2);
+  border: 1px solid var(--gk-border);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--gk-ink);
+  margin: 1.75rem 0;
+}
+.post-body .aside .at {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 500;
+  color: var(--gk-accent);
+  margin-bottom: 0.35rem;
+}
+/* The body here is real <p> elements, so hold them at the box's small font size
+   rather than letting them inherit the large post-body font. */
+.post-body .aside p { font-size: inherit; line-height: inherit; margin: 0; }
+.post-body .aside p + p { margin-top: 0.7rem; }
+.post-body .aside code { font-size: 0.78rem; }
+/* Post-publication update section: thin oxblood rule down the left and a small
+   dated label, so later additions are visibly marked without changing the body
+   text itself. */
+.post-body .post-update {
+  border-left: 3px solid var(--gk-accent);
+  padding-left: 1.25rem;
+  margin: 2.5rem 0 0;
+}
+.post-body .post-update h2 {
+  margin-top: 0.35rem;
+}
+.post-update-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--gk-accent);
+}
+@media (min-width: 1180px) {
+  .post-body .aside {
+    float: right;
+    clear: right;
+    width: calc((100vw - 720px) / 2 - 40px);
+    max-width: 360px;
+    margin: 0.3rem 0 1.25rem 1.5rem;
+    margin-right: calc(-1 * ((100vw - 720px) / 2) + 24px);
+  }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <a href="/" class="nav-logo"><span>Gem</span><span class="gk-ka">Ka</span></a>
+    <a href="/the-why" class="nav-link">The Why</a>
+  </div>
+  <div class="nav-clock" id="clock"></div>
+  <div class="nav-right">
+    <a href="https://github.com/jcowcher" target="_blank" rel="noopener" class="nav-github" aria-label="GitHub">
+      <svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+    </a>
+  </div>
+  <button class="nav-menu-btn" aria-label="Menu" aria-haspopup="menu" aria-expanded="false" type="button">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div class="nav-mobile-menu" role="menu">
+    <a class="nav-mobile-menu-item" href="/the-why" role="menuitem">The Why</a>
+    <a class="nav-mobile-menu-item" href="https://github.com/jcowcher" target="_blank" rel="noopener" role="menuitem">GitHub</a>
+  </div>
+</nav>
+<main class="post">
+  <header class="post-header">
+    <time>August 28, 2026</time>
+    <h1>Claude Cowork needs to show the dust</h1>
+  </header>
+  <article class="post-body">
+    <p>The dust and dirt in vacuum cleaners used to be hidden until James Dyson decided to use a clear bin.</p>
+    <blockquote>
+      <p>"Using a clear bin in our vacuum was another 'clear' example of going our own way. Trusting our own instincts, we decided to ignore the research and retailers. Pete and I had been developing the vacuum cleaner and we loved seeing the dust and dirt. We didn’t want to hide away all the hard work the machine had done."</p>
+      <p>— James Dyson (<a href="https://www.amazon.com/dp/1982188421?tag=gemka0e-20" target="_blank" rel="noopener noreferrer">Invention: A Life</a>)</p>
+    </blockquote>
+
+    <p>You've probably seen two things on X this week: a growing dissatisfaction with Opus 5's written text and the emergence of Grok Bot. I believe these two things are linked. In written text Opus 5 has felt like a regression from Opus 4.8, even though I've found it better at doing the coding.</p>
+
+    <p>If there was an easy fix for these written text issues, Anthropic would have pushed it out already. Claude was working better than almost any product ever and so this "wobble" has given me an opening to advocate for a change I've wanted to see in Cowork for a while: take a lesson from James Dyson and show the "dust". In this case, that means showing Claude's work in Cowork.</p>
+
+    <p>Right now, when Cowork runs something for you, including writing code, you generally just see one line at a time, something like "Running a command on your computer" or "Reading files on your computer". When it finishes, you might get a one-line summary like "Used 2 tools" or "Used 3 tools, ran a command".</p>
+
+    <p>Run the same prompt in Claude Code (I run Claude Code inside VS Code) and you'll get a one-line summary like "Ran 2 shell commands" and then you'll see the code changes. Claude Code shows the "dust" of code changes; Cowork does not.</p>
+
+    <p>I suspect this decision was made because Cowork is designed for non-technical users and Anthropic's concern was that the code changes were "noise". I disagree with this.</p>
+
+    <p>When I first started using Cowork, I didn't like that I couldn't see its work, especially if something didn't turn out how I wanted it to. If anything I've gotten stronger in this stance over time, and have hardened my CLAUDE.md rule that anything touching code happens in Claude Code. Where Cowork is really helpful is writing the prompts that I can feed to Claude Code to update the code.</p>
+
+    <p>When the end result is great, opacity doesn't matter. With this recent "wobble" for Claude, showing the "dust" does two jobs: it softens the wait, and by seeing the work being done, it can make you feel better about the end product. Anthropic will improve the written text wobble and be fine; in the meantime it can stop hiding all the great work its "machine" has done.</p>
+
+    <blockquote>
+      <p>"I know a college in Edmonton, Alberta, that could not immediately fix the problem of slow elevators, so the administrators placed mirrors next to the elevator doors - and received fewer complaints"</p>
+      <p>— Carmen Simon (<a href="https://www.amazon.com/Impossible-Ignore-Memorable-Influence-Decisions/dp/1259584135?tag=gemka0e-20" target="_blank" rel="noopener noreferrer">Impossible to Ignore</a>)</p>
+    </blockquote>
+  </article>
+  <div class="post-disclaimer">This post is provided for general information, commentary and discussion purposes only. It is not legal, investing or other professional advice, and it should not be relied upon as such. Any errors or omissions are unintentional. The views expressed are those of the author in a personal capacity and do not represent the views of any employer, client, partner or affiliated organization. Generative AI tools were used to assist with research and editing.</div>
+  <footer class="post-footer"><a href="/writing">&larr; All posts</a></footer>
+</main>
+<footer class="footer-links">
+  <div class="footer-row">
+    <div class="footer-group footer-left">
+      <a href="https://gemtimer.com" target="_blank" rel="noopener noreferrer">GemTimer</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <a href="https://gemtodo.com" target="_blank" rel="noopener noreferrer">GemTodo</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <a href="https://ideakache.com" target="_blank" rel="noopener noreferrer">IdeaKache</a>
+    </div>
+    <div class="footer-group footer-right">
+      <a href="/disclosures">Disclosures</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <a href="mailto:jeremy@gemka.co">Contact</a>
+    </div>
+  </div>
+  <div class="footer-divider" aria-hidden="true"></div>
+  <div class="footer-meta">
+    <span class="footer-copy">&copy; 2026 Jeremy Cowcher</span>
+    <span class="footer-tagline">Writing to think.</span>
+  </div>
+</footer>
+<script>
+(function(){
+  var q=document.getElementById('hero-quote');
+  if(q){
+    var quotes=[
+      {text:'It is not the critic who counts; not the man who points out how the strong man stumbles, or where the doer of deeds could have done them better. The credit belongs to the man who is actually in the arena.',attr:'Theodore Roosevelt',url:'https://www.presidency.ucsb.edu/documents/address-the-sorbonne-paris-france-citizenship-republic'},
+      {text:'The reasonable man adapts himself to the world: the unreasonable one persists in trying to adapt the world to himself. Therefore all progress depends on the unreasonable man.',attr:'George Bernard Shaw',url:'https://en.wikipedia.org/wiki/Man_and_Superman'},
+      {text:'As you become an adult, you realize that things around you weren’t just always there; people made them happen. But only recently have I started to internalize how much tenacity <em>everything</em> requires. That hotel, that park, that railway. The world is a museum of passion projects.',attr:'John Collison'}
+    ];
+    var pick=quotes[Math.floor(Math.random()*quotes.length)];
+    var attrHtml=pick.url?'<a href="'+pick.url+'" target="_blank" rel="noopener">'+pick.attr+'</a>':pick.attr;
+    q.innerHTML='<p class="hero-subtitle">'+pick.text+'</p><p class="hero-attr">&mdash; '+attrHtml+'</p>';
+  }
+  var btn=document.querySelector('.nav-menu-btn');
+  var menu=document.querySelector('.nav-mobile-menu');
+  if(btn&&menu){
+    function closeMenu(){menu.classList.remove('open');btn.setAttribute('aria-expanded','false');}
+    btn.addEventListener('click',function(e){
+      e.stopPropagation();
+      var willOpen=!menu.classList.contains('open');
+      menu.classList.toggle('open',willOpen);
+      btn.setAttribute('aria-expanded',willOpen?'true':'false');
+    });
+    menu.addEventListener('click',closeMenu);
+    document.addEventListener('click',function(e){
+      if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target))closeMenu();
+    });
+    document.addEventListener('keydown',function(e){
+      if(e.key==='Escape'&&menu.classList.contains('open')){closeMenu();btn.focus();}
+    });
+  }
+  var el=document.getElementById('clock');
+  if(!el)return;
+  function tick(){
+    var d=new Date();
+    var date=d.toLocaleDateString('en-US',{month:'numeric',day:'numeric',year:'numeric'});
+    var time=d.toLocaleTimeString('en-US',{hour12:false,hour:'2-digit',minute:'2-digit',second:'2-digit'});
+    el.innerHTML='<span class="clock-half clock-date">'+date+'</span><span class="clock-half clock-time">'+time+'</span>';
+  }
+  tick();setInterval(tick,1000);
+})();
+</script>
+</body>
+</html>
