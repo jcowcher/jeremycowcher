@@ -500,6 +500,11 @@ body.landing .hero {
    row's date and title line up with the series rows above it. */
 .post-list > .post-link {
   padding-left: 1.5rem;
+  /* No rule between standalone rows. The series groups above carry their own
+     dividers, so a line between two loose rows reads as a group boundary that
+     isn't there. Scoped to the direct children, so series parts keep the
+     .post-link border that separates them. */
+  border-bottom: none;
 }
 
 .empty {
