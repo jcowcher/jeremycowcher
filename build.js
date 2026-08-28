@@ -405,7 +405,7 @@ fs.writeFileSync(
 const partZeroQuotes = [
   {
     text: `"NOBODY KNOWS ANYTHING.  Not one person in the entire motion picture field knows for a certainty what's going to work. Every time out it's a guess - and, if you're lucky, an educated one"`,
-    attr: `&mdash; William Goldman, <a href="https://www.amazon.com/Adventures-Screen-Trade-Hollywood-Screenwriting/dp/0446391174?tag=gemka0e-20" target="_blank" rel="noopener noreferrer">Adventures in the Screen Trade</a>`,
+    attr: `&mdash; William Goldman, <a href="https://www.amazon.com/Adventures-Screen-Trade-Hollywood-Screenwriting/dp/0446391174" target="_blank" rel="noopener noreferrer">Adventures in the Screen Trade</a>`,
   },
   {
     text: `"Five dimensional chess doesn't exist. Everyone is furiously improvising all the time. The future is utterly uncertain."`,
@@ -425,7 +425,7 @@ const partZeroQuotes = [
   },
   {
     text: `"You have to start your own engine every day"`,
-    attr: `&mdash; Pat Summitt, <a href="https://www.amazon.com/Sum-Ninety-Eight-Victories-Irrelevant-Perspective/dp/0385347057?tag=gemka0e-20" target="_blank" rel="noopener noreferrer">Sum It Up</a>`,
+    attr: `&mdash; Pat Summitt, <a href="https://www.amazon.com/Sum-Ninety-Eight-Victories-Irrelevant-Perspective/dp/0385347057" target="_blank" rel="noopener noreferrer">Sum It Up</a>`,
   },
 ];
 
