@@ -8,7 +8,7 @@ part: 0
 
 > "Anyone can become an expert in anything in six months, whether it is hydrodynamics for boats or cyclonic systems for vacuum cleaners."
 >
-> — James Dyson ([Against the Odds: An Autobiography](https://www.amazon.com/dp/1587991705?tag=gemka0e-20))
+> — James Dyson ([Against the Odds: An Autobiography](https://www.amazon.com/dp/1587991705))
 
 Before SpaceX, Elon Musk's companies hadn't built physical products. James Dyson didn't train as an engineer; he went to art school and graduated with a degree in industrial design. Boris Cherny (creator of Claude Code) doesn't have a Computer Science degree. Estée Lauder got her start selling homemade skincare creams in New York beauty salons.
 

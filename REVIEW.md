@@ -37,7 +37,7 @@ The block between the shared-review markers is synced from `claude-kit/review.md
 - [ ] Clerk secret keys stay server-only, and the environment has the right test-vs-live keys.
 - [ ] Reverification-gated Clerk mutations (email change, passkey create/delete, and similar) go through `useReverification(...)`, not raw calls, or they return 403 `session_reverification_required`.
 - [ ] No change to the GemKa cross-domain sign-up or auto-SSO flow without checking `ALLOWED_AFTER_SIGNUP_ORIGINS` and the origin-tag contract in `auth-redirects.ts`.
-- [ ] clerk-js version assumptions still hold. The satellite return handshake depends on v5 behavior; a v6 bump silently returns users signed out unless sign-in is Clerk-initiated.
+- [ ] clerk-js version assumptions still hold. On v5 the satellite return handshake ran automatically; v6 changed the default to `satelliteAutoSync=false`, so the satellite only runs it when the arrival carries `__clerk_synced=false`. A Clerk-initiated sign-in (`redirectToSignIn` / `buildSignInUrl`) adds that marker for you; a hand-built link must include it or the user authenticates on the primary and returns signed OUT with no console error. Proven on GemTodo 2026-08-23, `tests/satellite-link.spec.js`. See `cross-product-log.md` (marker-less satellite sign-in fallback URLs) and gemtimer `NOTES.md` (Workaround #15).
 
 ## Supabase: schema, RLS, backups
 

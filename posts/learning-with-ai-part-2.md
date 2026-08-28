@@ -8,7 +8,7 @@ part: 2
 
 > "Empirical testing demands that you only ever make one change at a time. It is the Edisonian principle, and it is bloody slow. It is a thing that takes me ages to explain to my graduate employees at Dyson Appliances, but it is so important. They tend to leap in to tests, making dozens of radical changes and then stepping back to test their new masterpiece. How do they know which change has improved it, and which hasn't?"
 >
-> — James Dyson ([Against the Odds: An Autobiography](https://www.amazon.com/dp/1587991705?tag=gemka0e-20))
+> — James Dyson ([Against the Odds: An Autobiography](https://www.amazon.com/dp/1587991705))
 
 5,127. That's how many prototypes James Dyson built and tested of his cyclonic vacuum. It took four years. He built that many because he changed only one thing at a time. Dyson shows that patience isn't a bad thing. AI tempts you to rush.
 

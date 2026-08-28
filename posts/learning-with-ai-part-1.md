@@ -8,7 +8,7 @@ part: 1
 
 > "Look at the human body. We have two eyes, two lungs, two kidneys, even two brains (with the possible exception of corporate executives) - and each has more capacity than needed in ordinary circumstances. So redundancy *equals* insurance, and the apparent inefficiencies are associated with the costs of maintaining these spare parts and the energy needed to keep them around."
 >
-> — Nassim Nicholas Taleb ([The Black Swan](https://www.amazon.com/Incerto-Fooled-Randomness-Procrustes-Antifragile/dp/059324365X?tag=gemka0e-20))
+> — Nassim Nicholas Taleb ([The Black Swan](https://www.amazon.com/Incerto-Fooled-Randomness-Procrustes-Antifragile/dp/059324365X))
 
 Like all technology, AI is a double-edged sword; it can build things you only imagined and then break them. If you don't want to break something valuable, you need redundancy.
 
